@@ -1,0 +1,43 @@
+{
+  "Common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "notifySuccess": "Successed",
+    "notifyFail": "Failed"
+  },
+
+  "Header": {
+    "linkHome": "Home",
+    "linkProfile": "Profile",
+    "linkLogout": "Logout"
+  },
+
+  "Login": {
+    "title": "Login",
+    "messageInvalidEmail": "The input is not valid E-mail!",
+    "messageEmptyEmail": "Please input your Email!",
+    "messageEmptyPassword": "Please input your Password!",
+    "forgotPassword": "Forgot password ?",
+    "btnLogin": "Login",
+    "btnLoginFacebook": "Google Login",
+    "btnLoginGoogle": "Facebook Login",
+    "linkRegister": "Register"
+  },
+
+  "Register": {
+    "title": "Register",
+    "labelName": "Name",
+    "labelEmail": "Email",
+    "labelPassword": "Password",
+    "labelConfirmPassword": "ConfirmPassword",
+    "messageInvalidEmail": "The input is not valid E-mail!",
+    "messageEmptyEmail": "Please input your Email!",
+    "messageEmptyName": "Please input your Name!",
+    "messageEmptyPassword": "Please input your Password!",
+    "messageEmptyConfirmPassword": "Please confirm your Password!",
+    "messageInvalidConfirmPassword": "Passwords do not match!",
+    "messageMinPassword": "Must be minimum 6 characters!",
+    "btnRegister": "Register",
+    "linkLogin": "Login"
+  }
+}

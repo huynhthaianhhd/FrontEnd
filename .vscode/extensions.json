@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "vscode-icons-team.vscode-icons",
+    "eg2.vscode-npm-script",
+    "jpoissonnier.vscode-styled-components"
+  ]
+}
