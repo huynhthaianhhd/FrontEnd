@@ -10,7 +10,7 @@ function* loginWatcher() {
 function* loginTask(action) {
   const { response, error } = yield call(loginAPI, action.payload);
   if (response) {
-    yield call(storeAuthInfo, response.result);
+    yield call(storeAuthInfo, response);
     yield put(actions.loginSuccess());
   } else {
     yield put(actions.loginFailed(error.data));
@@ -41,7 +41,7 @@ function* loginServiceTask(action) {
   }
   const { response, error } = receivedData;
   if (response) {
-    yield call(storeAuthInfo, response.result);
+    yield call(storeAuthInfo, response);
     yield put(actions.loginServiceSuccess());
   } else {
     yield put(actions.loginServiceFailed(error.data));
