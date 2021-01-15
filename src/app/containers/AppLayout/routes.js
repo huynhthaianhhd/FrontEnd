@@ -4,7 +4,7 @@ import { Register } from 'app/containers/Register/Loadable';
 
 export const privateRoutes = [
   {
-    path: '/',
+    path: '/abc',
     component: Home,
     key: 'home',
   },
@@ -20,5 +20,10 @@ export const publicRoutes = [
     path: '/register',
     component: Register,
     key: 'register',
+  },
+  {
+    path: '/',
+    component: Home,
+    key: 'home',
   },
 ];
