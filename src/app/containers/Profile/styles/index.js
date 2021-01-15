@@ -22,7 +22,7 @@ export const StyledProfile = styled.div`
 export const StyledEditIcon = styled(EditIcon)`
   display: inline-table;
   position: absolute;
-  bottom: 0;
+  bottom: 7px;
   right: 0;
 `;
 

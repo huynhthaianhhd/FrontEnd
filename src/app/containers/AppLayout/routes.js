@@ -2,6 +2,7 @@ import { Home } from 'app/containers/Home/Loadable';
 import { Login } from 'app/containers/Login/Loadable';
 import { Register } from 'app/containers/Register/Loadable';
 import { Profile } from 'app/containers/Profile/Loadable';
+import { Booking } from 'app/containers/Booking/Loadable';
 
 export const privateRoutes = [
   {
@@ -13,6 +14,11 @@ export const privateRoutes = [
     path: '/profile',
     component: Profile,
     key: 'profile',
+  },
+  {
+    path: '/booking',
+    component: Booking,
+    key: 'booking',
   },
 ];
 
