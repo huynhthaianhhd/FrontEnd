@@ -11,3 +11,5 @@ export const COMMON_PROPERTIES = {
   data: null,
   error: null,
 };
+
+export const DATE_FORMAT = 'YYYY/MM/DD';

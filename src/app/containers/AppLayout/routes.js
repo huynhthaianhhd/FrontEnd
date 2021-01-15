@@ -2,13 +2,24 @@ import { Home } from 'app/containers/Home/Loadable';
 import { Login } from 'app/containers/Login/Loadable';
 import { Register } from 'app/containers/Register/Loadable';
 import { MovieDetail } from '../MovieDetail/Loadable';
-import { Row, Col } from 'antd';
+import { Profile } from 'app/containers/Profile/Loadable';
+import { Booking } from 'app/containers/Booking/Loadable';
 
 export const privateRoutes = [
   {
-    path: '/',
+    path: '/abc',
     component: Home,
     key: 'home',
+  },
+  {
+    path: '/profile',
+    component: Profile,
+    key: 'profile',
+  },
+  {
+    path: '/booking',
+    component: Booking,
+    key: 'booking',
   },
 ];
 
@@ -27,5 +38,10 @@ export const publicRoutes = [
     path: '/movie/:id',
     component: MovieDetail,
     key: 'movieDetail',
+  },
+  {
+    path: '/',
+    component: Home,
+    key: 'home',
   },
 ];

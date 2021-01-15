@@ -4,7 +4,7 @@ const { Content, Header, Footer } = Layout;
 
 export const StyledLayout = styled(Layout)`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 export const StyledHeader = styled(Header)`
@@ -14,7 +14,7 @@ export const StyledHeader = styled(Header)`
   .logo {
     width: 120px;
     height: 31px;
-    background: rgba(255, 255, 255, 0.2);
+    background: #fff;
     margin: 16px 24px 16px 0;
     float: left;
   }
@@ -23,9 +23,7 @@ export const StyledHeader = styled(Header)`
   }
 `;
 
-export const StyledContent = styled(Content)`
-  /* padding: 50px; */
-`;
+export const StyledContent = styled(Content)``;
 
 export const StyledFooter = styled(Footer)`
   text-align: center;

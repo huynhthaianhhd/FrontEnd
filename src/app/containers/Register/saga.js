@@ -1,8 +1,7 @@
 import { register } from 'fetchers/authFetcher';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
-import { notifyError, notifySuccess } from 'utils/notify';
-import i18n from 'locales/i18n';
+import { notifySuccess } from 'utils/notify';
 
 function* registerWatcher() {
   yield takeLatest(actions.register, registerTask);
@@ -12,10 +11,9 @@ function* registerTask(action) {
   const { response, error } = yield call(registerAPI, action.payload);
   if (response) {
     yield put(actions.registerSuccess());
-    notifySuccess(i18n.t('Common.notifySuccess'));
+    notifySuccess('Register success');
   } else {
     yield put(actions.registerFailed(error.data));
-    notifyError(i18n.t('Common.notifyFail'));
   }
 }
 
