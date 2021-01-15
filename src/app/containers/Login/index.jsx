@@ -75,7 +75,6 @@ export const Login = memo(() => {
             <StyledGoogleButton
               className="login-form-button"
               onClick={renderProps.onClick}
-              disabled={renderProps.disabled}
             >
               {t('Login.btnLoginGoogle')}
             </StyledGoogleButton>

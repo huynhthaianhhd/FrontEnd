@@ -2,8 +2,6 @@ import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 import { login, google, facebook } from 'fetchers/authFetcher';
 import { storeAuthInfo, removeAuthInfo } from 'utils/localStorageUtils';
-import { notifyError } from 'utils/notify';
-import i18n from 'locales/i18n';
 
 function* loginWatcher() {
   yield takeLatest(actions.login, loginTask);
@@ -12,11 +10,10 @@ function* loginWatcher() {
 function* loginTask(action) {
   const { response, error } = yield call(loginAPI, action.payload);
   if (response) {
-    yield call(storeAuthInfo, response.result);
+    yield call(storeAuthInfo, response);
     yield put(actions.loginSuccess());
   } else {
     yield put(actions.loginFailed(error.data));
-    notifyError(i18n.t('Common.notifyFail'));
   }
 }
 
@@ -44,7 +41,7 @@ function* loginServiceTask(action) {
   }
   const { response, error } = receivedData;
   if (response) {
-    yield call(storeAuthInfo, response.result);
+    yield call(storeAuthInfo, response);
     yield put(actions.loginServiceSuccess());
   } else {
     yield put(actions.loginServiceFailed(error.data));

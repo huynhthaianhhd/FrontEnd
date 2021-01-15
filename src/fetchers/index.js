@@ -1,6 +1,8 @@
 import axios from 'axios';
 import isNil from 'lodash/fp/isNil';
+import get from 'lodash/fp/get';
 import { getAccessToken } from 'utils/localStorageUtils';
+import { notifyError } from 'utils/notify';
 
 const createClient = baseURL =>
   axios.create({
@@ -19,6 +21,7 @@ const request = (baseURL, options) => {
 };
 
 export const handleGeneralError = error => {
+  handleShowError(error);
   if (!isNil(error.response)) {
     return {
       error: error.response
@@ -32,6 +35,11 @@ export const handleGeneralError = error => {
     };
   }
   return { error };
+};
+
+const handleShowError = error => {
+  const message = get('data.message', error);
+  if (message) notifyError(message);
 };
 
 export default request;
