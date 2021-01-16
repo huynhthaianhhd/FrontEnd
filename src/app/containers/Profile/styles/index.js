@@ -5,6 +5,7 @@ export const StyledProfile = styled.div`
   display: flex;
   justify-content: center;
   .profile-form {
+    margin-top: 60px;
     max-width: 800px;
     .group-info {
       justify-content: center;
