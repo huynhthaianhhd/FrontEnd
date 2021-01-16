@@ -15,7 +15,7 @@ export const StyledHome = styled.div`
 export const StyledSection = styled.div`
   width: 100%;
   position: relative !important;
-  padding: 20px 0px;
+  padding-bottom: 20px;
   margin-bottom: 20px;
   img {
     height: 100%;
@@ -101,7 +101,8 @@ export const StyledListMovie = styled.div`
     width: 100%;
   }
   .list {
-    width: 100%;
+    width: 100% !important;
+    color: black;
   }
   .ant-spin-nested-loading {
     width: 100%;

@@ -6,8 +6,14 @@ import { ACTION_STATUS } from 'utils/constants';
 export const initialState = {
   groupCinemaList: [],
   status: '',
-  listFilmHighLight: null,
+  listMovieHighLight: [],
   error: null,
+  listMovie: [],
+  currentCinemas: [],
+  currentDate: [],
+  currentShowTime: [],
+  step: 0,
+  loading: false,
 };
 
 const homePageSlice = createSlice({
@@ -35,23 +41,40 @@ const homePageSlice = createSlice({
       )(state);
     },
 
-    fetchListFilmHightLight(state) {
+    fetchListMovie(state) {
       return flow(
         set('error', null),
         set('status', ACTION_STATUS.PENDING),
       )(state);
     },
-    fetchMovieHightLightSuccess(state, action) {
+    fetchMovieSuccess(state, action) {
       return flow(
-        set('listFilmHighLight', action.payload),
+        set('listMovie', [...action.payload]),
         set('status', ACTION_STATUS.SUCCESS),
       )(state);
     },
-    fetchMovieHightLightFailed(state, action) {
+    fetchMovieFailed(state, action) {
       return flow(
         set('error', action.payload),
         set('status', ACTION_STATUS.SUCCESS),
       )(state);
+    },
+    setHighLightMovie(state, action) {
+      return flow(set('listMovieHighLight', action.payload))(state);
+    },
+
+    getListCinemaCurrent(state) {
+      return flow(set('step', 0), set('loading', true))(state);
+    },
+    getListDateCurrent(state) {
+      return flow(set('step', 1), set('loading', true))(state);
+    },
+    getListShowTimeCurrent(state) {
+      return flow(set('step', 2), set('loading', true))(state);
+    },
+
+    setStep(state, action) {
+      return flow(set('step', action.payload))(state);
     },
   },
 });

@@ -2,32 +2,56 @@ import useActions from 'hooks/useActions';
 import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { actions } from './slice';
-import { makeGroupList, makeStatus, makeListFilmHighLight } from './selectors';
+import {
+  makeGroupList,
+  makeStatus,
+  makeListMovieHighLight,
+  makeListMovie,
+  makeCurrentCinemas,
+  makeCurrentDate,
+  makeCurrentShowTime,
+} from './selectors';
 
 export const useHooks = () => {
-  const { fetchGroup, setCurrentCinema, fetchHighLight } = useActions(
+  const { fetchGroup, fetchListMovie } = useActions(
     {
       fetchGroup: actions.fetchGroup,
-      setCurrentCinema: actions.setCurrentCinema,
-      fetchHighLight: actions.fetchListFilmHightLight,
+      fetchListMovie: actions.fetchListMovie,
     },
     [actions],
   );
   const status = useSelector(makeStatus);
   const cinemaGroupList = useSelector(makeGroupList);
-  const listFilmHighLight = useSelector(makeListFilmHighLight);
+  const listMovieHighLight = useSelector(makeListMovieHighLight);
+  const listMovie = useSelector(makeListMovie);
+
+  const currentCinemas = useSelector(makeCurrentCinemas);
+  const currentDate = useSelector(makeCurrentDate);
+  const currentShowTime = useSelector(makeCurrentShowTime);
+
+  const handleSelectMovie = useCallback(e => {}, []);
+  const handleSelectGroupCinema = useCallback(e => {}, []);
+  const handleSelectCinema = useCallback(e => {}, []);
 
   useEffect(() => {
     fetchGroup();
-    fetchHighLight();
-  }, [fetchGroup, fetchHighLight]);
+    fetchListMovie();
+  }, [fetchGroup, fetchListMovie]);
 
   return {
     selectors: {
       cinemaGroupList,
       status,
-      listFilmHighLight,
+      listMovieHighLight,
+      listMovie,
+      currentCinemas,
+      currentDate,
+      currentShowTime,
     },
-    handles: {},
+    handles: {
+      handleSelectMovie,
+      handleSelectGroupCinema,
+      handleSelectCinema,
+    },
   };
 };

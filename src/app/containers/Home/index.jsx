@@ -14,31 +14,46 @@ import saga from './saga';
 import { useInjectSaga, useInjectReducer } from 'utils/reduxInjectors';
 import { useHooks } from './hooks';
 
-export const Home = memo(() => {
+export const Home = () => {
   useInjectSaga({ key: sliceKey, saga });
   useInjectReducer({ key: sliceKey, reducer });
-  const { selectors } = useHooks();
-  const { cinemaGroupList, status, listFilmHighLight } = selectors;
+  const { selectors, handles } = useHooks();
+  const {
+    cinemaGroupList,
+    status,
+    listMovieHighLight,
+    listMovie,
+    currentCinemas,
+    currentDate,
+    currentShowTime,
+  } = selectors;
+  const { handleSelectMovie } = handles;
   return (
     <StyledHome>
       <StyledSection>
         <Banner />
         <StyledHelper>
-          <BookTicketQick />
+          <BookTicketQick
+            listMovie={listMovie}
+            currentCinemas={currentCinemas}
+            currentDate={currentDate}
+            currentShowTime={currentShowTime}
+            handleClick={handleSelectMovie}
+          />
         </StyledHelper>
       </StyledSection>
       <StyledSection>
-        <Movie highLightMovie={listFilmHighLight} />
+        <Movie highLightMovie={listMovieHighLight} />
       </StyledSection>
       <StyledSection>
         <div className="container">
-          <StyledListMovie>
+          <StyledListMovie check={cinemaGroupList.length === 0}>
             <ListMovie dataSource={cinemaGroupList} />
           </StyledListMovie>
         </div>
       </StyledSection>
     </StyledHome>
   );
-});
+};
 
 export default Home;

@@ -16,3 +16,11 @@ export const toBase64 = file => {
     reader.onerror = error => reject(error);
   });
 };
+
+export const changeToDateOfWeek = date => {
+  if (date === 8) {
+    return `Chủ Nhật`;
+  } else {
+    return `Thứ ${date}`;
+  }
+};
