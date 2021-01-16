@@ -4,6 +4,7 @@ import BHD from 'images/movie/BHD.png';
 import { StyledTabLeft, StyleTimeTab } from './styles';
 import { DateTab } from './DateTab';
 import moment from 'moment';
+import { CinemaList } from './CinemaList';
 
 const { TabPane } = Tabs;
 const { Title } = Typography;
@@ -31,6 +32,7 @@ export const TabShowTime = memo(props => {
               handleActiveTabDate={handleActiveTabDate}
             ></DateTab>
           </StyleTimeTab>
+          <CinemaList />
         </TabPane>
       ))}
     </Tabs>
