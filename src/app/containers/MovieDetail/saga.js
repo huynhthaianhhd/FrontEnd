@@ -4,6 +4,7 @@ import {
   createMovieReview,
 } from 'fetchers/movie/movieFetcher';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
+import { getAll } from 'fetchers/cinema/groupCinema.service';
 import { actions } from './slice';
 
 function* getDetailMovieWatcher() {
@@ -14,6 +15,19 @@ function* getMovieReviewsWatcher() {
 }
 function* createMovieReviewWatcher() {
   yield takeLatest(actions.createMovieReview, createMovieReviewTask);
+}
+
+function* fetchGroupWatcher() {
+  yield takeLatest(actions.fetchGroup, fetchGroupTask);
+}
+
+function* fetchGroupTask(action) {
+  const { response, error } = yield call(fetchGroupCinemaAPI);
+  if (response) {
+    yield put(actions.fetchGroupSuccess(response));
+  } else {
+    yield put(actions.fetchGroupFailed(error));
+  }
 }
 
 function* getDetailMovieTask(action) {
@@ -55,10 +69,15 @@ function createMovieReviewAPI(payload) {
   return createMovieReview(payload);
 }
 
+function fetchGroupCinemaAPI() {
+  return getAll();
+}
+
 export default function* defaultSaga() {
   yield all([
     fork(getDetailMovieWatcher),
     fork(getMovieReviewsWatcher),
     fork(createMovieReviewWatcher),
+    fork(fetchGroupWatcher),
   ]);
 }

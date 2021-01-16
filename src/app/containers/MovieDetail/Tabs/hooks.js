@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { selectCreateMovieReview } from '../selectors';
 import { actions } from '../slice';
 import { notifySuccess } from 'utils/notify';
+import moment from 'moment';
 
 const useHooks = props => {
   const { detailMovie, movieReviews } = props;
@@ -18,10 +19,18 @@ const useHooks = props => {
     [actions],
   );
   const movieId = useParams();
-  const handleChangeReview = useCallback(event => {
-    const content = event.target.value;
+  const [activeDate, setActiveDate] = useState({
+    tab: 0,
+    date: moment(),
+  });
+
+  const handleActiveTabDate = useCallback(data => {
+    console.log({ data });
+    setActiveDate(preState => ({
+      ...preState,
+      ...data,
+    }));
   }, []);
-  const handleChangeRating = useCallback(value => {}, []);
 
   const handleSubmitReview = useCallback(valueForm => {
     if (valueForm?.content) {
@@ -44,7 +53,8 @@ const useHooks = props => {
   }, [selectorCreateMovieReview, movieId, getMovieReviews]);
 
   return {
-    handlers: { handleChangeReview, handleChangeRating, handleSubmitReview },
+    selectors: { activeDate },
+    handlers: { handleSubmitReview, handleActiveTabDate },
   };
 };
 

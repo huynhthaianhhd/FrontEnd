@@ -5,23 +5,21 @@ import { Tabs } from 'antd';
 import TabMovie from './TabMovie';
 import TabReview from './TabReview';
 import useHooks from './hooks';
+import TabShowTime from './TabShowTime';
 const { TabPane } = Tabs;
 
 export const TabInfo = memo(props => {
-  const { detailMovie, movieReviews } = props;
+  const { detailMovie, movieReviews, groupCinema } = props;
   const { handlers, selectors } = useHooks(props);
-  const {
-    handleChangeReview,
-    handleChangeRating,
-    handleSubmitReview,
-  } = handlers;
+  const { handleSubmitReview, handleActiveTabDate } = handlers;
+  const { activeDate } = selectors;
   return (
     <StyledTab defaultActiveKey="1" centered>
       <TabPane
         tab={
-          <span style={{ fontSize: '20px' }}>
+          <span style={{ fontSize: '16px' }}>
             <AndroidOutlined />
-            Thông tin phim
+            Thông tin
           </span>
         }
         key="1"
@@ -30,28 +28,31 @@ export const TabInfo = memo(props => {
       </TabPane>
       <TabPane
         tab={
-          <span style={{ fontSize: '20px' }}>
+          <span style={{ fontSize: '16px' }}>
             <AndroidOutlined />
-            Lịch chiếu phim
+            Lịch chiếu
           </span>
         }
         key="2"
       >
-        <TabMovie detailMovie={detailMovie} />
+        <TabShowTime
+          detailMovie={detailMovie}
+          activeDate={activeDate}
+          groupCinema={groupCinema}
+          handleActiveTabDate={handleActiveTabDate}
+        />
       </TabPane>
       <TabPane
         tab={
-          <span style={{ fontSize: '20px' }}>
+          <span style={{ fontSize: '16px' }}>
             <AndroidOutlined />
-            Đánh giá phim
+            Đánh giá
           </span>
         }
         key="3"
       >
         <TabReview
           movieReviews={movieReviews}
-          handleChangeReview={handleChangeReview}
-          handleChangeRating={handleChangeRating}
           handleSubmitReview={handleSubmitReview}
         />
       </TabPane>
