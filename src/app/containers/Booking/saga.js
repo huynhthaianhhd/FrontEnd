@@ -1,6 +1,7 @@
 import { getBookingInfo, book } from 'fetchers/bookingFetcher';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
+import { notifySuccess } from 'utils/notify';
 
 function* getBookingInfoWatcher() {
   yield takeLatest(actions.getBookingInfo, getBookingInfoTask);
@@ -27,6 +28,7 @@ function* bookTask(action) {
   const { response, error } = yield call(bookAPI, action.payload);
   if (response) {
     yield put(actions.bookSuccess(response));
+    notifySuccess('Đặt vé thành công');
   } else {
     yield put(actions.bookFailed(error.data));
   }

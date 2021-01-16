@@ -19,3 +19,8 @@ export const selectBookingPickedSeats = createSelector(
   selectBookingState,
   booking => get('pickedSeats', booking),
 );
+
+export const selectBookingBookStatus = createSelector(
+  selectBookingState,
+  booking => get('book.status', booking),
+);
