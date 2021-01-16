@@ -4,29 +4,6 @@ import MovieSrc from 'images/movie/chimuoiba.png';
 const { Title } = Typography;
 
 export const Movie = ({ highLightMovie }) => {
-  const movie = [
-    {
-      name: 'Chị Mười Ba: 3 Ngày Sinh Tử (C18)',
-      src: MovieSrc,
-      classify: 'C18',
-    },
-    {
-      name: 'Thợ Săn Quái Vật - Monster Hunter (C13)',
-      src: MovieSrc,
-      classify: 'C18',
-    },
-    {
-      name: 'Nữ Thần Chiến Binh 1984 - Wonder Woman 1984 (C13)',
-      src: MovieSrc,
-      classify: 'C18',
-    },
-    {
-      name: 'Nữ Thần Chiến Binh 1984 - Wonder Woman 1984 (C13)',
-      src: MovieSrc,
-      classify: 'C18',
-    },
-    { name: 'Em Là Của Em (C16)', src: MovieSrc, classify: 'C18' },
-  ];
   return (
     <div className="container">
       <div className="header">

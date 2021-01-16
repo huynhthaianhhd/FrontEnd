@@ -29,6 +29,7 @@ export const StyledHeader = styled(Header)`
     & > * {
       margin: 0px 10px;
       color: black;
+      font-weight: 500;
       font-size: 1rem;
       &:hover {
         color: #fb4226;

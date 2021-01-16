@@ -19,11 +19,12 @@ export const StyledTab = styled.div`
   display: flex;
   position: relative;
   align-items: flex-start;
-  max-width: 250px;
+  max-width: 260px;
 
   .img-tiny {
     width: 20%;
     margin-right: 10px;
+    min-width: 50px;
   }
   .content {
     display: flex;
@@ -49,8 +50,72 @@ export const StyledDateTab = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin-bottom: 20px;
   .date {
-    font-size: 1.01rem;
+    font-size: 1.03rem;
   }
   color: ${({ isActive }) => isActive && 'red'};
+`;
+
+export const StyledMovieDetail = styled.div`
+  display: flex;
+  position: relative;
+  width: 100%;
+  .content {
+    display: flex;
+    flex-direction: column;
+    .title {
+      font-weight: 550;
+      font-size: 1rem;
+    }
+    .sub-title {
+      font-size: 0.8rem;
+      color: #646464;
+    }
+  }
+  .img-tiny {
+    width: 10%;
+    margin-right: 10px;
+  }
+  & > * {
+    margin: 20px;
+  }
+`;
+
+export const StyledMovieList = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  max-height: 450px;
+`;
+
+export const StyledTime = styled.div`
+  width: calc(23% - 10px);
+  float: left;
+  font-family: 'SF Medium';
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0 10px 10px 0;
+  padding: 8px;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba(246, 246, 246, 0.5);
+  border-radius: 7px;
+  color: #9b9b9b;
+  border: 1px solid #e4e4e4;
+  letter-spacing: -0.12px;
+  .time {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #108f3e;
+    letter-spacing: -0.16px;
+  }
+`;
+
+export const StyledListTime = styled.div`
+  display: flex;
 `;

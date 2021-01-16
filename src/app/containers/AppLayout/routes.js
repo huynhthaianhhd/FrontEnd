@@ -46,7 +46,7 @@ export const publicRoutes = [
     key: 'home',
   },
   {
-    path: '/cinema',
+    path: '/cinema/:id',
     component: CinemaDetail,
     key: 'cinema',
   },
