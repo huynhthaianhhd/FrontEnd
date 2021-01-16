@@ -1,5 +1,5 @@
 import { getAll } from 'fetchers/cinema/groupCinema.service';
-import { getHighLight } from 'fetchers/cinema/cinema.service';
+import { getAllMovie } from 'fetchers/cinema/movie.service';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 
@@ -20,22 +20,24 @@ function fetchGroupCinema() {
   return getAll();
 }
 
-function* fetchHighLightMovieWatcher() {
-  yield takeLatest(actions.fetchListFilmHightLight, fetchHighLightMovieTask);
+function* fetchMovieWatcher() {
+  yield takeLatest(actions.fetchListMovie, fetchMovieTask);
 }
 
-function* fetchHighLightMovieTask(action) {
-  const { response, error } = yield call(fetchHighLightMovie);
-  if (response) {
-    yield put(actions.fetchMovieHightLightSuccess(response));
+function* fetchMovieTask(action) {
+  const { response, error } = yield call(fetchMovie);
+  if (response.length > 0) {
+    yield put(actions.fetchMovieSuccess(response));
+    const temp = [...response];
+    yield put(actions.setHighLightMovie(temp.splice(0, 8)));
   } else {
-    yield put(actions.fetchGroupFailed(error));
+    yield put(actions.fetchMovieFailed(error));
   }
 }
 
-function fetchHighLightMovie() {
-  return getHighLight();
+function fetchMovie() {
+  return getAllMovie();
 }
 export default function* defaultSaga() {
-  yield all([fork(fetchGroupListTask), fork(fetchHighLightMovieWatcher)]);
+  yield all([fork(fetchGroupListTask), fork(fetchMovieWatcher)]);
 }

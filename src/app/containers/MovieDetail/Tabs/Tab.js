@@ -1,12 +1,20 @@
 import React, { memo } from 'react';
 import { StyledTab } from './styles';
-import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
-import { Tabs, Row, Avatar, Col } from 'antd';
+import { AndroidOutlined } from '@ant-design/icons';
+import { Tabs } from 'antd';
 import TabMovie from './TabMovie';
 import TabReview from './TabReview';
+import useHooks from './hooks';
 const { TabPane } = Tabs;
 
-export const TabInfo = memo(() => {
+export const TabInfo = memo(props => {
+  const { detailMovie, movieReviews } = props;
+  const { handlers, selectors } = useHooks(props);
+  const {
+    handleChangeReview,
+    handleChangeRating,
+    handleSubmitReview,
+  } = handlers;
   return (
     <StyledTab defaultActiveKey="1" centered>
       <TabPane
@@ -18,7 +26,7 @@ export const TabInfo = memo(() => {
         }
         key="1"
       >
-        <TabMovie />
+        <TabMovie detailMovie={detailMovie} />
       </TabPane>
       <TabPane
         tab={
@@ -29,7 +37,7 @@ export const TabInfo = memo(() => {
         }
         key="2"
       >
-        <TabMovie />
+        <TabMovie detailMovie={detailMovie} />
       </TabPane>
       <TabPane
         tab={
@@ -40,7 +48,12 @@ export const TabInfo = memo(() => {
         }
         key="3"
       >
-        <TabReview />
+        <TabReview
+          movieReviews={movieReviews}
+          handleChangeReview={handleChangeReview}
+          handleChangeRating={handleChangeRating}
+          handleSubmitReview={handleSubmitReview}
+        />
       </TabPane>
     </StyledTab>
   );

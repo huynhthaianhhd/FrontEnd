@@ -7,6 +7,7 @@ export const StyledTab = styled(Tabs)`
   .about {
     padding: 32px 0px;
     padding-left: 50px;
+    padding-right: 50px;
     display: flex;
     flex-direction: column;
     color: #000000;
@@ -31,6 +32,10 @@ export const StyledTab = styled(Tabs)`
     }
   }
   .about-movie {
+    .title-type-info {
+      font-weight: bolder;
+      width: 150px;
+    }
   }
   .header-title {
     font-size: 24px;
@@ -38,12 +43,15 @@ export const StyledTab = styled(Tabs)`
     line-height: 1.17;
   }
   .about-comments {
+    padding-left: 100px;
+    padding-right: 100px;
     .ant-comment-content-author {
       display: flex;
       align-items: center;
     }
     .time-rating {
       display: flex;
+      align-items: center;
     }
   }
 `;

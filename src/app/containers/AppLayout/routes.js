@@ -3,6 +3,7 @@ import { Login } from 'app/containers/Login/Loadable';
 import { Register } from 'app/containers/Register/Loadable';
 import { MovieDetail } from '../MovieDetail/Loadable';
 import { Profile } from 'app/containers/Profile/Loadable';
+import { CinemaDetail } from 'app/containers/CinemaDetail/Loadable';
 import { Booking } from 'app/containers/Booking/Loadable';
 
 export const privateRoutes = [
@@ -43,5 +44,10 @@ export const publicRoutes = [
     path: '/',
     component: Home,
     key: 'home',
+  },
+  {
+    path: '/cinema',
+    component: CinemaDetail,
+    key: 'cinema',
   },
 ];

@@ -1,19 +1,19 @@
-// import { createSelector } from 'reselect';
-// import get from 'lodash/fp/get';
+import get from 'lodash/fp/get';
+import { createSelector } from 'reselect';
 
-// export const selectAuthenticationState = state => state.authentication;
+const selectDetailMovieState = state => state.detailMoviePage;
 
-// export const makeSelectIsAuthenticated = createSelector(
-//   selectAuthenticationState,
-//   authentication => get('isAuthenticated', authentication),
-// );
+export const selectDetailMovie = createSelector(
+  selectDetailMovieState,
+  detailMovie => get('detailMovie', detailMovie),
+);
 
-// export const makeSelectAuthenticationStatus = createSelector(
-//   selectAuthenticationState,
-//   authentication => get('status', authentication),
-// );
+export const selectMovieReviews = createSelector(
+  selectDetailMovieState,
+  detailMovie => get('movieReviews', detailMovie),
+);
 
-// export const makeSelectAuthenticationError = createSelector(
-//   selectAuthenticationState,
-//   authentication => get('error', authentication),
-// );
+export const selectCreateMovieReview = createSelector(
+  selectDetailMovieState,
+  detailMovie => get('createReview', detailMovie),
+);

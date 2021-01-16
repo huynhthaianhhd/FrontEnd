@@ -1,52 +1,83 @@
 import { Menu, Dropdown, Button } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-export const BookTicketQick = () => {
-  const Item = {
-    movie: [
-      { name: 'Chị Mười Ba: 3 Ngày Sinh Tử (C18)' },
-      { name: 'Thợ Săn Quái Vật - Monster Hunter (C13)' },
-      { name: 'Nữ Thần Chiến Binh 1984 - Wonder Woman 1984 (C13)' },
-      { name: 'Em Là Của Em (C16)' },
-    ],
-    cinema: [
-      { name: 'BHD Star Bitexco' },
-      { name: 'BHD Star Bitexco' },
-      { name: 'BHD Star Vincom Quang Trung' },
-    ],
-    date: [
-      { name: 'Ngày xem' },
-      { name: 'BHD Star Bitexco' },
-      { name: 'BHD Star Vincom Quang Trung' },
-    ],
-    tick: [
-      { name: 'Xuất chiếu' },
-      { name: 'BHD Star Bitexco' },
-      { name: 'BHD Star Vincom Quang Trung' },
-    ],
-  };
+import { memo } from 'react';
+
+export const BookTicketQick = ({
+  listMovie,
+  currentCinemas,
+  currentDate,
+  currentShowTime,
+  handleClick,
+}) => {
+  // const Cinema = [name];
   const MenuOverLay = overlay => (
     <Menu>
       {overlay.map((e, i) => (
-        <Menu.Item key={i}>{e.name}</Menu.Item>
+        <Menu.Item key={i} onClick={() => handleClick(e)}>
+          {e.name}
+        </Menu.Item>
       ))}
     </Menu>
   );
 
-  const DropDown = () => {
-    return Object.keys(Item).map((value, i) => {
-      const overlay = Item[value];
-      return (
-        <Dropdown overlay={MenuOverLay(overlay)} key={i} className="dropdown">
-          <Button>
-            {Item[value][0]?.name} <DownOutlined />
-          </Button>
-        </Dropdown>
-      );
-    });
+  const DropDownMovie = () => {
+    return (
+      <Dropdown
+        overlay={MenuOverLay(listMovie)}
+        className="dropdown"
+        trigger="click"
+      >
+        <Button>
+          Chọn phim <DownOutlined />
+        </Button>
+      </Dropdown>
+    );
+  };
+  const DropDownCinemas = () => {
+    return (
+      <Dropdown
+        overlay={MenuOverLay(currentCinemas)}
+        className="dropdown"
+        trigger="click"
+      >
+        <Button>
+          Chọn rạp <DownOutlined />
+        </Button>
+      </Dropdown>
+    );
+  };
+  const DropDownDate = () => {
+    return (
+      <Dropdown
+        overlay={MenuOverLay(currentCinemas)}
+        className="dropdown"
+        trigger="click"
+      >
+        <Button>
+          Chọn ngày xem <DownOutlined />
+        </Button>
+      </Dropdown>
+    );
+  };
+  const DropDownShowTime = () => {
+    return (
+      <Dropdown
+        overlay={MenuOverLay(currentCinemas)}
+        className="dropdown"
+        trigger="click"
+      >
+        <Button>
+          Chọn suất chiếu <DownOutlined />
+        </Button>
+      </Dropdown>
+    );
   };
   return (
     <>
-      {DropDown()}
+      <DropDownMovie />
+      <DropDownCinemas />
+      <DropDownDate />
+      <DropDownShowTime />
       <Button size="large" className="button" type="primary">
         Mua vé
       </Button>
@@ -54,4 +85,4 @@ export const BookTicketQick = () => {
   );
 };
 
-export default BookTicketQick;
+export default memo(BookTicketQick);

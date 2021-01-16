@@ -1,45 +1,54 @@
 import useActions from 'hooks/useActions';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { makeSelectAuthenticationStatus } from './selectors';
+import { selectDetailMovie, selectMovieReviews } from './selectors';
 import { actions } from './slice';
+import { ACTION_STATUS } from 'utils/constants';
+import { useParams } from 'react-router-dom';
 
-export const useHooks = () => {
-  const { login, loginService } = useActions(
-    { login: actions.login, loginService: actions.loginService },
+const useHooks = () => {
+  const selectorDetailMovie = useSelector(selectDetailMovie);
+  const selectorMovieReviews = useSelector(selectMovieReviews);
+  const { getDetailMovie, getMovieReviews } = useActions(
+    {
+      getDetailMovie: actions.getDetailMovie,
+      getMovieReviews: actions.getMovieReviews,
+    },
     [actions],
   );
-  const status = useSelector(makeSelectAuthenticationStatus);
+  const [detailMovie, setDetailMovie] = useState({});
+  const [movieReviews, setMovieReviews] = useState([]);
+  const movieId = useParams();
 
-  const onFinish = useCallback(
-    values => {
-      login(values);
-    },
-    [login],
-  );
+  useEffect(() => {
+    getDetailMovie(movieId);
+    getMovieReviews(movieId);
+  }, []);
 
-  const handleLoginService = useCallback(
-    payload => {
-      loginService(payload);
-    },
-    [loginService],
-  );
+  useEffect(() => {
+    if (selectorDetailMovie && selectorDetailMovie.data) {
+      if (selectorDetailMovie.status === ACTION_STATUS.SUCCESS) {
+        setDetailMovie(selectorDetailMovie.data);
+      } else if (selectorDetailMovie.status === ACTION_STATUS.FAILED)
+        setDetailMovie({});
+    }
+  }, [selectorDetailMovie]);
 
-  return {
-    handlers: { onFinish, handleLoginService },
-    selectors: { status },
-  };
-};
-
-export const useLogout = () => {
-  const { logout } = useActions({ logout: actions.logout });
-
-  const onLogout = useCallback(() => {
-    logout();
-  }, [logout]);
+  useEffect(() => {
+    if (selectorMovieReviews && selectorMovieReviews.data) {
+      if (selectorMovieReviews.status === ACTION_STATUS.SUCCESS) {
+        setMovieReviews(selectorMovieReviews.data);
+      } else if (selectorMovieReviews.status === ACTION_STATUS.FAILED)
+        setMovieReviews([]);
+    }
+  }, [selectorMovieReviews]);
 
   return {
-    handlers: { onLogout },
+    handlers: {},
+    selectors: {
+      detailMovie,
+      movieReviews,
+    },
   };
 };
 

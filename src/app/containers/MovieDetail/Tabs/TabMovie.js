@@ -1,70 +1,73 @@
 import React, { memo } from 'react';
 import { Row, Avatar, Col } from 'antd';
+import moment from 'moment';
 
-export const TabMovie = memo(() => {
+export const TabMovie = memo(props => {
+  const { detailMovie } = props;
   return (
     <Row style={{ padding: '20px' }}>
       <div className="about-movie about">
-        <span className="header-title">About the movie </span>
+        <span className="header-title">Nội dung phim </span>
         <div className="content-about">
-          <span>
-            Phần hai Chị Mười Ba: 3 Ngày Sinh Tử được đầu tư hoành tráng hơn với
-            những màn rượt đuổi ngẹt thở, những pha đánh đấm chân thật hơn, hứa
-            hẹn “bùng cháy” mạnh mẽ và kịch tính vào tháng 12 này. Phần hai Chị
-            Mười Ba: 3 Ngày Sinh Tử được đầu tư hoành tráng hơn với những màn
-            rượt đuổi ngẹt thở, những pha đánh đấm chân thật hơn, hứa hẹn “bùng
-            cháy” mạnh mẽ và kịch tính vào tháng 12 này.
+          <span style={{ marginBottom: '15px' }}>
+            {detailMovie?.description}
           </span>
           <Row>
-            <Col style={{ flex: 0.1, fontWeight: 'bolder' }}>
+            <Col className="title-type-info">
               <span>Ngày chiếu : </span>
             </Col>
             <Col>
-              <span>2020/10/10</span>
+              <span>
+                {moment(detailMovie?.premiereTime).format('YYYY-MM-DD')}
+              </span>
             </Col>
           </Row>
           <Row>
-            <Col style={{ flex: 0.1, fontWeight: 'bolder' }}>
+            <Col className="title-type-info">
               <span>Thể loại : </span>
             </Col>
             <Col>
-              <span>Hành động</span>
+              <span>{detailMovie?.category}</span>
             </Col>
           </Row>
           <Row>
-            <Col style={{ flex: 0.1, fontWeight: 'bolder' }}>
+            <Col className="title-type-info">
+              <span>Thời lượng : </span>
+            </Col>
+            <Col>
+              <span>{detailMovie?.duration} phút</span>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="title-type-info">
+              <span>Đạo diễn : </span>
+            </Col>
+            <Col>
+              <span>{detailMovie?.director}</span>
+            </Col>
+          </Row>
+          <Row>
+            <Col className="title-type-info">
               <span>Quốc gia : </span>
             </Col>
             <Col>
-              <span>Việt nam</span>
+              <span>{detailMovie?.language}</span>
             </Col>
           </Row>
         </div>
       </div>
       <div className="about-casts about">
-        <span className="header-title">Casts </span>
+        <span className="header-title">Diễn viên </span>
         <div className="content-about group-cast">
-          <div className="avatar">
-            <Avatar
-              size={80}
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            />
-            <span>Ronaldo</span>
-          </div>
-          <div className="avatar">
-            <Avatar
-              size={80}
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            />
-            <span>Ronaldo</span>
-          </div>
-          <div className="avatar">
-            <Avatar
-              size={80}
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            />
-            <span>Ronaldo</span>
-          </div>
+          {detailMovie?.casts?.map(cast => (
+            <div className="avatar">
+              <Avatar
+                size={80}
+                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              />
+              <span>{cast}</span>
+            </div>
+          ))}
         </div>
       </div>
     </Row>

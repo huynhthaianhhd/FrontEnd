@@ -7,7 +7,7 @@ html,body{
 }
 
 body{
-  font-family:'Lato',sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #root{
@@ -25,4 +25,5 @@ p,
     font-family: inherit;
     font-size: inherit;
   }
+  
 `;
