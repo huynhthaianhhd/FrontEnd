@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const StyledCoachList = styled.div``;
+export const StyledCouchList = styled.div``;
 
 export const Couch = styled(FontAwesomeIcon)`
   font-size: 30px;
+  margin: 7px 5px;
+  cursor: pointer;
   ${({ status }) => {
     switch (status) {
       case 'AVAILABLE': {
@@ -20,6 +22,7 @@ export const Couch = styled(FontAwesomeIcon)`
       case 'UNAVAILABLE': {
         return css`
           color: #d4d4d4;
+          pointer-events: none;
         `;
       }
       default: {

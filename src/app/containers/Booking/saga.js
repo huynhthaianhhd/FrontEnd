@@ -1,43 +1,40 @@
-import { getBooking, editBooking } from 'fetchers/bookingFetcher';
+import { getBookingInfo, book } from 'fetchers/bookingFetcher';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
-import { notifySuccess } from 'utils/notify';
 
-function* getBookingWatcher() {
-  yield takeLatest(actions.getBooking, getBookingTask);
+function* getBookingInfoWatcher() {
+  yield takeLatest(actions.getBookingInfo, getBookingInfoTask);
 }
 
-function* getBookingTask() {
-  const { response, error } = yield call(getBookingAPI);
+function* getBookingInfoTask(action) {
+  const { response, error } = yield call(getBookingInfoAPI, action.payload);
   if (response) {
-    yield put(actions.getBookingSuccess(response));
+    yield put(actions.getBookingInfoSuccess(response));
   } else {
-    yield put(actions.getBookingFailed(error.data));
+    yield put(actions.getBookingInfoFailed(error.data));
   }
 }
 
-function getBookingAPI() {
-  return getBooking();
+function getBookingInfoAPI(payload) {
+  return getBookingInfo(payload);
 }
 
-function* editBookingWatcher() {
-  yield takeLatest(actions.editBooking, editBookingTask);
+function* bookWatcher() {
+  yield takeLatest(actions.book, bookTask);
 }
 
-function* editBookingTask(action) {
-  const { response, error } = yield call(editBookingAPI, action.payload);
+function* bookTask(action) {
+  const { response, error } = yield call(bookAPI, action.payload);
   if (response) {
-    yield put(actions.editBookingSuccess(response));
-    notifySuccess('Update booking success');
+    yield put(actions.bookSuccess(response));
   } else {
-    yield put(actions.editBookingFailed(error.data));
+    yield put(actions.bookFailed(error.data));
   }
 }
 
-function editBookingAPI(payload) {
-  return editBooking(payload);
+function bookAPI(payload) {
+  return book(payload);
 }
-
 export default function* defaultSaga() {
-  yield all([fork(getBookingWatcher), fork(editBookingWatcher)]);
+  yield all([fork(getBookingInfoWatcher), fork(bookWatcher)]);
 }
