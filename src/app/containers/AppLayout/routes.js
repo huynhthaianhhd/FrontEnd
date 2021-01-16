@@ -5,6 +5,7 @@ import { MovieDetail } from '../MovieDetail/Loadable';
 import { Profile } from 'app/containers/Profile/Loadable';
 import { CinemaDetail } from 'app/containers/CinemaDetail/Loadable';
 import { Booking } from 'app/containers/Booking/Loadable';
+import { ManageUsers } from 'app/containers/ManageUsers/Loadable';
 
 export const privateRoutes = [
   {
@@ -46,8 +47,13 @@ export const publicRoutes = [
     key: 'home',
   },
   {
-    path: '/cinema',
+    path: '/cinema/:id',
     component: CinemaDetail,
     key: 'cinema',
+  },
+  {
+    path: '/admin/manage-user',
+    component: ManageUsers,
+    key: 'manageUsers',
   },
 ];

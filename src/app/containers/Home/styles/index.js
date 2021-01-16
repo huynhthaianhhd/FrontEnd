@@ -93,7 +93,6 @@ export const StyledListMovie = styled.div`
   height: 80vh;
   position: relative;
   border: 1px solid #c2c2c2;
-  padding: 10px;
   .ant-tabs-nav {
     width: 15%;
   }
