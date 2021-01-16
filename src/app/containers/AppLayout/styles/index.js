@@ -9,6 +9,7 @@ export const StyledLayout = styled(Layout)`
 `;
 
 export const StyledHeader = styled(Header)`
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -1,13 +1,31 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledMovieDetail = styled.div`
+  position: relative;
   height: 100%;
   overflow-y: auto;
   /* padding: 20px;  */
   -webkit-font-smoothing: antialiased;
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 667px !important;
+    ${({ background }) =>
+      background &&
+      css`
+        background: url(${background});
+        background-repeat: no-repeat;
+        filter: blur(8px);
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      `}
+  }
   .group-movie-header {
     padding-left: 50px;
-    background: linear-gradient(to top, black, transparent 100%);
     margin: 0 !important;
     .header-rating {
       display: flex;
@@ -43,6 +61,9 @@ export const StyledMovieDetail = styled.div`
     }
     .img-poster-main {
       margin-right: 20px;
+      img {
+        height: 667px;
+      }
     }
     .poster-main {
       display: flex;

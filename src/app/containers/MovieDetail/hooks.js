@@ -1,5 +1,5 @@
 import useActions from 'hooks/useActions';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   selectDetailMovie,
@@ -8,19 +8,22 @@ import {
 } from './selectors';
 import { actions } from './slice';
 import { ACTION_STATUS } from 'utils/constants';
+import { POPUP_TYPE } from 'app/containers/Popup/constants';
+import { actions as popupActions } from 'app/containers/Popup/slice';
 import { useParams } from 'react-router-dom';
 
 const useHooks = () => {
   const selectorDetailMovie = useSelector(selectDetailMovie);
   const selectorMovieReviews = useSelector(selectMovieReviews);
   const selectorGroupCinema = useSelector(selectGroupCinema);
-  const { getDetailMovie, getMovieReviews, fetchGroup } = useActions(
+  const { getDetailMovie, getMovieReviews, fetchGroup, openPopup } = useActions(
     {
       getDetailMovie: actions.getDetailMovie,
       getMovieReviews: actions.getMovieReviews,
       fetchGroup: actions.fetchGroup,
+      openPopup: popupActions.openPopup,
     },
-    [actions],
+    [actions, popupActions],
   );
   const [detailMovie, setDetailMovie] = useState({});
   const [movieReviews, setMovieReviews] = useState([]);
@@ -60,8 +63,17 @@ const useHooks = () => {
     }
   }, [selectorGroupCinema]);
 
+  const handleShowTrailer = trailerUrl => {
+    if (trailerUrl)
+      openPopup({
+        key: 'showTrailer',
+        type: POPUP_TYPE.LIVE_STREAM_VIDEO,
+        data: { url: trailerUrl },
+      });
+  };
+
   return {
-    handlers: {},
+    handlers: { handleShowTrailer },
     selectors: {
       detailMovie,
       movieReviews,
