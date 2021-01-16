@@ -4,12 +4,12 @@ import set from 'lodash/fp/set';
 import { ACTION_STATUS } from 'utils/constants';
 
 const initialState = {
-  info: null,
-  get: {
-    status: '',
-    error: null,
-  },
-  edit: {
+  data: '',
+  seats: [],
+  pickedSeats: [],
+  status: '',
+  error: null,
+  book: {
     status: '',
     error: null,
   },
@@ -19,47 +19,72 @@ const bookingSlice = createSlice({
   name: 'booking',
   initialState,
   reducers: {
-    getBooking(state) {
+    getBookingInfo(state) {
       return flow(
-        set('get.error', null),
-        set('get.status', ACTION_STATUS.PENDING),
+        set('error', null),
+        set('status', ACTION_STATUS.PENDING),
       )(state);
     },
 
-    getBookingSuccess(state, action) {
-      const { user } = action.payload;
+    getBookingInfoSuccess(state, action) {
+      const { seat } = action.payload;
+      const addedStatusSeats =
+        seat.length > 0 &&
+        seat
+          .sort((a, b) => a.no - b.no)
+          .map(item => ({
+            ...item,
+            status: item.transaction ? 'UNAVAILABLE' : 'AVAILABLE',
+          }));
       return flow(
-        set('info', user),
-        set('get.status', ACTION_STATUS.SUCCESS),
+        set('data', action.payload),
+        set('seats', addedStatusSeats),
+        set('status', ACTION_STATUS.SUCCESS),
+        set('pickedSeats', []),
       )(state);
     },
 
-    getBookingFailed(state, action) {
-      return flow(
-        set('get.error', action.payload),
-        set('get.status', ACTION_STATUS.FAILED),
-      )(state);
-    },
-
-    editBooking(state) {
-      return flow(
-        set('edit.error', null),
-        set('edit.status', ACTION_STATUS.PENDING),
-      )(state);
-    },
-
-    editBookingFailed(state, action) {
+    getBookingInfoFailed(state, action) {
       return flow(
         set('error', action.payload),
-        set('edit.status', ACTION_STATUS.FAILED),
+        set('status', ACTION_STATUS.FAILED),
       )(state);
     },
 
-    editBookingSuccess(state, action) {
-      const { user } = action.payload;
+    updateSeatStatus(state, action) {
+      const { id, newStatus } = action.payload;
+      const seats = [...state.seats];
+      const updatedSeats = seats.map(item => {
+        if (item.id === id) return { ...item, status: newStatus };
+        return item;
+      });
+      const updatePickedSeats = updatedSeats.filter(
+        item => item.status === 'PICKED',
+      );
       return flow(
-        set('info', user),
-        set('edit.status', ACTION_STATUS.SUCCESS),
+        set('seats', updatedSeats),
+        set('pickedSeats', updatePickedSeats),
+      )(state);
+    },
+
+    book(state) {
+      return flow(
+        set('book.error', null),
+        set('book.status', ACTION_STATUS.PENDING),
+      )(state);
+    },
+
+    bookSuccess(state) {
+      return flow(
+        set('status', ACTION_STATUS.SUCCESS),
+        set('pickedSeats', []),
+      )(state);
+    },
+
+    bookFailed(state, action) {
+      return flow(
+        set('book.error', action.payload),
+        set('book.status', ACTION_STATUS.FAILED),
       )(state);
     },
   },

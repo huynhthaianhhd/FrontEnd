@@ -1,40 +1,46 @@
 import useActions from 'hooks/useActions';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectBookingInfo, selectEditBookingStatus } from './selectors';
+import {
+  selectBookingData,
+  selectBookingStatus,
+  selectBookingSeats,
+  selectBookingPickedSeats,
+} from './selectors';
 import { actions } from './slice';
-import Form from 'app/components/Form';
 import { ACTION_STATUS } from 'utils/constants';
+import { useParams } from 'react-router-dom';
 
 const useHooks = () => {
-  const [form] = Form.useForm();
-  const info = useSelector(selectBookingInfo);
-  const statusUpdate = useSelector(selectEditBookingStatus);
-  const { getBooking, editBooking } = useActions(
+  const { showTimeId } = useParams();
+  const status = useSelector(selectBookingStatus);
+  const seats = useSelector(selectBookingSeats);
+  const pickedSeats = useSelector(selectBookingPickedSeats);
+  const data = useSelector(selectBookingData);
+
+  const { getBookingInfo, updateSeatStatus, book } = useActions(
     {
-      getBooking: actions.getBooking,
-      editBooking: actions.editBooking,
+      getBookingInfo: actions.getBookingInfo,
+      updateSeatStatus: actions.updateSeatStatus,
+      book: actions.book,
     },
     [actions],
   );
 
-  useEffect(() => getBooking(), [getBooking]);
+  useEffect(() => getBookingInfo(showTimeId), [getBookingInfo, showTimeId]);
 
-  useEffect(() => form.resetFields(), [info, form]);
+  const handleClickSeat = ({ id, newStatus }) =>
+    updateSeatStatus({ id, newStatus });
 
-  const onFinish = useCallback(
-    values => {
-      editBooking(values);
-    },
-    [editBooking],
-  );
+  const handleBook = () => book({ showTimeId, pickedSeats });
 
   return {
-    handlers: { onFinish },
+    handlers: { handleClickSeat, handleBook },
     selectors: {
-      loading: statusUpdate === ACTION_STATUS.PENDING,
-      info,
-      form,
+      loading: status === ACTION_STATUS.PENDING,
+      data,
+      seats,
+      pickedSeats,
     },
   };
 };

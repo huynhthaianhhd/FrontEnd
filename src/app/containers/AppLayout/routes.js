@@ -17,7 +17,7 @@ export const privateRoutes = [
     key: 'profile',
   },
   {
-    path: '/booking',
+    path: '/booking/:showTimeId',
     component: Booking,
     key: 'booking',
   },
