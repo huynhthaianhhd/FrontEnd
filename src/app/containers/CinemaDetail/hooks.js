@@ -15,7 +15,12 @@ export const useHooks = () => {
     },
     [actions],
   );
-
+  const onClickTab = useCallback(
+    date => {
+      fetchListCinema({ ...param, date: date });
+    },
+    [fetchListCinema, param],
+  );
   useEffect(() => {
     fetchListCinema(param);
   }, [fetchListCinema, param]);
@@ -24,6 +29,8 @@ export const useHooks = () => {
     selectors: {
       listCinema,
     },
-    handles: {},
+    handles: {
+      onClickTab,
+    },
   };
 };

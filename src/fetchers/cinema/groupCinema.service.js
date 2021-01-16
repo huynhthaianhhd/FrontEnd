@@ -11,10 +11,14 @@ export const getAll = () => {
     .catch(handleGeneralError);
 };
 
-export const getCinemaByGroup = ({ id }) => {
+export const getCinemaByGroup = ({ id, date }) => {
   return request(WEB_API, {
-    url: `/movie/group?id=${id}`,
-    method: 'GET',
+    url: '/movie/group',
+    method: 'POST',
+    data: {
+      id,
+      date,
+    },
   })
     .then(res => res.data)
     .then(data => ({ response: data }))

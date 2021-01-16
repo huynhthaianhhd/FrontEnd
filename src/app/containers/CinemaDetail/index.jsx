@@ -14,12 +14,13 @@ export const CinemaDetail = memo(() => {
   useInjectReducer({ key: sliceKey, reducer });
   const { selectors, handles } = useHooks();
   const { listCinema } = selectors;
+  const { onClickTab } = handles;
   return (
     <StyledSection>
       <Tabs defaultActiveKey="1" centered>
         <TabPane tab="Lich Chiếu" key="1">
           <Container>
-            <ShowTime cinemas={listCinema} />
+            <ShowTime cinemas={listCinema} onClickTab={onClickTab} />
           </Container>
         </TabPane>
         <TabPane tab="Thông tin" key="2">

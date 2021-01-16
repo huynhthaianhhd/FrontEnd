@@ -3,8 +3,7 @@ import { memo, useState, useCallback, useMemo } from 'react';
 import { changeToDateOfWeek } from 'utils/common';
 import { StyledDateTab } from './styles';
 
-export const DateTab = memo(() => {
-  const [activeTab, setActiveTab] = useState(0);
+export const DateTab = memo(({ onClickTab, activeTab = 0, onChangeTab }) => {
   const currentDayOfWeek = useMemo(() => {
     return moment().isoWeekday();
   }, []);
@@ -19,11 +18,13 @@ export const DateTab = memo(() => {
     [currentDayOfWeek],
   );
   return [...Array(7).fill('')].map((e, i) => {
+    const temp = moment().add(i, 'days').toDate();
     return (
       <StyledDateTab
         isActive={activeTab === i}
         onClick={() => {
-          setActiveTab(i);
+          onChangeTab(i);
+          onClickTab(temp);
         }}
       >
         {changeToDateOfWeek(dayOfWeek(i))}
