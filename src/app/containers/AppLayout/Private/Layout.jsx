@@ -7,7 +7,7 @@ export const PrivateLayout = ({ children }) => (
   <StyledLayout>
     <Header />
     <StyledContent>{children}</StyledContent>
-    <Footer />
+    {/* <Footer /> */}
   </StyledLayout>
 );
 

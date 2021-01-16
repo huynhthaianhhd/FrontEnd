@@ -27,11 +27,15 @@ const bookingSlice = createSlice({
     },
 
     getBookingInfoSuccess(state, action) {
-      const { seat } = action.payload;
+      const seat = [...action.payload.seat];
       const addedStatusSeats =
         seat.length > 0 &&
         seat
-          .sort((a, b) => a.no - b.no)
+          .sort((a, b) => {
+            if (a.row < b.row) return -1;
+            if (a.row > b.row) return 1;
+            return a.no - b.no;
+          })
           .map(item => ({
             ...item,
             status: item.transaction ? 'UNAVAILABLE' : 'AVAILABLE',
@@ -76,7 +80,7 @@ const bookingSlice = createSlice({
 
     bookSuccess(state) {
       return flow(
-        set('status', ACTION_STATUS.SUCCESS),
+        set('book.status', ACTION_STATUS.SUCCESS),
         set('pickedSeats', []),
       )(state);
     },
@@ -86,6 +90,10 @@ const bookingSlice = createSlice({
         set('book.error', action.payload),
         set('book.status', ACTION_STATUS.FAILED),
       )(state);
+    },
+
+    resetData() {
+      return { ...initialState };
     },
   },
 });
