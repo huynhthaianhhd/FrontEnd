@@ -27,7 +27,7 @@ export const Home = () => {
     currentDate,
     currentShowTime,
   } = selectors;
-  const { handleSelectMovie } = handles;
+  const { handleSelectMovie, handleClickMovie } = handles;
   return (
     <StyledHome>
       <StyledSection>
@@ -43,7 +43,10 @@ export const Home = () => {
         </StyledHelper>
       </StyledSection>
       <StyledSection>
-        <Movie highLightMovie={listMovieHighLight} />
+        <Movie
+          highLightMovie={listMovieHighLight}
+          handleClickMovie={handleClickMovie}
+        />
       </StyledSection>
       <StyledSection>
         <div className="container">

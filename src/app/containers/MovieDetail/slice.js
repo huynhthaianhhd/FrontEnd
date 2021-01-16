@@ -19,6 +19,11 @@ const initialState = {
     status: '',
     error: null,
   },
+  groupCinema: {
+    data: null,
+    status: '',
+    error: null,
+  },
 };
 
 const detailMovieSlice = createSlice({
@@ -85,6 +90,27 @@ const detailMovieSlice = createSlice({
       return flow(
         set('createReview.error', action.payload),
         set('createReview.status', ACTION_STATUS.FAILED),
+      )(state);
+    },
+
+    fetchGroup(state) {
+      return flow(
+        set('groupCinema.status', ACTION_STATUS.PENDING),
+        set('groupCinema.error', null),
+      )(state);
+    },
+
+    fetchGroupSuccess(state, action) {
+      return flow(
+        set('groupCinema.data', action.payload),
+        set('groupCinema.status', ACTION_STATUS.SUCCESS),
+      )(state);
+    },
+
+    fetchGroupFailed(state, action) {
+      return flow(
+        set('groupCinema.error', action.payload),
+        set('groupCinema.status', ACTION_STATUS.FAILED),
       )(state);
     },
   },
