@@ -2,7 +2,17 @@ import React, { memo } from 'react';
 import { StyledMovieDetail } from './styles';
 import { Row, Col, Button } from 'antd';
 import TabInfo from './Tabs/Tab';
+import useHooks from './hooks';
+import saga from './saga';
+import { useInjectReducer, useInjectSaga } from 'utils/reduxInjectors';
+import { reducer, sliceKey } from './slice';
+import moment from 'moment';
+
 export const MovieDetail = memo(() => {
+  useInjectSaga({ key: sliceKey, saga });
+  useInjectReducer({ key: sliceKey, reducer });
+  const { handlers, selectors } = useHooks();
+  const { detailMovie, movieReviews } = selectors;
   return (
     <StyledMovieDetail>
       <Row
@@ -19,13 +29,15 @@ export const MovieDetail = memo(() => {
           </div>
           <div className="poster-main">
             <div className="info">
-              <span>25.12.2020</span>
+              <span>
+                {moment(detailMovie?.premiereTime).format('YYYY-MM-DD')}
+              </span>
             </div>
             <div className="name-movie info">
-              <span>Chị Mười Ba: 3 Ngày Sinh Tử</span>
+              <span>{detailMovie?.name}</span>
             </div>
             <div className="info">
-              <span>100 phút - 0 IMDb - 2D/Digital</span>
+              <span>{detailMovie?.duration} phút - 0 IMDb - 2D/Digital</span>
             </div>
             <Button type="primary" danger className="info">
               Đặt vé
@@ -65,8 +77,7 @@ export const MovieDetail = memo(() => {
           </div>
         </Col>
       </Row>
-
-      <TabInfo />
+      <TabInfo detailMovie={detailMovie} movieReviews={movieReviews} />
     </StyledMovieDetail>
   );
 });

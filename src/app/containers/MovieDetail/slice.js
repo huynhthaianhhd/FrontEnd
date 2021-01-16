@@ -1,71 +1,67 @@
-// import { createSlice } from '@reduxjs/toolkit';
-// import flow from 'lodash/fp/flow';
-// import set from 'lodash/fp/set';
-// import { ACTION_STATUS } from 'utils/constants';
-// export const initialState = {
-//   isAuthenticated: false,
-//   status: '',
-//   error: null,
-// };
+import { createSlice } from '@reduxjs/toolkit';
+import flow from 'lodash/fp/flow';
+import set from 'lodash/fp/set';
+import { ACTION_STATUS } from 'utils/constants';
 
-// const authenticationSlice = createSlice({
-//   name: 'authentication',
-//   initialState,
-//   reducers: {
-//     login(state) {
-//       return flow(
-//         set('error', null),
-//         set('status', ACTION_STATUS.PENDING),
-//       )(state);
-//     },
+const initialState = {
+  detailMovie: {
+    data: null,
+    status: '',
+    error: null,
+  },
+  movieReviews: {
+    data: null,
+    status: '',
+    error: null,
+  },
+};
 
-//     loginSuccess(state) {
-//       return flow(
-//         set('isAuthenticated', true),
-//         set('status', ACTION_STATUS.SUCCESS),
-//       )(state);
-//     },
+const detailMovieSlice = createSlice({
+  name: 'detailMoviePage',
+  initialState,
+  reducers: {
+    getDetailMovie(state) {
+      return flow(
+        set('detailMovie.error', null),
+        set('detailMovie.status', ACTION_STATUS.PENDING),
+      )(state);
+    },
 
-//     loginFailed(state, action) {
-//       return flow(
-//         set('error', action.payload),
-//         set('status', ACTION_STATUS.FAILED),
-//       )(state);
-//     },
+    getDetailMovieSuccess(state, action) {
+      return flow(
+        set('detailMovie.data', action.payload),
+        set('detailMovie.status', ACTION_STATUS.SUCCESS),
+      )(state);
+    },
 
-//     loginService(state) {
-//       return flow(
-//         set('error', null),
-//         set('status', ACTION_STATUS.PENDING),
-//       )(state);
-//     },
+    getDetailMovieFailed(state, action) {
+      return flow(
+        set('detailMovie.error', action.payload),
+        set('detailMovie.status', ACTION_STATUS.FAILED),
+      )(state);
+    },
 
-//     loginServiceSuccess(state) {
-//       return flow(
-//         set('isAuthenticated', true),
-//         set('status', ACTION_STATUS.SUCCESS),
-//       )(state);
-//     },
+    getMovieReviews(state) {
+      return flow(
+        set('movieReviews.error', null),
+        set('movieReviews.status', ACTION_STATUS.PENDING),
+      )(state);
+    },
 
-//     loginServiceFailed(state, action) {
-//       return flow(
-//         set('error', action.payload),
-//         set('status', ACTION_STATUS.FAILED),
-//       )(state);
-//     },
+    getMovieReviewsSuccess(state, action) {
+      return flow(
+        set('movieReviews.data', action.payload),
+        set('movieReviews.status', ACTION_STATUS.SUCCESS),
+      )(state);
+    },
 
-//     logout(state) {
-//       return state;
-//     },
+    getMovieReviewsFailed(state, action) {
+      return flow(
+        set('movieReviews.error', action.payload),
+        set('movieReviews.status', ACTION_STATUS.FAILED),
+      )(state);
+    },
+  },
+});
 
-//     logoutSuccess(state) {
-//       return flow(
-//         set('isAuthenticated', false),
-//         set('status', ''),
-//         set('error', null),
-//       )(state);
-//     },
-//   },
-// });
-
-// export const { actions, reducer, name: sliceKey } = authenticationSlice;
+export const { actions, reducer, name: sliceKey } = detailMovieSlice;
