@@ -10,13 +10,19 @@ import {
   Avatar,
   Rate,
 } from 'antd';
-import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 import moment from 'moment';
 
 const { TextArea } = Input;
 
 export const TabReview = memo(props => {
-  const { movieReviews } = props;
+  const {
+    movieReviews,
+    handleChangeReview,
+    handleChangeRating,
+    handleSubmitReview,
+    contentReview,
+    ratingReview,
+  } = props;
   const data = movieReviews.map(review => ({
     author: review?.user?.name,
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
@@ -37,40 +43,46 @@ export const TabReview = memo(props => {
     ),
   }));
 
-  const Editor = ({ onChange, onSubmit, submitting, value }) => (
+  const Editor = ({
+    handleChangeReview,
+    handleChangeRating,
+    handleSubmitReview,
+    ratingReview,
+    contentReview,
+  }) => (
     <>
-      <Form.Item>
-        <Avatar
-          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-          alt="Han Solo"
-        />
-        <Rate defaultValue={5} />
-      </Form.Item>
-      <Form.Item>
-        <TextArea rows={4} onChange={onChange} value={value} />
-      </Form.Item>
-      <Form.Item>
-        <Button
-          htmlType="submit"
-          loading={submitting}
-          onClick={onSubmit}
-          type="primary"
-        >
-          Add Comment
-        </Button>
-      </Form.Item>
+      <Form className="register-form" id="form" onFinish={handleSubmitReview}>
+        <Form.Item name="rating">
+          <Rate defaultValue={5} onChange={handleChangeRating} />
+        </Form.Item>
+        <Form.Item name="content">
+          <TextArea rows={4} onChange={handleChangeReview} />
+        </Form.Item>
+        <Form.Item>
+          <Button htmlType="submit" type="primary" form="form">
+            Add Comment
+          </Button>
+        </Form.Item>
+      </Form>
     </>
   );
   return (
     <Row justify="center">
       <div className="about-comments about">
         <Comment
+          avatar={
+            <Avatar
+              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              alt="Han Solo"
+            />
+          }
           content={
             <Editor
-            // onChange={this.handleChange}
-            // onSubmit={this.handleSubmit}
-            // submitting={submitting}
-            // value={value}
+              handleChangeReview={handleChangeReview}
+              handleChangeRating={handleChangeRating}
+              handleSubmitReview={handleSubmitReview}
+              contentReview={contentReview}
+              ratingReview={ratingReview}
             />
           }
         />

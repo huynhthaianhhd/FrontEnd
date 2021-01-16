@@ -4,10 +4,17 @@ import { AndroidOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
 import TabMovie from './TabMovie';
 import TabReview from './TabReview';
+import useHooks from './hooks';
 const { TabPane } = Tabs;
 
 export const TabInfo = memo(props => {
   const { detailMovie, movieReviews } = props;
+  const { handlers, selectors } = useHooks(props);
+  const {
+    handleChangeReview,
+    handleChangeRating,
+    handleSubmitReview,
+  } = handlers;
   return (
     <StyledTab defaultActiveKey="1" centered>
       <TabPane
@@ -41,7 +48,12 @@ export const TabInfo = memo(props => {
         }
         key="3"
       >
-        <TabReview movieReviews={movieReviews} />
+        <TabReview
+          movieReviews={movieReviews}
+          handleChangeReview={handleChangeReview}
+          handleChangeRating={handleChangeRating}
+          handleSubmitReview={handleSubmitReview}
+        />
       </TabPane>
     </StyledTab>
   );

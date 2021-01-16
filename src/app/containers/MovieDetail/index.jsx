@@ -13,6 +13,14 @@ export const MovieDetail = memo(() => {
   useInjectReducer({ key: sliceKey, reducer });
   const { handlers, selectors } = useHooks();
   const { detailMovie, movieReviews } = selectors;
+  const point = movieReviews.reduce(
+    (totalRate, item) => totalRate + item.rating,
+    0,
+  );
+  const numReviews = movieReviews.length > 0 ? movieReviews.length : 1;
+  const pointRating = (point * 10) / (numReviews * 5.0);
+  const num = pointRating > 0 ? Math.ceil(pointRating / 2.0) : 5;
+  const numStars = num ? [...Array(num).fill(null)] : [];
   return (
     <StyledMovieDetail>
       <Row
@@ -47,33 +55,22 @@ export const MovieDetail = memo(() => {
         <Col span={8} className="header-rating">
           <div className="circlePercent">
             <div className="circleBorder">
-              <span className="point">7.4</span>
+              <span className="point">
+                {pointRating > 0 ? pointRating : 10}
+              </span>
             </div>
           </div>
           <div className="group-star">
-            <img
-              className="smallStar"
-              src="https://tix.vn/app/assets/img/icons/star1.png"
-              alt="Rating"
-            />
-            <img
-              className="smallStar"
-              src="https://tix.vn/app/assets/img/icons/star1.png"
-              alt="Rating"
-            />
-            <img
-              className="smallStar"
-              src="https://tix.vn/app/assets/img/icons/star1.png"
-              alt="Rating"
-            />
-            <img
-              className="smallStar"
-              src="https://tix.vn/app/assets/img/icons/star1.png"
-              alt="Rating"
-            />
+            {numStars.map(() => (
+              <img
+                className="smallStar"
+                src="https://tix.vn/app/assets/img/icons/star1.png"
+                alt="Rating"
+              />
+            ))}
           </div>
           <div>
-            <span>150 lượt đánh giá</span>
+            <span>{movieReviews?.length} lượt đánh giá</span>
           </div>
         </Col>
       </Row>

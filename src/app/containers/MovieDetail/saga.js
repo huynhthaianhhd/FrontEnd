@@ -1,4 +1,8 @@
-import { getMovieById, getMovieReviewsById } from 'fetchers/movie/movieFetcher';
+import {
+  getMovieById,
+  getMovieReviewsById,
+  createMovieReview,
+} from 'fetchers/movie/movieFetcher';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 
@@ -7,6 +11,9 @@ function* getDetailMovieWatcher() {
 }
 function* getMovieReviewsWatcher() {
   yield takeLatest(actions.getMovieReviews, getMovieReviewsTask);
+}
+function* createMovieReviewWatcher() {
+  yield takeLatest(actions.createMovieReview, createMovieReviewTask);
 }
 
 function* getDetailMovieTask(action) {
@@ -27,6 +34,15 @@ function* getMovieReviewsTask(action) {
   }
 }
 
+function* createMovieReviewTask(action) {
+  const { response, error } = yield call(createMovieReviewAPI, action.payload);
+  if (response) {
+    yield put(actions.createMovieReviewSuccess(response));
+  } else {
+    yield put(actions.createMovieReviewFailed(error));
+  }
+}
+
 function getDetailMovieAPI(payload) {
   return getMovieById(payload);
 }
@@ -35,6 +51,14 @@ function getMovieReviewsAPI(payload) {
   return getMovieReviewsById(payload);
 }
 
+function createMovieReviewAPI(payload) {
+  return createMovieReview(payload);
+}
+
 export default function* defaultSaga() {
-  yield all([fork(getDetailMovieWatcher), fork(getMovieReviewsWatcher)]);
+  yield all([
+    fork(getDetailMovieWatcher),
+    fork(getMovieReviewsWatcher),
+    fork(createMovieReviewWatcher),
+  ]);
 }

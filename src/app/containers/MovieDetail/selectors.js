@@ -12,3 +12,8 @@ export const selectMovieReviews = createSelector(
   selectDetailMovieState,
   detailMovie => get('movieReviews', detailMovie),
 );
+
+export const selectCreateMovieReview = createSelector(
+  selectDetailMovieState,
+  detailMovie => get('createReview', detailMovie),
+);

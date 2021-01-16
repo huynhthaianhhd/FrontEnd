@@ -14,6 +14,11 @@ const initialState = {
     status: '',
     error: null,
   },
+  createReview: {
+    data: null,
+    status: '',
+    error: null,
+  },
 };
 
 const detailMovieSlice = createSlice({
@@ -59,6 +64,27 @@ const detailMovieSlice = createSlice({
       return flow(
         set('movieReviews.error', action.payload),
         set('movieReviews.status', ACTION_STATUS.FAILED),
+      )(state);
+    },
+
+    createMovieReview(state) {
+      return flow(
+        set('createReview.error', null),
+        set('createReview.status', ACTION_STATUS.PENDING),
+      )(state);
+    },
+
+    createMovieReviewSuccess(state, action) {
+      return flow(
+        set('createReview.data', action.payload),
+        set('createReview.status', ACTION_STATUS.SUCCESS),
+      )(state);
+    },
+
+    createMovieReviewFailed(state, action) {
+      return flow(
+        set('createReview.error', action.payload),
+        set('createReview.status', ACTION_STATUS.FAILED),
       )(state);
     },
   },

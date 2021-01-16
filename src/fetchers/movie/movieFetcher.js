@@ -20,3 +20,14 @@ export const getMovieReviewsById = ({ id }) => {
     .then(data => ({ response: data }))
     .catch(handleGeneralError);
 };
+
+export const createMovieReview = payload => {
+  return request(BASE_URL, {
+    url: `/movie/reviews`,
+    method: 'POST',
+    data: payload,
+  })
+    .then(({ data }) => data.data)
+    .then(data => ({ response: data }))
+    .catch(handleGeneralError);
+};
