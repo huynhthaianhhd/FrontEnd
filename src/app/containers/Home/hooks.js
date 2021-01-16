@@ -11,6 +11,7 @@ import {
   makeCurrentDate,
   makeCurrentShowTime,
 } from './selectors';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export const useHooks = () => {
   const { fetchGroup, fetchListMovie } = useActions(
@@ -28,8 +29,14 @@ export const useHooks = () => {
   const currentCinemas = useSelector(makeCurrentCinemas);
   const currentDate = useSelector(makeCurrentDate);
   const currentShowTime = useSelector(makeCurrentShowTime);
+  const history = useHistory();
 
-  const handleSelectMovie = useCallback(e => {}, []);
+  const handleSelectMovie = useCallback(id => {}, []);
+
+  const handleClickMovie = useCallback(id => {
+    history.push(`/movie/${id}`);
+  }, []);
+
   const handleSelectGroupCinema = useCallback(e => {}, []);
   const handleSelectCinema = useCallback(e => {}, []);
 
@@ -52,6 +59,7 @@ export const useHooks = () => {
       handleSelectMovie,
       handleSelectGroupCinema,
       handleSelectCinema,
+      handleClickMovie,
     },
   };
 };

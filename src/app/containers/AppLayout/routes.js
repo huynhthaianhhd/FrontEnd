@@ -9,11 +9,6 @@ import { ManageUsers } from 'app/containers/ManageUsers/Loadable';
 
 export const privateRoutes = [
   {
-    path: '/abc',
-    component: Home,
-    key: 'home',
-  },
-  {
     path: '/profile',
     component: Profile,
     key: 'profile',

@@ -1,4 +1,4 @@
-import React, { memo, createElement, useState } from 'react';
+import React, { memo } from 'react';
 import {
   Comment,
   Tooltip,
@@ -15,14 +15,8 @@ import moment from 'moment';
 const { TextArea } = Input;
 
 export const TabReview = memo(props => {
-  const {
-    movieReviews,
-    handleChangeReview,
-    handleChangeRating,
-    handleSubmitReview,
-    contentReview,
-    ratingReview,
-  } = props;
+  const { movieReviews, handleSubmitReview } = props;
+
   const data = movieReviews.map(review => ({
     author: review?.user?.name,
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
@@ -43,20 +37,14 @@ export const TabReview = memo(props => {
     ),
   }));
 
-  const Editor = ({
-    handleChangeReview,
-    handleChangeRating,
-    handleSubmitReview,
-    ratingReview,
-    contentReview,
-  }) => (
+  const Editor = ({ handleSubmitReview }) => (
     <>
       <Form className="register-form" id="form" onFinish={handleSubmitReview}>
         <Form.Item name="rating">
-          <Rate defaultValue={5} onChange={handleChangeRating} />
+          <Rate defaultValue={5} />
         </Form.Item>
         <Form.Item name="content">
-          <TextArea rows={4} onChange={handleChangeReview} />
+          <TextArea rows={4} />
         </Form.Item>
         <Form.Item>
           <Button htmlType="submit" type="primary" form="form">
@@ -76,15 +64,7 @@ export const TabReview = memo(props => {
               alt="Han Solo"
             />
           }
-          content={
-            <Editor
-              handleChangeReview={handleChangeReview}
-              handleChangeRating={handleChangeRating}
-              handleSubmitReview={handleSubmitReview}
-              contentReview={contentReview}
-              ratingReview={ratingReview}
-            />
-          }
+          content={<Editor handleSubmitReview={handleSubmitReview} />}
         />
         <List
           header={`${data.length} Reviews`}

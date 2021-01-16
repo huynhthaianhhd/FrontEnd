@@ -12,7 +12,7 @@ export const MovieDetail = memo(() => {
   useInjectSaga({ key: sliceKey, saga });
   useInjectReducer({ key: sliceKey, reducer });
   const { handlers, selectors } = useHooks();
-  const { detailMovie, movieReviews } = selectors;
+  const { detailMovie, movieReviews, groupCinema } = selectors;
   const point = movieReviews.reduce(
     (totalRate, item) => totalRate + item.rating,
     0,
@@ -74,7 +74,11 @@ export const MovieDetail = memo(() => {
           </div>
         </Col>
       </Row>
-      <TabInfo detailMovie={detailMovie} movieReviews={movieReviews} />
+      <TabInfo
+        detailMovie={detailMovie}
+        movieReviews={movieReviews}
+        groupCinema={groupCinema}
+      />
     </StyledMovieDetail>
   );
 });
