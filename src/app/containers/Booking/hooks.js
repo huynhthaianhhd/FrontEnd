@@ -13,6 +13,8 @@ import { ACTION_STATUS } from 'utils/constants';
 import { useParams, useHistory } from 'react-router-dom';
 import get from 'lodash/fp/get';
 import moment from 'moment';
+import { actions as popupActions } from 'app/containers/Popup/slice';
+import { POPUP_TYPE } from 'app/containers/Popup/constants';
 
 const useHooks = () => {
   const { showTimeId } = useParams();
@@ -28,14 +30,21 @@ const useHooks = () => {
   );
   const [paymentMethod, setPaymentMethod] = useState(1);
 
-  const { resetData, getBookingInfo, updateSeatStatus, book } = useActions(
+  const {
+    resetData,
+    getBookingInfo,
+    updateSeatStatus,
+    book,
+    openPopup,
+  } = useActions(
     {
       getBookingInfo: actions.getBookingInfo,
       updateSeatStatus: actions.updateSeatStatus,
       book: actions.book,
       resetData: actions.resetData,
+      openPopup: popupActions.openPopup,
     },
-    [actions],
+    [actions, popupActions],
   );
 
   useEffect(() => getBookingInfo(showTimeId), [getBookingInfo, showTimeId]);
@@ -51,12 +60,23 @@ const useHooks = () => {
 
   const handleBook = () => book({ showTimeId, pickedSeats });
 
+  const handleConfirmBook = () => {
+    openPopup({
+      key: 'confirmBook',
+      type: POPUP_TYPE.CONFIRM,
+      message: 'Bạn có chắc chắn với thông tin đặt vé ?',
+      cancelText: 'Hủy',
+      handleConfirm: handleBook,
+      loading: bookStatus === ACTION_STATUS.PENDING,
+    });
+  };
+
   const handleChangeRadio = e => {
     setPaymentMethod(e.target.value);
   };
 
   return {
-    handlers: { handleClickSeat, handleBook, handleChangeRadio },
+    handlers: { handleClickSeat, handleConfirmBook, handleChangeRadio },
     selectors: {
       loading: status === ACTION_STATUS.PENDING,
       data,

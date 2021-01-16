@@ -24,7 +24,7 @@ export const Booking = props => {
   useInjectSaga({ key: sliceKey, saga });
   useInjectReducer({ key: sliceKey, reducer });
   const { handlers, selectors } = useHooks(props);
-  const { handleClickSeat, handleBook, handleChangeRadio } = handlers;
+  const { handleClickSeat, handleConfirmBook, handleChangeRadio } = handlers;
   const { seats, pickedSeats, movie, startTime, paymentMethod } = selectors;
 
   const radioStyle = {
@@ -89,7 +89,7 @@ export const Booking = props => {
             </div>
             <BookingButton
               disabled={pickedSeats?.length === 0}
-              onClick={handleBook}
+              onClick={handleConfirmBook}
             >
               Đặt vé
             </BookingButton>
