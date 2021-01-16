@@ -85,7 +85,6 @@ export const StyledMovieDetail = styled.div`
 export const StyledMovieList = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   max-height: 450px;
 `;
 
@@ -93,7 +92,7 @@ export const StyledTime = styled.div`
   width: calc(23% - 10px);
   float: left;
   font-family: 'SF Medium';
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   margin: 0 10px 10px 0;
   padding: 8px;
@@ -108,14 +107,26 @@ export const StyledTime = styled.div`
   color: #9b9b9b;
   border: 1px solid #e4e4e4;
   letter-spacing: -0.12px;
+  cursor: pointer;
   .time {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #108f3e;
+    color: #108f3e !important;
     letter-spacing: -0.16px;
+  }
+  & > a {
+    display: flex;
+    align-items: center;
+    color: #9b9b9b;
+    & > * {
+      margin-right: 5px;
+    }
   }
 `;
 
 export const StyledListTime = styled.div`
   display: flex;
+  & > * {
+    margin-right: 10px;
+  }
 `;

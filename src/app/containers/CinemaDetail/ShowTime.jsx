@@ -3,17 +3,26 @@ import BHD from 'images/movie/BHD.png';
 import { StyledTab, StyleTimeTab } from './styles';
 import { DateTab } from './DateTab';
 import { MovieList } from './MovieList';
+import { useState } from 'react';
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
-export const ShowTime = ({ cinemas }) => {
+export const ShowTime = ({ cinemas, onClickTab }) => {
+  const [activeTab, setActiveTab] = useState(0);
+  const onChangeTab = i => {
+    setActiveTab(i);
+  };
   return (
     <Tabs tabPosition="left">
       {cinemas.length > 0 &&
         cinemas.map((e, i) => (
           <TabPane tab={<OneTab {...e} />} key={i}>
             <StyleTimeTab>
-              <DateTab></DateTab>
+              <DateTab
+                activeTab={activeTab}
+                onClickTab={onClickTab}
+                onChangeTab={onChangeTab}
+              ></DateTab>
             </StyleTimeTab>
             <MovieList movies={e?.movies || []} />
           </TabPane>

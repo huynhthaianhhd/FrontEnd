@@ -6,7 +6,8 @@ import {
 } from './styles';
 import { Image, Typography } from 'antd';
 import { GetUrlCinema } from 'utils/common';
-import BHD from 'images/movie/BHD.png';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const { Title } = Typography;
 export const MovieList = ({ movies }) => {
@@ -27,6 +28,7 @@ const OneMovieInList = ({
   category,
   startTime,
   index,
+  showTimes,
 }) => {
   return (
     <div>
@@ -38,10 +40,17 @@ const OneMovieInList = ({
         </div>
       </StyledMovieDetail>
       <StyledListTime>
-        <StyledTime>
-          <div className="time">{startTime}</div>
-          ~13:45
-        </StyledTime>
+        {showTimes &&
+          showTimes.map((ee, i) => (
+            <StyledTime>
+              <Link to={`/booking/${ee?.id}`}>
+                <div className="time">
+                  {moment(ee?.startTime).format('HH:mm')}
+                </div>
+                ~{moment(ee?.startTime).add(duration, 'minute').format('HH:mm')}
+              </Link>
+            </StyledTime>
+          ))}
       </StyledListTime>
     </div>
   );
