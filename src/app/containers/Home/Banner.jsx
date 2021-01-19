@@ -8,7 +8,7 @@ export const Banner = () => {
       autoplay={true}
       effect="fade"
       easing="ease-in-out"
-      dotPosition="top"
+      dotPosition="bottom"
     >
       <Image src={ImageBanner} alt="banner" className="img" preview={false} />
       <Image src={ImageBanner2} alt="banner" className="img" preview={false} />

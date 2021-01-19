@@ -8,6 +8,11 @@ export const makeSelectIsAuthenticated = createSelector(
   authentication => get('isAuthenticated', authentication),
 );
 
+export const selectUserInfoAuthenticate = createSelector(
+  selectAuthenticationState,
+  authentication => get('info', authentication),
+);
+
 export const makeSelectAuthenticationStatus = createSelector(
   selectAuthenticationState,
   authentication => get('status', authentication),

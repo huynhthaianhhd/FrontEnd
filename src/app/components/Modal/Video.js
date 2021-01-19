@@ -41,7 +41,6 @@ const Video = memo(function Video(props) {
       centered
       visible={visible}
       footer={false}
-      mask={false}
       {...remainingProps}
       wrapClassName="events-none"
     >

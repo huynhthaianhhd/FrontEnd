@@ -5,13 +5,15 @@ import { Avatar, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Dropdown from 'app/components/Dropdown';
 import Menu from 'app/components/Menu';
-import { useLogout } from 'app/containers/Login/hooks';
+import {
+  useLogout,
+  useGetUserInfoAuthenticate,
+} from 'app/containers/Login/hooks';
 import { useHistory } from 'react-router-dom';
-import { getUser as getUserFromStorage } from 'utils/localStorageUtils';
 
 export const PublicHeader = () => {
+  const user = useGetUserInfoAuthenticate();
   const history = useHistory();
-  const user = getUserFromStorage();
   const { handlers } = useLogout();
   const { onLogout } = handlers;
 

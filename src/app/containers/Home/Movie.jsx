@@ -1,6 +1,6 @@
 import { Image, Typography, Button, Tag } from 'antd';
 import { StyledMovie } from './styles';
-import MovieSrc from 'images/movie/chimuoiba.png';
+// import MovieSrc from 'images/movie/chimuoiba.png';
 const { Title } = Typography;
 
 export const Movie = ({ highLightMovie, handleClickMovie }) => {
@@ -32,7 +32,7 @@ export const Movie = ({ highLightMovie, handleClickMovie }) => {
       <div className="main">
         {highLightMovie?.length > 0 &&
           highLightMovie.map((e, i) => {
-            return <MoviePreview {...e} id={e.id} src={MovieSrc} key={i} />;
+            return <MoviePreview {...e} id={e.id} src={e.posterUrl} key={i} />;
           })}
       </div>
     </div>

@@ -11,7 +11,7 @@ function* loginTask(action) {
   const { response, error } = yield call(loginAPI, action.payload);
   if (response) {
     yield call(storeAuthInfo, response);
-    yield put(actions.loginSuccess());
+    yield put(actions.loginSuccess(response));
   } else {
     yield put(actions.loginFailed(error.data));
   }

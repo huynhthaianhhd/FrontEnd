@@ -17,7 +17,7 @@ export const StyledMovieDetail = styled.div`
       css`
         background: url(${background});
         background-repeat: no-repeat;
-        filter: blur(8px);
+        filter: blur(18px);
         height: 100%;
         background-position: center;
         background-repeat: no-repeat;

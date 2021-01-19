@@ -9,6 +9,7 @@ html,body{
 body{
   font-family: 'Montserrat', sans-serif;
   font-weight:500;
+  overflow:auto !important;
 }
 
 #root{
@@ -26,5 +27,5 @@ p,
     font-family: inherit;
     font-size: inherit;
   }
-  
+
 `;

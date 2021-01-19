@@ -6,18 +6,14 @@ import { Link } from 'react-router-dom';
 const { TabPane } = Tabs;
 
 export const ListMovie = memo(({ dataSource }) => {
+  const logos = dataSource.map(item => item.logo);
+
   return (
     <Tabs defaultActiveKey="0" tabPosition="left" style={{ height: '80vh' }}>
       {dataSource.length &&
         dataSource.map((e, i) => (
           <TabPane
-            tab={
-              <Image
-                src={GetUrlGroup(i)}
-                className="img-tiny"
-                preview={false}
-              />
-            }
+            tab={<Image src={logos[i]} className="img-tiny" preview={false} />}
             key={i}
           >
             <List
