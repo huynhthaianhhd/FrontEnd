@@ -1,5 +1,5 @@
 import useActions from 'hooks/useActions';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   makeSelectAuthenticationStatus,
@@ -48,6 +48,12 @@ export const useLogout = () => {
 
 export const useGetUserInfoAuthenticate = () => {
   const user = useSelector(selectUserInfoAuthenticate);
+  const { getUserInfoFromStorage } = useActions({
+    getUserInfoFromStorage: actions.getUserInfoFromStorage,
+  });
+
+  useEffect(() => getUserInfoFromStorage(), [getUserInfoFromStorage]);
+
   return user;
 };
 
