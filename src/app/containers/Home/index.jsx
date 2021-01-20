@@ -42,13 +42,13 @@ export const Home = () => {
           />
         </StyledHelper>
       </StyledSection>
-      <StyledSection>
+      <StyledSection id="show-time">
         <Movie
           highLightMovie={listMovieHighLight}
           handleClickMovie={handleClickMovie}
         />
       </StyledSection>
-      <StyledSection>
+      <StyledSection id="group-cinema">
         <div className="container">
           <StyledListMovie check={cinemaGroupList.length === 0}>
             <ListMovie dataSource={cinemaGroupList} />

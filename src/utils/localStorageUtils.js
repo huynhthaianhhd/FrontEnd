@@ -18,7 +18,6 @@ export const getAuthInfo = () => {
     if (!isNil(authInfo) && isValidAuthInfo(authInfo)) {
       return authInfo;
     }
-    removeAuthInfo();
     return null;
   } catch (error) {
     console.log('Error: ', error);

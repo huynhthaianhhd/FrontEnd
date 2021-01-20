@@ -68,6 +68,14 @@ const authenticationSlice = createSlice({
         set('error', null),
       )(state);
     },
+
+    getUserInfoFromStorage(state) {
+      return state;
+    },
+
+    getUserInfoFromStorageSuccess(state, action) {
+      return set('info', action.payload)(state);
+    },
   },
 });
 
