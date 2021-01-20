@@ -5,6 +5,7 @@ import {
 } from 'fetchers/movie/movieFetcher';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { getAll } from 'fetchers/cinema/groupCinema.service';
+import { getCinemaByGroupNTime } from 'fetchers/cinema/cinema.service';
 import { actions } from './slice';
 
 function* getDetailMovieWatcher() {
@@ -13,6 +14,11 @@ function* getDetailMovieWatcher() {
 function* getMovieReviewsWatcher() {
   yield takeLatest(actions.getMovieReviews, getMovieReviewsTask);
 }
+
+function* getCinemaListWatcher() {
+  yield takeLatest(actions.getCinemaList, getCinemaListTask);
+}
+
 function* createMovieReviewWatcher() {
   yield takeLatest(actions.createMovieReview, createMovieReviewTask);
 }
@@ -21,7 +27,7 @@ function* fetchGroupWatcher() {
   yield takeLatest(actions.fetchGroup, fetchGroupTask);
 }
 
-function* fetchGroupTask(action) {
+function* fetchGroupTask() {
   const { response, error } = yield call(fetchGroupCinemaAPI);
   if (response) {
     yield put(actions.fetchGroupSuccess(response));
@@ -45,6 +51,15 @@ function* getMovieReviewsTask(action) {
     yield put(actions.getMovieReviewsSuccess(response));
   } else {
     yield put(actions.getMovieReviewsFailed(error));
+  }
+}
+
+function* getCinemaListTask(action) {
+  const { response, error } = yield call(getCinemaListAPI, action.payload);
+  if (response) {
+    yield put(actions.getCinemaListSuccess(response));
+  } else {
+    yield put(actions.getCinemaListFailed(error));
   }
 }
 
@@ -73,11 +88,16 @@ function fetchGroupCinemaAPI() {
   return getAll();
 }
 
+function getCinemaListAPI(payload) {
+  return getCinemaByGroupNTime(payload);
+}
+
 export default function* defaultSaga() {
   yield all([
     fork(getDetailMovieWatcher),
     fork(getMovieReviewsWatcher),
     fork(createMovieReviewWatcher),
     fork(fetchGroupWatcher),
+    fork(getCinemaListWatcher),
   ]);
 }

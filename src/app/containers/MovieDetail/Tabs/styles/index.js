@@ -101,6 +101,7 @@ export const StyledCinemaList = styled.div`
 `;
 
 export const StyledTime = styled.div`
+  cursor: pointer;
   width: calc(23% - 10px);
   float: left;
   font-size: 14px;
@@ -131,6 +132,7 @@ export const StyledTime = styled.div`
 
 export const StyledListTime = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const StyledCinemaDetail = styled.div`

@@ -31,10 +31,10 @@ const useHooks = () => {
   const movieId = useParams();
 
   useEffect(() => {
+    fetchGroup();
     getDetailMovie(movieId);
     getMovieReviews(movieId);
-    fetchGroup();
-  }, []);
+  }, [getDetailMovie, fetchGroup, getMovieReviews, movieId]);
 
   useEffect(() => {
     if (selectorDetailMovie && selectorDetailMovie.data) {
@@ -55,6 +55,7 @@ const useHooks = () => {
   }, [selectorMovieReviews]);
 
   useEffect(() => {
+    console.log('selectorGroupCinema', selectorGroupCinema);
     if (selectorGroupCinema && selectorGroupCinema.data) {
       if (selectorGroupCinema.status === ACTION_STATUS.SUCCESS) {
         setGroupCinema(selectorGroupCinema.data);
@@ -78,6 +79,7 @@ const useHooks = () => {
       detailMovie,
       movieReviews,
       groupCinema,
+      selectorGroupCinema,
     },
   };
 };

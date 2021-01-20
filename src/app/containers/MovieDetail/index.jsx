@@ -13,7 +13,12 @@ export const MovieDetail = memo(() => {
   useInjectReducer({ key: sliceKey, reducer });
   const { handlers, selectors } = useHooks();
   const { handleShowTrailer } = handlers;
-  const { detailMovie, movieReviews, groupCinema } = selectors;
+  const {
+    detailMovie,
+    movieReviews,
+    groupCinema,
+    selectorGroupCinema,
+  } = selectors;
   const point = movieReviews.reduce(
     (totalRate, item) => totalRate + item.rating,
     0,
@@ -76,11 +81,13 @@ export const MovieDetail = memo(() => {
           </Col>
         </Row>
       </div>
-      <TabInfo
-        detailMovie={detailMovie}
-        movieReviews={movieReviews}
-        groupCinema={groupCinema}
-      />
+      {selectorGroupCinema.status === 'SUCCESS' && (
+        <TabInfo
+          detailMovie={detailMovie}
+          movieReviews={movieReviews}
+          groupCinema={groupCinema}
+        />
+      )}
     </StyledMovieDetail>
   );
 });

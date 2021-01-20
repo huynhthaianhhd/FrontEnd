@@ -24,6 +24,11 @@ const initialState = {
     status: '',
     error: null,
   },
+  cinemaList: {
+    data: null,
+    status: '',
+    error: null,
+  },
 };
 
 const detailMovieSlice = createSlice({
@@ -101,6 +106,7 @@ const detailMovieSlice = createSlice({
     },
 
     fetchGroupSuccess(state, action) {
+      console.log('action.payload', action.payload);
       return flow(
         set('groupCinema.data', action.payload),
         set('groupCinema.status', ACTION_STATUS.SUCCESS),
@@ -111,6 +117,27 @@ const detailMovieSlice = createSlice({
       return flow(
         set('groupCinema.error', action.payload),
         set('groupCinema.status', ACTION_STATUS.FAILED),
+      )(state);
+    },
+
+    getCinemaList(state) {
+      return flow(
+        set('cinemaList.error', null),
+        set('cinemaList.status', ACTION_STATUS.PENDING),
+      )(state);
+    },
+
+    getCinemaListSuccess(state, action) {
+      return flow(
+        set('cinemaList.data', action.payload),
+        set('cinemaList.status', ACTION_STATUS.SUCCESS),
+      )(state);
+    },
+
+    getCinemaListFailed(state, action) {
+      return flow(
+        set('cinemaList.error', action.payload),
+        set('cinemaList.status', ACTION_STATUS.FAILED),
       )(state);
     },
   },
