@@ -32,15 +32,18 @@ const useHooks = props => {
     }));
   }, []);
 
-  const handleSubmitReview = useCallback(valueForm => {
-    if (valueForm?.content) {
-      createMovieReview({
-        movieId: movieId.id,
-        content: valueForm?.content,
-        rating: valueForm?.rating ?? 5,
-      });
-    }
-  }, []);
+  const handleSubmitReview = useCallback(
+    valueForm => {
+      if (valueForm?.content) {
+        createMovieReview({
+          movieId: movieId.id,
+          content: valueForm?.content,
+          rating: valueForm?.rating ?? 5,
+        });
+      }
+    },
+    [createMovieReview, movieId.id],
+  );
 
   useEffect(() => {
     if (selectorCreateMovieReview && selectorCreateMovieReview.data) {

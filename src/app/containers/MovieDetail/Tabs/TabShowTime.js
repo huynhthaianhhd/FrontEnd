@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import { Tabs, Image, Typography } from 'antd';
-import BHD from 'images/movie/BHD.png';
 import { StyledTabLeft, StyleTimeTab } from './styles';
 import { DateTab } from './DateTab';
 import moment from 'moment';
@@ -12,10 +11,10 @@ const { Title } = Typography;
 export const TabShowTime = memo(props => {
   const { detailMovie, activeDate, handleActiveTabDate, groupCinema } = props;
 
-  const OneTab = ({ name }) => {
+  const OneTab = ({ name, logo }) => {
     return (
       <StyledTabLeft>
-        <Image src={BHD} className="img-tiny" preview={false} />
+        <Image src={logo} className="img-tiny" preview={false} />
         <div className="content">
           <Title level={5}>{name}</Title>
         </div>
@@ -25,7 +24,10 @@ export const TabShowTime = memo(props => {
   return (
     <Tabs tabPosition="left" className="about-showtime about">
       {groupCinema.map(group => (
-        <TabPane tab={<OneTab name={group.name} />} key={group.id}>
+        <TabPane
+          tab={<OneTab logo={group.logo} name={group.name} />}
+          key={group.id}
+        >
           <StyleTimeTab>
             <DateTab
               activeDate={activeDate}

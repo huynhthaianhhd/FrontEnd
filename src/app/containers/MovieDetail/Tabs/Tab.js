@@ -16,24 +16,8 @@ export const TabInfo = memo(props => {
   return (
     <StyledTab defaultActiveKey="1" centered>
       <TabPane
-        tab={
-          <span style={{ fontSize: '16px' }}>
-            <AndroidOutlined />
-            Thông tin
-          </span>
-        }
+        tab={<span style={{ fontSize: '16px' }}>Lịch chiếu</span>}
         key="1"
-      >
-        <TabMovie detailMovie={detailMovie} />
-      </TabPane>
-      <TabPane
-        tab={
-          <span style={{ fontSize: '16px' }}>
-            <AndroidOutlined />
-            Lịch chiếu
-          </span>
-        }
-        key="2"
       >
         <TabShowTime
           detailMovie={detailMovie}
@@ -43,14 +27,13 @@ export const TabInfo = memo(props => {
         />
       </TabPane>
       <TabPane
-        tab={
-          <span style={{ fontSize: '16px' }}>
-            <AndroidOutlined />
-            Đánh giá
-          </span>
-        }
-        key="3"
+        tab={<span style={{ fontSize: '16px' }}>Thông tin</span>}
+        key="2"
       >
+        <TabMovie detailMovie={detailMovie} />
+      </TabPane>
+
+      <TabPane tab={<span style={{ fontSize: '16px' }}>Đánh giá</span>} key="3">
         <TabReview
           movieReviews={movieReviews}
           handleSubmitReview={handleSubmitReview}

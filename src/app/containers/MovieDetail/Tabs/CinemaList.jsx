@@ -12,9 +12,9 @@ const { Title } = Typography;
 export const CinemaList = ({ cinema }) => {
   return (
     <StyledCinemaList>
+      {/* <OneMovieInList />
       <OneMovieInList />
-      <OneMovieInList />
-      <OneMovieInList />
+      <OneMovieInList /> */}
     </StyledCinemaList>
   );
 };
@@ -28,7 +28,7 @@ const OneMovieInList = ({
   index,
 }) => {
   return (
-    <div>
+    <div style={{ marginBottom: 10 }}>
       <StyledCinemaDetail>
         <Image
           className="img-tiny"
@@ -38,14 +38,17 @@ const OneMovieInList = ({
           preview={false}
         />
         <div className="content">
-          <Title level={5}>BHD Star - Bitexco</Title>
+          <Title className="title" level={5}>
+            BHD Star - Bitexco
+          </Title>
           <div className="sub-title">L3-Bitexco Icon 68, 2 Hải Triều, Q.1</div>
         </div>
       </StyledCinemaDetail>
       <StyledListTime>
         <StyledTime>
           <div className="time">13:00</div>
-          ~13:45
+          <span className="divider">-</span>
+          <span>13:45</span>
         </StyledTime>
       </StyledListTime>
     </div>

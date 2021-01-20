@@ -47,7 +47,7 @@ export const MovieDetail = memo(() => {
                 onClick={() => handleShowTrailer(detailMovie?.trailerUrl)}
                 type="primary"
                 danger
-                className="info"
+                className="info button-trailer"
               >
                 Xem trailer
               </Button>

@@ -19,7 +19,8 @@ export const TabReview = memo(props => {
 
   const data = movieReviews.map(review => ({
     author: review?.user?.name,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+    avatar:
+      'https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png',
     content: <p>{review?.content}</p>,
     datetime: (
       <Tooltip
@@ -30,7 +31,7 @@ export const TabReview = memo(props => {
         <div className="time-rating">
           <span>{moment(review?.createdAt).subtract(2, 'days').fromNow()}</span>
           <span style={{ marginLeft: '10px' }}>
-            <Rate defaultValue={review?.rating} disabled />
+            <Rate value={review?.rating} disabled />
           </span>
         </div>
       </Tooltip>
@@ -48,42 +49,45 @@ export const TabReview = memo(props => {
         </Form.Item>
         <Form.Item>
           <Button htmlType="submit" type="primary" form="form">
-            Add Comment
+            Thêm đánh giá
           </Button>
         </Form.Item>
       </Form>
     </>
   );
   return (
-    <Row justify="center">
-      <div className="about-comments about">
-        <Comment
-          avatar={
-            <Avatar
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              alt="Han Solo"
-            />
-          }
-          content={<Editor handleSubmitReview={handleSubmitReview} />}
-        />
-        <List
-          header={`${data.length} Reviews`}
-          itemLayout="horizontal"
-          dataSource={data}
-          renderItem={item => (
-            <li>
-              <Comment
-                actions={item.actions}
-                author={item.author}
-                avatar={item.avatar}
-                content={item.content}
-                datetime={item.datetime}
+    <>
+      <Row justify="center">
+        <div className="about-comments about">
+          <span className="header-title">Bạn nghĩ gì về phim ?</span>
+          <Comment
+            avatar={
+              <Avatar
+                src="https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+                alt="Han Solo"
               />
-            </li>
-          )}
-        />
-      </div>
-    </Row>
+            }
+            content={<Editor handleSubmitReview={handleSubmitReview} />}
+          />
+          <List
+            header={`${data.length} Reviews`}
+            itemLayout="horizontal"
+            dataSource={data}
+            renderItem={item => (
+              <li>
+                <Comment
+                  actions={item.actions}
+                  author={item.author}
+                  avatar={item.avatar}
+                  content={item.content}
+                  datetime={item.datetime}
+                />
+              </li>
+            )}
+          />
+        </div>
+      </Row>
+    </>
   );
 });
 

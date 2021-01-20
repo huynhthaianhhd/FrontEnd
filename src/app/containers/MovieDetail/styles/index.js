@@ -49,7 +49,8 @@ export const StyledMovieDetail = styled.div`
           border: 7.5px solid rgb(126, 211, 33);
           border-radius: 50%;
           .point {
-            font-size: 80px;
+            font-size: 75px;
+            line-height: 140px;
             text-align: center;
             color: #e9e9e9;
           }
@@ -73,7 +74,7 @@ export const StyledMovieDetail = styled.div`
       color: #e9e9e9;
       font-size: 20px;
       .info {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
       .name-movie {
         font-size: 24px;
@@ -81,6 +82,13 @@ export const StyledMovieDetail = styled.div`
         font-size: 36px;
         font-weight: bold;
         line-height: 42px;
+      }
+      .button-trailer {
+        padding: 7px 20px;
+        height: unset;
+        span {
+          font-size: 16px;
+        }
       }
     }
   }
