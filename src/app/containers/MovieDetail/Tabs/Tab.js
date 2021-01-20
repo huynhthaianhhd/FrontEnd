@@ -11,8 +11,13 @@ const { TabPane } = Tabs;
 export const TabInfo = memo(props => {
   const { detailMovie, movieReviews, groupCinema } = props;
   const { handlers, selectors } = useHooks(props);
-  const { handleSubmitReview, handleActiveTabDate } = handlers;
-  const { activeDate } = selectors;
+  const {
+    handleSubmitReview,
+    handleActiveTabDate,
+    handleActiveTabGroup,
+    handleBooking,
+  } = handlers;
+  const { activeDate, cinemaList } = selectors;
   return (
     <StyledTab defaultActiveKey="1" centered>
       <TabPane
@@ -23,7 +28,10 @@ export const TabInfo = memo(props => {
           detailMovie={detailMovie}
           activeDate={activeDate}
           groupCinema={groupCinema}
+          cinemaList={cinemaList}
           handleActiveTabDate={handleActiveTabDate}
+          handleActiveTabGroup={handleActiveTabGroup}
+          handleBooking={handleBooking}
         />
       </TabPane>
       <TabPane

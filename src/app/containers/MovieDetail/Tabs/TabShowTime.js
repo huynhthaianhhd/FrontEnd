@@ -9,11 +9,18 @@ const { TabPane } = Tabs;
 const { Title } = Typography;
 
 export const TabShowTime = memo(props => {
-  const { detailMovie, activeDate, handleActiveTabDate, groupCinema } = props;
+  const {
+    cinemaList,
+    activeDate,
+    handleActiveTabDate,
+    groupCinema,
+    handleActiveTabGroup,
+    handleBooking,
+  } = props;
 
-  const OneTab = ({ name, logo }) => {
+  const OneTab = ({ name, logo, idGroup }) => {
     return (
-      <StyledTabLeft>
+      <StyledTabLeft onClick={() => handleActiveTabGroup(idGroup)}>
         <Image src={logo} className="img-tiny" preview={false} />
         <div className="content">
           <Title level={5}>{name}</Title>
@@ -25,7 +32,9 @@ export const TabShowTime = memo(props => {
     <Tabs tabPosition="left" className="about-showtime about">
       {groupCinema.map(group => (
         <TabPane
-          tab={<OneTab logo={group.logo} name={group.name} />}
+          tab={
+            <OneTab logo={group.logo} name={group.name} idGroup={group.id} />
+          }
           key={group.id}
         >
           <StyleTimeTab>
@@ -34,7 +43,7 @@ export const TabShowTime = memo(props => {
               handleActiveTabDate={handleActiveTabDate}
             ></DateTab>
           </StyleTimeTab>
-          <CinemaList />
+          <CinemaList cinemaList={cinemaList} handleBooking={handleBooking} />
         </TabPane>
       ))}
     </Tabs>
