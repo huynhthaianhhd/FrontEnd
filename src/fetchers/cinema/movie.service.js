@@ -13,7 +13,7 @@ export const getHighLight = () => {
 
 export const getAllMovie = () => {
   return request(WEB_API, {
-    url: '/movie?limit=20',
+    url: '/movie?limit=24',
     method: 'GET',
   })
     .then(res => res.data)

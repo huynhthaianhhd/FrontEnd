@@ -12,12 +12,15 @@ import {
   makeCurrentShowTime,
 } from './selectors';
 import { useHistory, useLocation } from 'react-router-dom';
+import { actions as popupActions } from 'app/containers/Popup/slice';
+import { POPUP_TYPE } from 'app/containers/Popup/constants';
 
 export const useHooks = () => {
-  const { fetchGroup, fetchListMovie } = useActions(
+  const { fetchGroup, fetchListMovie, openPopup } = useActions(
     {
       fetchGroup: actions.fetchGroup,
       fetchListMovie: actions.fetchListMovie,
+      openPopup: popupActions.openPopup,
     },
     [actions],
   );
@@ -43,6 +46,15 @@ export const useHooks = () => {
   const handleSelectGroupCinema = useCallback(e => {}, []);
   const handleSelectCinema = useCallback(e => {}, []);
 
+  const handleShowTrailer = trailerUrl => {
+    if (trailerUrl)
+      openPopup({
+        key: 'showTrailer',
+        type: POPUP_TYPE.LIVE_STREAM_VIDEO,
+        data: { url: trailerUrl },
+      });
+  };
+
   useEffect(() => {
     fetchGroup();
     fetchListMovie();
@@ -63,6 +75,7 @@ export const useHooks = () => {
       handleSelectGroupCinema,
       handleSelectCinema,
       handleClickMovie,
+      handleShowTrailer,
     },
   };
 };

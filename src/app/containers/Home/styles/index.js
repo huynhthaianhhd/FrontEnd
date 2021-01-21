@@ -50,6 +50,10 @@ export const StyledSection = styled.div`
       justify-content: center;
       margin: 20px;
     }
+    .block {
+      display: flex !important;
+      flex-wrap: wrap;
+    }
   }
 `;
 
@@ -77,14 +81,126 @@ export const StyledHelper = styled.div`
 export const StyledMovie = styled.div`
   width: 25%;
   margin-bottom: 20px;
+  position: relative;
   .film {
     position: relative;
     padding: 5px;
     display: flex;
     flex-direction: column;
+    .poster-group {
+      position: relative;
+      .poster {
+        height: 318px;
+        img {
+          border-radius: 4px;
+        }
+      }
+      .overlay {
+        cursor: default;
+        z-index: 11;
+        display: none;
+        border-radius: 4px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 318px;
+        background-image: linear-gradient(
+          to top,
+          rgb(0, 0, 0),
+          transparent 100%
+        );
+
+        .play-icon {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: white;
+          font-size: 30px;
+          width: 60px;
+          height: 60px;
+          border: solid 1px white;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          opacity: 0.8;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .title-group {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 71px;
+      .name-time {
+        .title {
+          font-weight: 500;
+          margin: 0;
+        }
+        .duration {
+          font-size: 13px;
+        }
+      }
+    }
+    .tag {
+      font-weight: bold;
+    }
     .rate {
       position: absolute;
+      z-index: 10;
+      font-size: 16px;
+      background-color: rgba(12, 27, 54, 0.8);
+      border: 1px solid #1f2e46;
+      border-radius: 4px;
+      padding: 2px;
+      top: 12px;
+      right: 12px;
+      color: #fff;
       text-align: center;
+      line-height: 1.1;
+      text-align: center;
+      .stars {
+        display: flex;
+        .ant-rate-star {
+          margin: 0 1px;
+          svg {
+            width: 10px;
+          }
+        }
+      }
+    }
+    .button-buy {
+      cursor: pointer;
+      display: none;
+      border: none;
+      background: linear-gradient(to left, #fb4226, #ce3017 100%);
+      width: 100%;
+      font-size: 16px;
+      padding: 10px;
+      color: white;
+      border-radius: 4px;
+      opacity: 0.8;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      .name-time {
+        display: none;
+      }
+      .button-buy,
+      .overlay {
+        display: block;
+      }
     }
   }
 `;

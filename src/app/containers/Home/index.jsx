@@ -27,7 +27,7 @@ export const Home = () => {
     currentDate,
     currentShowTime,
   } = selectors;
-  const { handleSelectMovie, handleClickMovie } = handles;
+  const { handleSelectMovie, handleClickMovie, handleShowTrailer } = handles;
   return (
     <StyledHome>
       <StyledSection className="first-section">
@@ -44,8 +44,9 @@ export const Home = () => {
       </StyledSection>
       <StyledSection id="show-time">
         <Movie
-          highLightMovie={listMovieHighLight}
+          highLightMovie={listMovie}
           handleClickMovie={handleClickMovie}
+          handleShowTrailer={handleShowTrailer}
         />
       </StyledSection>
       <StyledSection id="group-cinema">

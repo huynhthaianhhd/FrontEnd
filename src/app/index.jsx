@@ -7,7 +7,7 @@ import { GlobalStyle } from 'styles/globalStyles';
 export const App = () => {
   return (
     <BrowserRouter>
-      <Helmet titleTemplate="%s - BSA" defaultTitle="Basic App">
+      <Helmet titleTemplate="%s - AT" defaultTitle="AE1N Tickets">
         <meta name="description" content="A React application" />
       </Helmet>
       <Switch>
