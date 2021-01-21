@@ -30,7 +30,7 @@ export const Home = () => {
   const { handleSelectMovie, handleClickMovie } = handles;
   return (
     <StyledHome>
-      <StyledSection>
+      <StyledSection className="first-section">
         <Banner />
         <StyledHelper>
           <BookTicketQick

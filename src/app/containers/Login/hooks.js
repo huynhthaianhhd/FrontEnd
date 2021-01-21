@@ -52,7 +52,7 @@ export const useGetUserInfoAuthenticate = () => {
     getUserInfoFromStorage: actions.getUserInfoFromStorage,
   });
 
-  useEffect(() => getUserInfoFromStorage(), [getUserInfoFromStorage]);
+  useEffect(() => getUserInfoFromStorage(), []);
 
   return user;
 };

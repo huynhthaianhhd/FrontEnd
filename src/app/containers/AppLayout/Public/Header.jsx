@@ -22,8 +22,8 @@ export const PublicHeader = () => {
       <div className="logo" />
       <div className="category">
         <Link to="/">Trang chủ</Link>
-        <a href="#show-time">Lịch chiếu</a>
-        <a href="#group-cinema">Cụm rạp</a>
+        <a href="/#show-time">Lịch chiếu</a>
+        <a href="/#group-cinema">Cụm rạp</a>
         <Link>Tin tức</Link>
       </div>
       <div className="control">

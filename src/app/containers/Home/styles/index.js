@@ -13,10 +13,12 @@ export const StyledHome = styled.div`
 `;
 
 export const StyledSection = styled.div`
+  &.first-section {
+    padding-top: 64px;
+  }
+  padding-top: 75px;
   width: 100%;
   position: relative !important;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
   img {
     height: 100%;
     width: 100%;
