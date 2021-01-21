@@ -7,13 +7,10 @@ function* fetchCinemasTask() {
 }
 
 function* fetchListCinemaTask(action) {
-  console.log(
-    '🚀 ~ file: saga.js ~ line 11 ~ function*fetchListCinemaTask ~  action.payload',
-    action.payload,
-  );
   const { response, error } = yield call(fetchListCinemaAPI, action.payload);
   if (response) {
     yield put(actions.fetchCinemasSuccess(response));
+    yield put(actions.setDefaultCinema(0));
   } else {
     yield put(actions.fetchCinemasFailed(error));
   }

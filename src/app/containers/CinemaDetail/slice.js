@@ -7,6 +7,7 @@ export const initialState = {
   listCinema: [],
   error: null,
   status: '',
+  defaultCinema: 0,
 };
 const cinemaDetailSlice = createSlice({
   name: 'cinemaDetail',
@@ -29,6 +30,11 @@ const cinemaDetailSlice = createSlice({
         set('error', action.payload),
         set('status', ACTION_STATUS.FAILED),
       )(state);
+    },
+    setDefaultCinema(state, action) {
+      return flow(set('defaultCinema', state.listCinema[action.payload] || []))(
+        state,
+      );
     },
   },
 });

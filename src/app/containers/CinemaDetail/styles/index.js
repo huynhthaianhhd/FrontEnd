@@ -13,6 +13,9 @@ export const StyledSection = styled.div`
   position: relative !important;
   padding-bottom: 20px;
   margin-top: 30px;
+  .ant-tabs-tab {
+    margin: 0 16px;
+  }
 `;
 
 export const StyledTab = styled.div`

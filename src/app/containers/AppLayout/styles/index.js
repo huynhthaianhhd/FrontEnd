@@ -15,6 +15,7 @@ export const StyledHeader = styled(Header)`
   background: #fff;
   color: black;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  z-index: 10;
   .logo {
     width: 120px;
     height: 31px;

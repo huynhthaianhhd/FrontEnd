@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { memo, useState, useCallback, useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { changeToDateOfWeek } from 'utils/common';
 import { StyledDateTab } from './styles';
 

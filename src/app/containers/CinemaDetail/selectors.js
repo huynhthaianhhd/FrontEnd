@@ -11,3 +11,8 @@ export const makeListCinema = createSelector(selectCinemaState, listCinema =>
 export const makeStatus = createSelector(selectCinemaState, status =>
   get('status', status),
 );
+
+export const makeDefaultCinema = createSelector(
+  selectCinemaState,
+  defaultCinema => get('defaultCinema', defaultCinema),
+);
