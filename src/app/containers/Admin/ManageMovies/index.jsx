@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import {
   Button,
   Space,
@@ -9,10 +9,15 @@ import {
   Layout,
   Image,
   Card,
+  Form,
   Modal,
+  Input,
+  Select,
+  DatePicker,
 } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
+import { cloneDeep } from 'lodash';
 
 import AdminSider from 'app/components/AdminSider/index';
 
@@ -24,11 +29,24 @@ import {
 } from '@ant-design/icons';
 
 const { Text } = Typography;
+const { Option } = Select;
+
+const layout = {
+  labelCol: {
+    span: 6,
+  },
+  wrapperCol: {
+    span: 18,
+  },
+};
 
 export const ManageMovies = memo(() => {
   const [movies, setMovies] = useState([]);
+  const [editMovie, setEditMovie] = useState(null);
   const [showAddMovieModal, setShowAddMovieModal] = useState(false);
+  const [showEditMovieModal, setShowEditMovieModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const editFormEl = useRef(null);
 
   useEffect(() => {
     async function doStuff() {
@@ -98,7 +116,10 @@ export const ManageMovies = memo(() => {
         <Space size="middle">
           <Button
             ghost
-            onClick={() => {}}
+            onClick={() => {
+              setShowEditMovieModal(true);
+              setEditMovie(record);
+            }}
             style={{ color: 'green' }}
             icon={<EditOutlined />}
           />
@@ -134,6 +155,44 @@ export const ManageMovies = memo(() => {
   const handleOk = () => {};
 
   const handleCancel = () => {};
+
+  const handleEditOk = () => {};
+
+  const handleEditCancel = () => {
+    setShowEditMovieModal(false);
+  };
+
+  const onFinish = async values => {
+    const {
+      director,
+      duration,
+      name,
+      posterUrl,
+      premiereTime,
+      category,
+    } = values;
+    const response = await axios.put(`${WEB_API}/movie/${editMovie.id}`, {
+      director,
+      duration,
+      name,
+      posterUrl,
+      premiereTime,
+      category,
+    });
+    const { movie, success } = response.data;
+    if (!success) {
+      message.error('Chỉnh sửa phim không thành công');
+    } else {
+      const movieIndex = movies.findIndex(m => m.id === movie.id);
+      let modifyMovie = cloneDeep(movies[movieIndex]);
+      modifyMovie = movie;
+      let modifyMovies = cloneDeep(movies);
+      modifyMovies[movieIndex] = modifyMovie;
+      setMovies(modifyMovies);
+      setShowEditMovieModal(false);
+      message.success('Chỉnh sửa phim thành công');
+    }
+  };
 
   return (
     <>
@@ -182,6 +241,106 @@ export const ManageMovies = memo(() => {
           </Button>,
         ]}
       ></Modal>
+      <Modal
+        title="Chỉnh sửa phim"
+        visible={showEditMovieModal}
+        onOk={handleEditOk}
+        confirmLoading={isLoading}
+        onCancel={handleEditCancel}
+        footer={[
+          <Button key="back" onClick={handleEditCancel}>
+            Hủy bỏ
+          </Button>,
+          <Button
+            key="submit"
+            type="primary"
+            loading={isLoading}
+            onClick={() => {
+              editFormEl.current.submit();
+            }}
+          >
+            Xác nhận
+          </Button>,
+        ]}
+      >
+        {editMovie ? (
+          <Form name="basic" onFinish={onFinish} ref={editFormEl}>
+            <Form.Item
+              label="Posterurl"
+              name="posterUrl"
+              initialValue={editMovie?.posterUrl}
+              rules={[
+                {
+                  required: true,
+                  message: 'Posterurl không được bỏ trống',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Tên phim"
+              name="name"
+              initialValue={editMovie?.name}
+              rules={[
+                {
+                  required: true,
+                  message: 'Tên phim không được bỏ trống',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Đạo diễn"
+              name="director"
+              initialValue={editMovie?.director}
+              rules={[
+                {
+                  required: true,
+                  message: 'Đạo diễn không được bỏ trống',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="category"
+              label="Thể loại"
+              initialValue={editMovie?.category}
+              rules={[
+                {
+                  required: true,
+                  message: 'Thể loại không được bỏ trống',
+                },
+              ]}
+            >
+              <Select>
+                <Option value={'Kinh dị'}>Kinh dị</Option>
+                <Option value={'Hành động'}>Hành động</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="Thời lượng (phút)"
+              name="duration"
+              initialValue={editMovie?.duration}
+              rules={[
+                {
+                  required: true,
+                  message: 'Thời lượng không được bỏ trống',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item label="Thời điểm ra mắt" name="premiereTime">
+              <DatePicker
+                value={moment(editMovie?.premiereTime).format('YYYY-MM-DD')}
+              />
+            </Form.Item>
+          </Form>
+        ) : null}
+      </Modal>
     </>
   );
 });
