@@ -19,6 +19,9 @@ export const StyledHeader = styled(Header)`
   color: black;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   z-index: 999;
+  .ant-input-affix-wrapper {
+    border-radius: 10px;
+  }
   .logo {
     width: 120px;
     height: 31px;
