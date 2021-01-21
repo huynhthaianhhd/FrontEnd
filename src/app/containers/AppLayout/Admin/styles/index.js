@@ -28,5 +28,8 @@ export const StyledContent = styled(Content)`
     width: 100%;
     background-color: #fff;
     position: relative;
+    * div {
+      overflow: auto;
+    }
   }
 `;
