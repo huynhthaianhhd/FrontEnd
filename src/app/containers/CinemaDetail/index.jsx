@@ -21,7 +21,7 @@ export const CinemaDetail = memo(() => {
     <StyledSection>
       <Header {...defaultCinema} />
       <Tabs defaultActiveKey="1" centered>
-        <TabPane tab={<Title level={4}>Lịch Chiếu</Title>} key="1">
+        <TabPane tab="Lịch Chiếu" key="1">
           <Container>
             <ShowTime
               cinemas={listCinema}
@@ -30,19 +30,12 @@ export const CinemaDetail = memo(() => {
             />
           </Container>
         </TabPane>
-        <TabPane tab={<Title level={4}>Thông tin</Title>} key="2">
+        <TabPane tab="Thông tin" key="2">
           <Container>
             <Detail {...defaultCinema}></Detail>
           </Container>
         </TabPane>
-        <TabPane
-          tab={
-            <Title level={4} onClick={() => {}}>
-              Đánh giá
-            </Title>
-          }
-          key="3"
-        >
+        <TabPane tab="Đánh giá" key="3">
           <Container>
             <Review></Review>
           </Container>
