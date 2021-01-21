@@ -9,7 +9,7 @@ export const ListMovie = memo(({ dataSource }) => {
   const logos = dataSource.map(item => item.logo);
 
   return (
-    <Tabs defaultActiveKey="0" tabPosition="left" style={{ height: '80vh' }}>
+    <Tabs defaultActiveKey="0" tabPosition="left">
       {dataSource.length &&
         dataSource.map((e, i) => (
           <TabPane

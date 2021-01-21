@@ -14,13 +14,12 @@ import saga from './saga';
 import { useInjectSaga, useInjectReducer } from 'utils/reduxInjectors';
 import { useHooks } from './hooks';
 
-export const Home = () => {
+export const Home = memo(() => {
   useInjectSaga({ key: sliceKey, saga });
   useInjectReducer({ key: sliceKey, reducer });
   const { selectors, handles } = useHooks();
   const {
     cinemaGroupList,
-    status,
     listMovieHighLight,
     listMovie,
     currentCinemas,
@@ -57,6 +56,6 @@ export const Home = () => {
       </StyledSection>
     </StyledHome>
   );
-};
+});
 
 export default Home;

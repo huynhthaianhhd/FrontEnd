@@ -17,7 +17,7 @@ export const DateTab = memo(({ onClickTab, activeTab = 0, onChangeTab }) => {
     },
     [currentDayOfWeek],
   );
-  return [...Array(7).fill('')].map((e, i) => {
+  return [...Array(7).fill('')].map((_, i) => {
     const temp = moment().add(i, 'days').toDate();
     return (
       <StyledDateTab
@@ -26,6 +26,7 @@ export const DateTab = memo(({ onClickTab, activeTab = 0, onChangeTab }) => {
           onChangeTab(i);
           onClickTab(temp);
         }}
+        key={i}
       >
         {changeToDateOfWeek(dayOfWeek(i))}
         <div className="date">{currentDay + i}</div>

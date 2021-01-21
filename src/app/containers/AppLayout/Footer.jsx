@@ -26,13 +26,13 @@ export const Footer = () => {
       <div className="content border">
         <div className="column">
           <p className="title">AE1N</p>
-          <Link>FAQ</Link>
-          <Link>Brand Guidelines</Link>
+          <Link to="#">FAQ</Link>
+          <Link to="#">Brand Guidelines</Link>
         </div>
         <div className="column">
           <p className="title">CHÍNH SÁCH</p>
-          <Link>Thỏa thuận sử dụng</Link>
-          <Link>Chính sách bảo mật</Link>
+          <Link to="#">Thỏa thuận sử dụng</Link>
+          <Link to="#">Chính sách bảo mật</Link>
         </div>
         <div className="column">
           <p className="title">ĐỐI TÁC</p>

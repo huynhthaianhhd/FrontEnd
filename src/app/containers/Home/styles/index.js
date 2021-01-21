@@ -82,6 +82,9 @@ export const StyledMovie = styled.div`
     padding: 5px;
     display: flex;
     flex-direction: column;
+    img {
+      height: 330px;
+    }
     .rate {
       position: absolute;
       text-align: center;
@@ -92,10 +95,11 @@ export const StyledMovie = styled.div`
 export const StyledListMovie = styled.div`
   display: flex;
   width: 100%;
-  height: 80vh;
+  min-height: 85vh;
   position: relative;
   border: 1px solid #c2c2c2;
   .ant-tabs-nav {
+    padding: 10px;
     width: 15%;
   }
   .ant-tabs {
@@ -107,5 +111,10 @@ export const StyledListMovie = styled.div`
   }
   .ant-spin-nested-loading {
     width: 100%;
+  }
+  .ant-list-items {
+    & > * {
+      padding: 20px 20px 10px 0px;
+    }
   }
 `;

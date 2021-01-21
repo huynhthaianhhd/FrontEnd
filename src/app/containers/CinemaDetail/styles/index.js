@@ -16,6 +16,9 @@ export const StyledSection = styled.div`
   .ant-tabs-tab {
     margin: 0 16px;
   }
+  .ant-tabs-content {
+    margin-top: 15px;
+  }
 `;
 
 export const StyledTab = styled.div`
@@ -88,16 +91,17 @@ export const StyledMovieDetail = styled.div`
 export const StyledMovieList = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 450px;
+  max-height: 500px;
+  overflow-y: scroll;
 `;
 
 export const StyledTime = styled.div`
+  margin-left: 15px;
   width: calc(23% - 10px);
   float: left;
-  font-family: 'SF Medium';
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
-  margin: 0 10px 10px 0;
+  margin: 0 10px 10px 20px;
   padding: 8px;
   transition: all 0.2s;
   text-decoration: none;

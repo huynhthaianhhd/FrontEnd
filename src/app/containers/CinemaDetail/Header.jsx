@@ -1,8 +1,9 @@
 import { StyledHeader } from './styles/StyledHeader';
 import { Image, Progress, Row, Col, Typography, Button, Rate } from 'antd';
 import { memo } from 'react';
+import { CalcReviewPoint } from 'utils/common';
 const { Title } = Typography;
-export const Header = memo(({ name, location }) => {
+export const Header = memo(({ name, location, cinemaReview }) => {
   return (
     <StyledHeader>
       <img
@@ -29,7 +30,7 @@ export const Header = memo(({ name, location }) => {
             </Col>
             <Col span={8} className="center-end">
               <Progress
-                percent={83}
+                percent={(CalcReviewPoint(cinemaReview) / 5) * 100 || 83}
                 type="circle"
                 className="white"
                 status="success"
@@ -37,7 +38,12 @@ export const Header = memo(({ name, location }) => {
                 width={137}
                 format={per => Math.floor(per / 10)}
               />
-              <Rate allowHalf defaultValue={4} />
+              <Rate
+                allowHalf
+                value={CalcReviewPoint(cinemaReview)}
+                disabled={true}
+                style={{ color: '#FB4226' }}
+              />
             </Col>
           </Row>
         </div>

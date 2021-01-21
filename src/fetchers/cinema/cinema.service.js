@@ -21,3 +21,27 @@ export const getCinemaByGroupNTime = payload => {
     .then(data => ({ response: data }))
     .catch(handleGeneralError);
 };
+
+export const getReviewByCinema = payload => {
+  return request(WEB_API, {
+    url: '/cinema/review',
+    method: 'POST',
+    data: payload,
+  })
+    .then(({ data }) => {
+      return data;
+    })
+    .then(data => ({ response: data }))
+    .catch(handleGeneralError);
+};
+
+export const addReviewCinema = payload => {
+  return request(WEB_API, {
+    url: '/cinema/review/add',
+    method: 'POST',
+    data: payload,
+  })
+    .then(({ data }) => data)
+    .then(data => ({ response: data }))
+    .catch(handleGeneralError);
+};
