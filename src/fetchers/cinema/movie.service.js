@@ -20,3 +20,14 @@ export const getAllMovie = () => {
     .then(data => ({ response: data }))
     .catch(handleGeneralError);
 };
+
+export const searchMovies = data => {
+  return request(WEB_API, {
+    url: '/movie/search',
+    method: 'POST',
+    data,
+  })
+    .then(({ data }) => data.data)
+    .then(data => ({ response: data }))
+    .catch(handleGeneralError);
+};

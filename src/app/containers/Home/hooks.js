@@ -33,9 +33,12 @@ export const useHooks = () => {
 
   const handleSelectMovie = useCallback(id => {}, []);
 
-  const handleClickMovie = useCallback(id => {
-    history.push(`/movie/${id}`);
-  }, []);
+  const handleClickMovie = useCallback(
+    id => {
+      history.push(`/movie/${id}`);
+    },
+    [history],
+  );
 
   const handleSelectGroupCinema = useCallback(e => {}, []);
   const handleSelectCinema = useCallback(e => {}, []);

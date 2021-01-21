@@ -22,3 +22,8 @@ export const selectGroupCinema = createSelector(
   selectDetailMovieState,
   detailMovie => get('groupCinema', detailMovie),
 );
+
+export const selectCinemaList = createSelector(
+  selectDetailMovieState,
+  detailMovie => get('cinemaList', detailMovie),
+);

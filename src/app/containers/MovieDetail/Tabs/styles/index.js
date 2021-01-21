@@ -5,14 +5,12 @@ export const StyledTab = styled(Tabs)`
   background: #ffffff;
   padding-top: 20px;
   .about {
-    padding: 32px 0px;
     padding-left: 10%;
     padding-right: 10%;
     display: flex;
     flex-direction: column;
     color: #000000;
     font-size: 16px;
-    border-bottom: 1px solid rgb(238, 238, 238);
     .content-about {
       padding-top: 16px;
       display: flex;
@@ -29,20 +27,21 @@ export const StyledTab = styled(Tabs)`
       margin-right: 30px;
       > span {
         text-align: center;
+        margin-top: 5px;
       }
     }
   }
   .about-movie {
     .title-type-info {
-      font-weight: bolder;
       width: 150px;
     }
   }
   .header-title {
-    font-size: 24px;
+    font-size: 27px;
     line-height: 1.17;
   }
   .about-comments {
+    padding-top: 20px;
     .ant-comment-content-author {
       display: flex;
       align-items: center;
@@ -54,6 +53,7 @@ export const StyledTab = styled(Tabs)`
   }
 
   .about-showtime {
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
     padding-left: 15%;
@@ -101,9 +101,9 @@ export const StyledCinemaList = styled.div`
 `;
 
 export const StyledTime = styled.div`
+  cursor: pointer;
   width: calc(23% - 10px);
   float: left;
-  font-family: 'SF Medium';
   font-size: 14px;
   font-weight: 400;
   margin: 0 10px 10px 0;
@@ -125,20 +125,27 @@ export const StyledTime = styled.div`
     color: #108f3e;
     letter-spacing: -0.16px;
   }
+  .divider {
+    margin: 0 3px;
+  }
 `;
 
 export const StyledListTime = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const StyledCinemaDetail = styled.div`
   display: flex;
   width: 100%;
   .content {
+    margin-left: 0;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     .title {
       font-weight: 550;
+      margin-bottom: 2px;
       font-size: 1rem;
     }
     .sub-title {
@@ -152,4 +159,11 @@ export const StyledCinemaDetail = styled.div`
   & > * {
     margin: 10px;
   }
+`;
+
+export const StyledDivider = styled.div`
+  margin: 32px 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgb(238, 238, 238);
 `;

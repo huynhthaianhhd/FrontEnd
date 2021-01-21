@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { Row, Avatar, Col } from 'antd';
 import moment from 'moment';
+import { StyledDivider } from './styles';
 
 export const TabMovie = memo(props => {
   const { detailMovie } = props;
@@ -56,15 +57,13 @@ export const TabMovie = memo(props => {
           </Row>
         </div>
       </div>
+      <StyledDivider />
       <div className="about-casts about">
         <span className="header-title">Diễn viên </span>
         <div className="content-about group-cast">
           {detailMovie?.casts?.map(cast => (
             <div className="avatar">
-              <Avatar
-                size={80}
-                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              />
+              <Avatar size={80} src="http://placeimg.com/300/300/people" />
               <span>{cast}</span>
             </div>
           ))}

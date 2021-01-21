@@ -1,13 +1,31 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledMovieDetail = styled.div`
+  position: relative;
   height: 100%;
   overflow-y: auto;
   /* padding: 20px;  */
   -webkit-font-smoothing: antialiased;
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 667px !important;
+    ${({ background }) =>
+      background &&
+      css`
+        background: url(${background});
+        background-repeat: no-repeat;
+        filter: blur(18px);
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      `}
+  }
   .group-movie-header {
     padding-left: 50px;
-    background: linear-gradient(to top, black, transparent 100%);
     margin: 0 !important;
     .header-rating {
       display: flex;
@@ -31,7 +49,8 @@ export const StyledMovieDetail = styled.div`
           border: 7.5px solid rgb(126, 211, 33);
           border-radius: 50%;
           .point {
-            font-size: 80px;
+            font-size: 75px;
+            line-height: 140px;
             text-align: center;
             color: #e9e9e9;
           }
@@ -43,6 +62,9 @@ export const StyledMovieDetail = styled.div`
     }
     .img-poster-main {
       margin-right: 20px;
+      img {
+        height: 667px;
+      }
     }
     .poster-main {
       display: flex;
@@ -52,7 +74,7 @@ export const StyledMovieDetail = styled.div`
       color: #e9e9e9;
       font-size: 20px;
       .info {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
       .name-movie {
         font-size: 24px;
@@ -60,6 +82,13 @@ export const StyledMovieDetail = styled.div`
         font-size: 36px;
         font-weight: bold;
         line-height: 42px;
+      }
+      .button-trailer {
+        padding: 7px 20px;
+        height: unset;
+        span {
+          font-size: 16px;
+        }
       }
     }
   }

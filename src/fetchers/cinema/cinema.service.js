@@ -10,3 +10,14 @@ export const getHighLight = () => {
     .then(data => ({ response: data }))
     .catch(handleGeneralError);
 };
+
+export const getCinemaByGroupNTime = payload => {
+  return request(WEB_API, {
+    url: '/cinema',
+    method: 'POST',
+    data: payload,
+  })
+    .then(({ data }) => data.data)
+    .then(data => ({ response: data }))
+    .catch(handleGeneralError);
+};

@@ -4,6 +4,7 @@ import { reducer, sliceKey } from './slice';
 import useHooks from './hooks';
 
 import Confirm from 'app/components/Modal/Confirm';
+import Video from 'app/components/Modal/Video';
 
 import { POPUP_TYPE } from './constants';
 
@@ -20,6 +21,16 @@ export const Popup = memo(() => {
           case POPUP_TYPE.CONFIRM: {
             return (
               <Confirm
+                key={popup.key}
+                onCancel={handleClosePopup(popup)}
+                visible
+                {...popup}
+              />
+            );
+          }
+          case POPUP_TYPE.LIVE_STREAM_VIDEO: {
+            return (
+              <Video
                 key={popup.key}
                 onCancel={handleClosePopup(popup)}
                 visible

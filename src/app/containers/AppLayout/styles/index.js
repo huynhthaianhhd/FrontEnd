@@ -9,6 +9,9 @@ export const StyledLayout = styled(Layout)`
 `;
 
 export const StyledHeader = styled(Header)`
+  position: fixed;
+  width: 100%;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,5 +53,58 @@ export const StyledHeader = styled(Header)`
 export const StyledContent = styled(Content)``;
 
 export const StyledFooter = styled(Footer)`
-  text-align: center;
+  margin-top: 50px;
+  background-color: #222222;
+  color: white;
+  .content {
+    padding: 20px 0;
+    max-width: 1020px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    .column {
+      display: flex;
+      flex-direction: column;
+      a,
+      span {
+        color: #949494;
+        transition: ease 0.5s;
+        &:hover {
+          color: white;
+        }
+      }
+      span.email {
+        color: #fb4226;
+      }
+      img.zion-logo {
+        width: 80px;
+        border-radius: 8px;
+        margin-right: 15px;
+      }
+      img.bo-cong-thuong {
+        width: 130px;
+      }
+      .title.no-margin {
+        margin: 0;
+      }
+    }
+  }
+
+  .content.border {
+    border-bottom: 1px solid #4a4a4a;
+  }
+
+  .column.full {
+    flex: 1;
+  }
+`;
+
+export const BrandIcon = styled.img`
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  background-color: white;
+  border-radius: 50%;
 `;

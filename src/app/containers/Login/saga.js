@@ -1,7 +1,11 @@
 import { call, put, all, fork, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 import { login, google, facebook } from 'fetchers/authFetcher';
-import { storeAuthInfo, removeAuthInfo } from 'utils/localStorageUtils';
+import {
+  storeAuthInfo,
+  removeAuthInfo,
+  getUser,
+} from 'utils/localStorageUtils';
 
 function* loginWatcher() {
   yield takeLatest(actions.login, loginTask);
@@ -11,7 +15,7 @@ function* loginTask(action) {
   const { response, error } = yield call(loginAPI, action.payload);
   if (response) {
     yield call(storeAuthInfo, response);
-    yield put(actions.loginSuccess());
+    yield put(actions.loginSuccess(response));
   } else {
     yield put(actions.loginFailed(error.data));
   }
@@ -65,10 +69,20 @@ function* logoutTask() {
   yield put(actions.logoutSuccess());
 }
 
+function* getUserInfoFromStorageWatcher() {
+  yield takeLatest(actions.getUserInfoFromStorage, getUserInfoFromStorageTask);
+}
+
+function* getUserInfoFromStorageTask() {
+  const user = yield call(getUser);
+  yield put(actions.getUserInfoFromStorageSuccess(user));
+}
+
 export default function* defaultSaga() {
   yield all([
     fork(loginWatcher),
     fork(logoutWatcher),
     fork(loginServiceWatcher),
+    fork(getUserInfoFromStorageWatcher),
   ]);
 }

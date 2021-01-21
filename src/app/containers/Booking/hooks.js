@@ -52,8 +52,9 @@ const useHooks = () => {
   useEffect(() => () => resetData(), [resetData]);
 
   useEffect(() => {
-    if (bookStatus === ACTION_STATUS.SUCCESS) history.push('/');
-  }, [bookStatus, history, resetData]);
+    if (bookStatus === ACTION_STATUS.SUCCESS)
+      history.push(`/booking/${showTimeId}/result`);
+  }, [bookStatus, history, resetData, showTimeId]);
 
   const handleClickSeat = ({ id, newStatus }) =>
     updateSeatStatus({ id, newStatus });

@@ -6,6 +6,8 @@ import { Profile } from 'app/containers/Profile/Loadable';
 import { CinemaDetail } from 'app/containers/CinemaDetail/Loadable';
 import { Booking } from 'app/containers/Booking/Loadable';
 import { ManageUsers } from 'app/containers/ManageUsers/Loadable';
+import { SearchMovie } from 'app/containers/SearchMovie/Loadable';
+import BookingResult from 'app/components/BookingResult';
 
 export const privateRoutes = [
   {
@@ -17,6 +19,11 @@ export const privateRoutes = [
     path: '/booking/:showTimeId',
     component: Booking,
     key: 'booking',
+  },
+  {
+    path: '/booking/:id/result',
+    component: BookingResult,
+    key: 'booking-result',
   },
 ];
 
@@ -50,5 +57,10 @@ export const publicRoutes = [
     path: '/admin/manage-user',
     component: ManageUsers,
     key: 'manageUsers',
+  },
+  {
+    path: '/search',
+    component: SearchMovie,
+    key: 'searchMovie',
   },
 ];
