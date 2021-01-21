@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import { StyledHeader } from '../styles';
 import { Link } from 'react-router-dom';
-import { Avatar, Button } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Avatar, Button, Input } from 'antd';
+import { UserOutlined, SearchOutlined } from '@ant-design/icons';
 import Dropdown from 'app/components/Dropdown';
 import Menu from 'app/components/Menu';
 import {
@@ -25,6 +25,17 @@ export const PublicHeader = () => {
         <a href="/#show-time">Lịch chiếu</a>
         <a href="/#group-cinema">Cụm rạp</a>
         <Link to="/">Tin tức</Link>
+      </div>
+      <div>
+        <Input
+          placeholder="Tìm kiếm ..."
+          suffix={<SearchOutlined />}
+          onPressEnter={event => {
+            const input = event.target.value;
+            history.push(`/search?q=${input}`);
+          }}
+          allowClear
+        />
       </div>
       <div className="control">
         {user ? (

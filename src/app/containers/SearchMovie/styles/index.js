@@ -43,13 +43,9 @@ export const StyledSection = styled.div`
       flex-wrap: wrap;
     }
     .header {
-      > span {
-        width: 40%;
-        border-radius: 10px;
-      }
       display: flex;
       width: 100%;
-      justify-content: center;
+      justify-content: flex-start;
       margin: 20px;
     }
   }

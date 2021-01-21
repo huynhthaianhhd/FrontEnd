@@ -196,7 +196,7 @@ export const ManageMovies = memo(() => {
 
   return (
     <>
-      <Layout style={{ minHeight: '100vh' }}>
+      <Layout style={{ height: '100%' }}>
         <AdminSider selectedKey={2} />
         <Card
           title="Danh sách các phim"

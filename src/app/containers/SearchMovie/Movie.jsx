@@ -1,13 +1,8 @@
-import { Image, Typography, Tag, Input } from 'antd';
+import { Image, Typography, Tag } from 'antd';
 import { StyledMovie } from './styles';
-import { SearchOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
-export const Movie = ({
-  searchMovieList,
-  handleChangeInput,
-  handleClickMovie,
-}) => {
+export const Movie = ({ searchMovieList, handleClickMovie, myRef }) => {
   const MoviePreview = ({ name, src, classify, id }) => {
     return (
       <StyledMovie>
@@ -28,18 +23,9 @@ export const Movie = ({
   };
 
   return (
-    <div className="container">
+    <div className="container" ref={myRef}>
       <div className="header">
-        <Input
-          className="header-search"
-          placeholder="Tìm kiếm ..."
-          suffix={<SearchOutlined />}
-          onChange={event => {
-            const input = event.target.value;
-            handleChangeInput(input);
-          }}
-          allowClear
-        />
+        <Title level={5}>Kết quả tìm kiếm :</Title>
       </div>
       <div className="main">
         {searchMovieList?.length > 0 &&

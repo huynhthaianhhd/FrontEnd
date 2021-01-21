@@ -112,7 +112,7 @@ export const ManageUsers = memo(() => {
   ];
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ height: '100%' }}>
       <AdminSider selectedKey={1} />
       <div
         style={{

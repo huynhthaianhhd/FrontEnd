@@ -8,7 +8,6 @@ const { SubMenu } = Menu;
 const AdminSider = ({ selectedKey }) => {
   return (
     <Sider>
-      <div className="logo" />
       <Menu theme="dark" defaultSelectedKeys={[`${selectedKey}`]} mode="inline">
         <Menu.Item key="1">
           <Link to={'/admin/manage-users'}>Quản lý người dùng</Link>

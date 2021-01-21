@@ -11,7 +11,7 @@ export const StyledLayout = styled(Layout)`
 export const StyledHeader = styled(Header)`
   position: fixed;
   width: 100%;
-  z-index: 10;
+  z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,6 +19,9 @@ export const StyledHeader = styled(Header)`
   color: black;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   z-index: 999;
+  .ant-input-affix-wrapper {
+    border-radius: 10px;
+  }
   .logo {
     width: 120px;
     height: 31px;
@@ -50,7 +53,9 @@ export const StyledHeader = styled(Header)`
   }
 `;
 
-export const StyledContent = styled(Content)``;
+export const StyledContent = styled(Content)`
+  padding-top: 64px;
+`;
 
 export const StyledFooter = styled(Footer)`
   margin-top: 50px;

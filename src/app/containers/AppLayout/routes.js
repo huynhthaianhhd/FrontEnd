@@ -56,6 +56,14 @@ export const publicRoutes = [
     key: 'cinema',
   },
   {
+    path: '/search',
+    component: SearchMovie,
+    key: 'searchMovie',
+  },
+];
+
+export const adminRoutes = [
+  {
     path: '/admin/manage-users',
     component: ManageUsers,
     key: 'ManageUsers',
@@ -69,10 +77,5 @@ export const publicRoutes = [
     path: '/admin/manage-theaters',
     component: ManageTheaters,
     key: 'ManageTheaters',
-  },
-  {
-    path: '/search',
-    component: SearchMovie,
-    key: 'searchMovie',
   },
 ];
