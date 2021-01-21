@@ -7,12 +7,12 @@ import saga from './saga';
 import { useInjectSaga, useInjectReducer } from 'utils/reduxInjectors';
 import { useHooks } from './hooks';
 
-export const SearchMovie = () => {
+export const SearchMovie = props => {
   useInjectSaga({ key: sliceKey, saga });
   useInjectReducer({ key: sliceKey, reducer });
-  const { selectors, handles } = useHooks();
-  const { searchMovieList } = selectors;
-  const { handleClickMovie, handleChangeInput } = handles;
+  const { selectors, handles } = useHooks(props);
+  const { searchMovieList, myRef } = selectors;
+  const { handleClickMovie } = handles;
   return (
     <StyledHome>
       <StyledSection>
@@ -20,9 +20,9 @@ export const SearchMovie = () => {
       </StyledSection>
       <StyledSection>
         <Movie
-          handleChangeInput={handleChangeInput}
           handleClickMovie={handleClickMovie}
           searchMovieList={searchMovieList}
+          myRef={myRef}
         />
       </StyledSection>
     </StyledHome>
