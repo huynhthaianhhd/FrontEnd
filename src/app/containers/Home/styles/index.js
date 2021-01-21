@@ -14,7 +14,7 @@ export const StyledHome = styled.div`
 
 export const StyledSection = styled.div`
   &.first-section {
-    padding-top: 64px;
+    padding-top: 0;
   }
   padding-top: 75px;
   width: 100%;

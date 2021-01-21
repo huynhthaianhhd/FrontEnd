@@ -1,10 +1,11 @@
 import React, { memo } from 'react';
 import { Redirect, Switch } from 'react-router-dom';
-import { publicRoutes, privateRoutes } from './routes';
+import { publicRoutes, privateRoutes, adminRoutes } from './routes';
 import PublicRoute from './Public/Route';
 import PrivateRoute from './Private/Route';
 import PublicLayout from './Public/Layout';
 import PrivateLayout from './Private/Layout';
+import AdminLayout from './Admin/Layout';
 import { useAuthenticatedRedirect } from './hooks';
 import { useInjectSaga } from 'utils/reduxInjectors';
 import saga from 'app/containers/Login/saga';
@@ -32,6 +33,15 @@ export const AppLayout = () => {
           path={route.path}
           component={route.component}
           layout={PrivateLayout}
+        />
+      ))}
+      {adminRoutes.map(route => (
+        <PrivateRoute
+          exact
+          key={route.key}
+          path={route.path}
+          component={route.component}
+          layout={AdminLayout}
         />
       ))}
       <Redirect to="/not-found" />
