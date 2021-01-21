@@ -7,7 +7,6 @@ import {
 } from 'app/containers/Login/hooks';
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { StyledHeader } from './styles';
 
 export const Header = () => {
@@ -23,12 +22,6 @@ export const Header = () => {
           trigger={['click']}
           overlay={
             <Menu>
-              {!user?.roles?.includes('admin') && (
-                <Menu.Item>
-                  <Link to="/profile">{t('Header.linkProfile')}</Link>
-                </Menu.Item>
-              )}
-
               <Menu.Item onClick={onLogout}>{t('Header.linkLogout')}</Menu.Item>
             </Menu>
           }

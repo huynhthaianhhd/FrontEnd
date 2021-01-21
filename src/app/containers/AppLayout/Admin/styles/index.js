@@ -14,7 +14,7 @@ export const StyledHeader = styled(Header)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 21, 41, 0.85);
+  background-color: #001529;
 `;
 export const StyledMain = styled(Layout)`
   position: relative;
@@ -24,7 +24,6 @@ export const StyledMain = styled(Layout)`
 export const StyledContent = styled(Content)`
   position: relative;
   .content {
-    padding: 15px;
     height: 100%;
     width: 100%;
     background-color: #fff;

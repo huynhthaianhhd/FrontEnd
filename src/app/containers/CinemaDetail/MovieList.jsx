@@ -5,7 +5,7 @@ import {
   StyledListTime,
 } from './styles';
 import { Image, Typography } from 'antd';
-import { GetUrlCinema } from 'utils/common';
+import { GetUrlMovie } from 'utils/common';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ const OneMovieInList = ({
   return (
     <div>
       <StyledMovieDetail>
-        <Image className="img-tiny" src={GetUrlCinema(index)} preview={false} />
+        <Image className="img-tiny" src={GetUrlMovie(index)} preview={false} />
         <div className="content">
           <Title level={5}>{name}</Title>
           <div className="sub-title">{`${duration} phút - Thể Loại: ${category} - Ngôn ngữ:${language}`}</div>

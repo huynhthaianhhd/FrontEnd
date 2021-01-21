@@ -39,7 +39,13 @@ export const UrlCinema = () => {
     'https://s3img.vcdn.vn/123phim/2021/01/bhd-star-pham-hung-16105959230642.png',
     'https://s3img.vcdn.vn/123phim/2021/01/bhd-star-vincom-quang-trung-16105960645760.png',
   ];
-  return { Group, Cinema };
+  const Movie = [
+    'https://s3img.vcdn.vn/mobile/123phim/2020/12/lua-deu-gap-lua-dao-the-con-heartist-c16-16082739589858_60x60.png',
+    'https://s3img.vcdn.vn/mobile/123phim/2021/01/duong-cong-cua-quy-the-cursed-lesson-c18-16105109796358_60x60.png',
+    'https://s3img.vcdn.vn/mobile/123phim/2020/12/em-la-cua-em-16091411645152_60x60.png',
+    'https://s3img.vcdn.vn/123phim/2021/01/phong-chat-quy-am-host-c18-16098357722892.png',
+  ];
+  return { Group, Cinema, Movie };
 };
 
 export const GetUrlGroup = i => {
@@ -61,6 +67,17 @@ export const GetUrlCinema = i => {
       return Cinema[i - length];
     } else {
       return Cinema[i];
+    }
+  }
+};
+export const GetUrlMovie = i => {
+  const { Movie } = UrlCinema();
+  const length = Movie.length;
+  if (i >= 0) {
+    if (i >= length) {
+      return Movie[i - length];
+    } else {
+      return Movie[i];
     }
   }
 };

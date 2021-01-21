@@ -37,7 +37,7 @@ export const useAuthenticatedRedirect = () => {
       user.roles?.includes('admin') &&
       !location.pathname.includes('admin')
     )
-      history.push('/admin/manage-user');
+      history.push('/admin/manage-users');
   }, [history, location, user]);
 
   useEffect(() => {
