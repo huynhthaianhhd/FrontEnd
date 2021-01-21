@@ -5,9 +5,11 @@ import { MovieDetail } from '../MovieDetail/Loadable';
 import { Profile } from 'app/containers/Profile/Loadable';
 import { CinemaDetail } from 'app/containers/CinemaDetail/Loadable';
 import { Booking } from 'app/containers/Booking/Loadable';
-import { ManageUsers } from 'app/containers/ManageUsers/Loadable';
+import { ManageUsers } from 'app/containers/Admin/ManageUsers/Loadable';
 import { SearchMovie } from 'app/containers/SearchMovie/Loadable';
 import BookingResult from 'app/components/BookingResult';
+import ManageTheaters from '../Admin/ManageTheaters';
+import ManageMovies from '../Admin/ManageMovies';
 
 export const privateRoutes = [
   {
@@ -54,9 +56,19 @@ export const publicRoutes = [
     key: 'cinema',
   },
   {
-    path: '/admin/manage-user',
+    path: '/admin/manage-users',
     component: ManageUsers,
-    key: 'manageUsers',
+    key: 'ManageUsers',
+  },
+  {
+    path: '/admin/manage-movies',
+    component: ManageMovies,
+    key: 'ManageMovies',
+  },
+  {
+    path: '/admin/manage-theaters',
+    component: ManageTheaters,
+    key: 'ManageTheaters',
   },
   {
     path: '/search',

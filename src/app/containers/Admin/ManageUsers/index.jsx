@@ -1,12 +1,22 @@
 import React, { memo, useEffect, useState } from 'react';
-import { Button, Space, Table, Typography, Popconfirm } from 'antd';
+import {
+  Button,
+  Space,
+  Table,
+  Typography,
+  Popconfirm,
+  message,
+  Layout,
+  Menu,
+} from 'antd';
 import Avatar from 'antd/lib/avatar/avatar';
 import { UserOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import lodash from 'lodash';
 
+import AdminSider from 'app/components/AdminSider/index';
+
 import { WEB_API } from 'configs';
-import { retry } from 'redux-saga/effects';
 
 const { Text } = Typography;
 
@@ -26,10 +36,10 @@ export const ManageUsers = memo(() => {
 
   const columns = [
     {
-      title: 'Name',
+      title: 'Tên',
       dataIndex: 'name',
       key: 'name',
-      render: name => {
+      render: (name, record) => {
         return (
           <>
             <div
@@ -42,8 +52,8 @@ export const ManageUsers = memo(() => {
             >
               <Avatar
                 size="large"
-                icon={<UserOutlined />}
                 style={{ marginRight: '8px' }}
+                src={record.avatar}
               />
               <Text strong>{name}</Text>
             </div>
@@ -80,6 +90,7 @@ export const ManageUsers = memo(() => {
                   let modifyUsers = lodash.cloneDeep(users);
                   modifyUsers[userIndex] = modifyUser;
                   setUsers(modifyUsers);
+                  message.success('Khóa tài khoản thành công!');
                 }
               }}
               onCancel={async () => {
@@ -101,20 +112,24 @@ export const ManageUsers = memo(() => {
   ];
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Table
-        style={{ marginTop: '16px', width: '80%', marginLeft: '16px' }}
-        bordered
-        columns={columns}
-        dataSource={users}
-      />
-    </div>
+    <Layout style={{ minHeight: '100vh' }}>
+      <AdminSider selectedKey={1} />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <Table
+          style={{ marginTop: '16px', width: '80%', marginLeft: '16px' }}
+          bordered
+          columns={columns}
+          dataSource={users}
+        />
+      </div>
+    </Layout>
   );
 });
 
