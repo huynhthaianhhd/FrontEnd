@@ -1,5 +1,6 @@
 import { getAll } from 'fetchers/cinema/groupCinema.service';
-import { getAllMovie } from 'fetchers/cinema/movie.service';
+import { getAllMovie, getListMovieInDay } from 'fetchers/cinema/movie.service';
+import { getCinemaByMovie } from 'fetchers/cinema/cinema.service';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 
@@ -23,21 +24,36 @@ function fetchGroupCinema() {
 function* fetchMovieWatcher() {
   yield takeLatest(actions.fetchListMovie, fetchMovieTask);
 }
-
-function* fetchMovieTask(action) {
+function* fetchMovieTask() {
   const { response, error } = yield call(fetchMovie);
   if (response.length > 0) {
     yield put(actions.fetchMovieSuccess(response));
-    const temp = [...response];
-    yield put(actions.setHighLightMovie(temp.splice(0, 8)));
   } else {
     yield put(actions.fetchMovieFailed(error));
   }
 }
-
 function fetchMovie() {
   return getAllMovie();
 }
+
+function* getListMovieInDayWatcher() {
+  yield takeLatest(actions.getListMovieInDay, getListMovieInDayTask);
+}
+function* getListMovieInDayTask() {
+  const { response, error } = yield call(getListMovieInDayAPI);
+  if (response.length > 0) {
+    yield put(actions.getListMovieInDaySuccess(response));
+  } else {
+    yield put(actions.getListMovieInDayFailed(error));
+  }
+}
+function getListMovieInDayAPI() {
+  return getListMovieInDay();
+}
 export default function* defaultSaga() {
-  yield all([fork(fetchGroupListTask), fork(fetchMovieWatcher)]);
+  yield all([
+    fork(fetchGroupListTask),
+    fork(fetchMovieWatcher),
+    fork(getListMovieInDayWatcher),
+  ]);
 }

@@ -20,24 +20,20 @@ export const Home = memo(() => {
   const { selectors, handles } = useHooks();
   const {
     cinemaGroupList,
-    listMovieHighLight,
     listMovie,
-    currentCinemas,
-    currentDate,
-    currentShowTime,
+    listMovieToday,
+    currentError,
   } = selectors;
-  const { handleSelectMovie, handleClickMovie, handleShowTrailer } = handles;
+  const { handleClickMovie, handleShowTrailer, confirmBooking } = handles;
   return (
     <StyledHome>
       <StyledSection className="first-section">
         <Banner />
         <StyledHelper>
           <BookTicketQick
-            listMovie={listMovie}
-            currentCinemas={currentCinemas}
-            currentDate={currentDate}
-            currentShowTime={currentShowTime}
-            handleClick={handleSelectMovie}
+            listMovie={listMovieToday}
+            error={currentError}
+            onConfirm={confirmBooking}
           />
         </StyledHelper>
       </StyledSection>

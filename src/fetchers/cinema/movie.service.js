@@ -31,3 +31,13 @@ export const searchMovies = data => {
     .then(data => ({ response: data }))
     .catch(handleGeneralError);
 };
+
+export const getListMovieInDay = () => {
+  return request(WEB_API, {
+    url: '/movie/allInDay',
+    method: 'GET',
+  })
+    .then(({ data }) => data)
+    .then(data => ({ response: data }))
+    .catch(handleGeneralError);
+};

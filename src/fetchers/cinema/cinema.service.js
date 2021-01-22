@@ -45,3 +45,15 @@ export const addReviewCinema = payload => {
     .then(data => ({ response: data }))
     .catch(handleGeneralError);
 };
+
+export const getCinemaByMovie = payload => {
+  return request(WEB_API, {
+    url: `/cinema/movie?id=${payload.id}`,
+    method: 'GET',
+  })
+    .then(({ data }) => data)
+    .then(data => ({ response: data }))
+    .catch(handleGeneralError);
+};
+
+// export const getShowTimeByCinemaAndMovie =

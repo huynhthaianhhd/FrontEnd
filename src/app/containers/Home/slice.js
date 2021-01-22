@@ -6,14 +6,19 @@ import { ACTION_STATUS } from 'utils/constants';
 export const initialState = {
   groupCinemaList: [],
   status: '',
-  listMovieHighLight: [],
   error: null,
   listMovie: [],
+  currentError: null,
+  listMovieToday: [],
   currentCinemas: [],
-  currentDate: [],
   currentShowTime: [],
   step: 0,
-  loading: false,
+  bookMovie: {
+    movieId: null,
+    cinemaId: null,
+    dateTime: null,
+    showTime: null,
+  },
 };
 
 const homePageSlice = createSlice({
@@ -59,18 +64,25 @@ const homePageSlice = createSlice({
         set('status', ACTION_STATUS.SUCCESS),
       )(state);
     },
-    setHighLightMovie(state, action) {
-      return flow(set('listMovieHighLight', action.payload))(state);
-    },
 
-    getListCinemaCurrent(state) {
-      return flow(set('step', 0), set('loading', true))(state);
+    //* get list in day
+    getListMovieInDay(state) {
+      return flow(
+        set('error', null),
+        set('status', ACTION_STATUS.PENDING),
+      )(state);
     },
-    getListDateCurrent(state) {
-      return flow(set('step', 1), set('loading', true))(state);
+    getListMovieInDaySuccess(state, action) {
+      return flow(
+        set('listMovieToday', action.payload),
+        set('status', ACTION_STATUS.SUCCESS),
+      )(state);
     },
-    getListShowTimeCurrent(state) {
-      return flow(set('step', 2), set('loading', true))(state);
+    getListMovieInDayFailed(state, action) {
+      return flow(
+        set('error', action.payload),
+        set('status', ACTION_STATUS.FAILED),
+      )(state);
     },
 
     setStep(state, action) {

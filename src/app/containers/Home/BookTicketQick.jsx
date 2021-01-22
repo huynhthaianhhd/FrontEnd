@@ -1,84 +1,121 @@
-import { Menu, Dropdown, Button } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import { memo } from 'react';
+import { Button, Select } from 'antd';
+import { memo, useState } from 'react';
+import moment from 'moment';
 
-export const BookTicketQick = ({
-  listMovie,
-  currentCinemas,
-  currentDate,
-  currentShowTime,
-  handleClick,
-}) => {
-  // const Cinema = [name];
-  const MenuOverLay = overlay => (
-    <Menu>
-      {overlay.map((e, i) => (
-        <Menu.Item key={i} onClick={() => handleClick(e)}>
-          {e.name}
-        </Menu.Item>
-      ))}
-    </Menu>
+export const BookTicketQick = ({ listMovie, onConfirm }) => {
+  const [current, setCurrent] = useState({
+    indexMovie: null,
+    indexCinema: null,
+    indexShowTime: null,
+    listCinemaCurrent: [],
+    listShowTimeCurrent: [],
+  });
+  const checkCondition = () => {
+    if (
+      current?.indexMovie !== null &&
+      current?.indexCinema !== null &&
+      current.indexShowTime !== null
+    )
+      return { type: 'danger', disabled: false };
+    return { type: 'danger', disabled: true };
+  };
+  const SelectMovie = () => {
+    return (
+      <Select
+        className="dropdown"
+        defaultValue="Chọn phim"
+        value={
+          current.indexMovie !== null
+            ? listMovie[current.indexMovie].name
+            : 'Chọn phim'
+        }
+        onSelect={data => {
+          setCurrent(pre => {
+            if (pre.indexCinema !== null) {
+              return {
+                ...pre,
+                indexMovie: data,
+                indexCinema: null,
+                indexShowTime: null,
+                listCinemaCurrent: listMovie[data].cinemas,
+                listShowTimeCurrent: [],
+              };
+            } else {
+              return {
+                ...pre,
+                indexMovie: data,
+                listCinemaCurrent: listMovie[data].cinemas,
+              };
+            }
+          });
+        }}
+      >
+        {listMovie.length > 0 &&
+          listMovie.map((e, i) => (
+            <Select.Option key={i}>{e.name}</Select.Option>
+          ))}
+      </Select>
+    );
+  };
+  const SelectCinemas = () => (
+    <Select
+      className="dropdown"
+      trigger="click"
+      defaultValue="Chọn rạp"
+      notFoundContent={'Vui lòng chọn phim'}
+      value={
+        current.indexCinema !== null
+          ? current.listCinemaCurrent[current.indexCinema].name
+          : 'Chọn rạp'
+      }
+      onSelect={data => {
+        setCurrent(pre => ({
+          ...pre,
+          indexCinema: data,
+          listShowTimeCurrent: pre.listCinemaCurrent[data].showTime,
+        }));
+      }}
+    >
+      {current.listCinemaCurrent.length > 0 &&
+        current.listCinemaCurrent.map((e, i) => (
+          <Select.Option key={i}>{e.name}</Select.Option>
+        ))}
+    </Select>
   );
-
-  const DropDownMovie = () => {
-    return (
-      <Dropdown
-        overlay={MenuOverLay(listMovie)}
-        className="dropdown"
-        trigger="click"
-      >
-        <Button>
-          Chọn phim <DownOutlined />
-        </Button>
-      </Dropdown>
-    );
-  };
-  const DropDownCinemas = () => {
-    return (
-      <Dropdown
-        overlay={MenuOverLay(currentCinemas)}
-        className="dropdown"
-        trigger="click"
-      >
-        <Button>
-          Chọn rạp <DownOutlined />
-        </Button>
-      </Dropdown>
-    );
-  };
-  const DropDownDate = () => {
-    return (
-      <Dropdown
-        overlay={MenuOverLay(currentCinemas)}
-        className="dropdown"
-        trigger="click"
-      >
-        <Button>
-          Chọn ngày xem <DownOutlined />
-        </Button>
-      </Dropdown>
-    );
-  };
-  const DropDownShowTime = () => {
-    return (
-      <Dropdown
-        overlay={MenuOverLay(currentCinemas)}
-        className="dropdown"
-        trigger="click"
-      >
-        <Button>
-          Chọn suất chiếu <DownOutlined />
-        </Button>
-      </Dropdown>
-    );
-  };
+  const SelectShowTime = () => (
+    <Select
+      className="dropdown"
+      trigger="click"
+      defaultValue="Chọn suất chiếu"
+      value={
+        current.indexShowTime !== null
+          ? moment(
+              current.listShowTimeCurrent[current.indexShowTime].startTime,
+            ).format('HH:mm DD/MM')
+          : 'Chọn suất chiếu'
+      }
+      notFoundContent="Vui lòng chọn phim và rạp"
+      onSelect={data => setCurrent(pre => ({ ...pre, indexShowTime: data }))}
+    >
+      {current.listShowTimeCurrent.length > 0 &&
+        current.listShowTimeCurrent.map((e, i) => (
+          <Select.Option key={i}>
+            {moment(e.startTime).format('HH:mm DD/MM')}
+          </Select.Option>
+        ))}
+    </Select>
+  );
   return (
     <>
-      <DropDownMovie />
-      <DropDownCinemas />
-      <DropDownDate />
-      <DropDownShowTime />
-      <Button size="large" className="button" type="primary">
+      <SelectMovie />
+      <SelectCinemas />
+      <SelectShowTime />
+      <Button
+        size="large"
+        className="button"
+        {...checkCondition()}
+        onClick={() => onConfirm(current)}
+      >
         Mua vé
       </Button>
     </>

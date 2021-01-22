@@ -29,6 +29,11 @@ export const StyledSection = styled.div`
   .dropdown {
     border: none;
     outline: none;
+    padding: 0px 10px;
+    width: 30%;
+    .ant-select-selector {
+      border: none;
+    }
   }
   .button {
     border-radius: 5px;
@@ -81,6 +86,7 @@ export const StyledHelper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding: 20px;
 `;
 
 export const StyledMovie = styled.div`
@@ -213,7 +219,7 @@ export const StyledMovie = styled.div`
 export const StyledListMovie = styled.div`
   display: flex;
   width: 100%;
-  min-height: 85vh;
+  /* min-height: 85vh; */
   position: relative;
   border: 1px solid #c2c2c2;
   .ant-tabs-nav {
@@ -225,7 +231,10 @@ export const StyledListMovie = styled.div`
   }
   .list {
     width: 100% !important;
+    max-height: 550px;
     color: black;
+    overflow-y: scroll;
+    padding-bottom: 10px;
   }
   .ant-spin-nested-loading {
     width: 100%;

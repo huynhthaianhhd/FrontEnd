@@ -11,27 +11,23 @@ export const makeStatus = createSelector(selectHomeState, status =>
   get('status', status),
 );
 
-export const makeListMovieHighLight = createSelector(
-  selectHomeState,
-  listMovieHighLight => get('listMovieHighLight', listMovieHighLight),
-);
+// export const makeListMovieHighLight = createSelector(
+//   selectHomeState,
+//   listMovieHighLight => get('listMovieHighLight', listMovieHighLight),
+// );
 
 export const makeListMovie = createSelector(selectHomeState, listMovie =>
   get('listMovie', listMovie),
 );
 
-// currentCinemas: [{ name: 'Chọn rạp' }],
-// currentDate: [{ name: 'Chọn ngày xem' }],
-// currentShowTime: [{ name: 'Chọn suất chiếu' }],
+export const makeLoading = createSelector(selectHomeState, loading =>
+  get('loading', loading),
+);
+export const makeCurrentError = createSelector(selectHomeState, currentError =>
+  get('currentError', currentError),
+);
 
-export const makeCurrentCinemas = createSelector(
+export const makeListMovieToday = createSelector(
   selectHomeState,
-  currentCinemas => get('currentCinemas', currentCinemas),
-);
-export const makeCurrentDate = createSelector(selectHomeState, currentDate =>
-  get('currentDate', currentDate),
-);
-export const makeCurrentShowTime = createSelector(
-  selectHomeState,
-  currentShowTime => get('currentShowTime', currentShowTime),
+  listMovieToday => get('listMovieToday', listMovieToday),
 );
