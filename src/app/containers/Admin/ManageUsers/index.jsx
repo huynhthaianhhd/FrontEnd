@@ -126,21 +126,6 @@ export const ManageUsers = memo(() => {
           dataSource={users}
         />
       </Card>
-      {/* <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        <Table
-          style={{ marginTop: '16px', width: '80%', marginLeft: '16px' }}
-          bordered
-          columns={columns}
-          dataSource={users}
-        />
-      </div> */}
     </Layout>
   );
 });
