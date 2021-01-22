@@ -79,10 +79,7 @@ const bookingSlice = createSlice({
     },
 
     bookSuccess(state) {
-      return flow(
-        set('book.status', ACTION_STATUS.SUCCESS),
-        set('pickedSeats', []),
-      )(state);
+      return set('book.status', ACTION_STATUS.SUCCESS)(state);
     },
 
     bookFailed(state, action) {

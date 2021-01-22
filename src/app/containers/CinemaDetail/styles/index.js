@@ -15,6 +15,8 @@ export const StyledSection = styled.div`
   margin-top: 30px;
   .ant-tabs-tab {
     margin: 0 16px;
+    font-size: 16px;
+    padding-top: 10px;
   }
   .ant-tabs-content {
     margin-top: 15px;
@@ -92,7 +94,7 @@ export const StyledMovieList = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 500px;
-  overflow-y: scroll;
+  overflow-y: ${({ checkLength }) => (checkLength > 3 ? 'scroll' : 'auto')};
 `;
 
 export const StyledTime = styled.div`
@@ -133,6 +135,7 @@ export const StyledTime = styled.div`
 
 export const StyledListTime = styled.div`
   display: flex;
+  flex-wrap: wrap;
   & > * {
     margin-right: 10px;
   }

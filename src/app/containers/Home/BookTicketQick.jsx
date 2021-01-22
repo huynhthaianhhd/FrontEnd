@@ -116,7 +116,7 @@ export const BookTicketQick = ({ listMovie, onConfirm }) => {
         {...checkCondition()}
         onClick={() => onConfirm(current)}
       >
-        Mua vé
+        Mua vé hôm nay
       </Button>
     </>
   );

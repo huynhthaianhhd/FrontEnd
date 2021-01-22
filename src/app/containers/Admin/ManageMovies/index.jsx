@@ -5,7 +5,7 @@ import {
   Table,
   Typography,
   Popconfirm,
-  message,
+  message as antMessage,
   Layout,
   Image,
   Card,
@@ -18,14 +18,17 @@ import {
 import axios from 'axios';
 import moment from 'moment';
 import { cloneDeep } from 'lodash';
+import Highlighter from 'react-highlight-words';
 
 import AdminSider from 'app/components/AdminSider/index';
+import AddEditMovieModal from 'app/components/AddEditMovieModal/index';
 
 import { WEB_API } from 'configs';
 import {
   DeleteOutlined,
   EditOutlined,
   PlusCircleFilled,
+  SearchOutlined,
 } from '@ant-design/icons';
 
 const { Text } = Typography;
@@ -45,8 +48,88 @@ export const ManageMovies = memo(() => {
   const [editMovie, setEditMovie] = useState(null);
   const [showAddMovieModal, setShowAddMovieModal] = useState(false);
   const [showEditMovieModal, setShowEditMovieModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const editFormEl = useRef(null);
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  let searchInput = '';
+
+  const getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button
+            onClick={() => handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => (
+      <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : '',
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => searchInput.select(), 100);
+      }
+    },
+    render: text =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  const handleReset = clearFilters => {
+    clearFilters();
+    setSearchText('');
+  };
 
   useEffect(() => {
     async function doStuff() {
@@ -72,18 +155,21 @@ export const ManageMovies = memo(() => {
       title: 'Tên phim',
       dataIndex: 'name',
       key: 'name',
+      ...getColumnSearchProps('name'),
       render: name => <Text strong>{name}</Text>,
     },
     {
       title: 'Đạo diễn',
       dataIndex: 'director',
       key: 'director',
+      ...getColumnSearchProps('director'),
       render: director => <Text strong>{director}</Text>,
     },
     {
       title: 'Thể loại',
       dataIndex: 'category',
       key: 'category',
+      ...getColumnSearchProps('category'),
       render: category => <Text strong>{category}</Text>,
     },
     {
@@ -134,7 +220,7 @@ export const ManageMovies = memo(() => {
                   movie => movie.id !== record.id,
                 );
                 setMovies(modifyMovies);
-                message.success('Xóa phim thành công!');
+                antMessage.success('Xóa phim thành công!');
               }
             }}
             okText="Xóa"
@@ -152,18 +238,55 @@ export const ManageMovies = memo(() => {
     },
   ];
 
-  const handleOk = () => {};
-
-  const handleCancel = () => {};
-
-  const handleEditOk = () => {};
+  const handleAddCancel = () => {
+    setShowAddMovieModal(false);
+  };
 
   const handleEditCancel = () => {
+    setEditMovie('');
     setShowEditMovieModal(false);
   };
 
-  const onFinish = async values => {
+  const onFinishAddMovie = async values => {
     const {
+      trailerUrl,
+      description,
+      language,
+      director,
+      duration,
+      name,
+      posterUrl,
+      premiereTime,
+      category,
+    } = values;
+    const response = await axios.post(`${WEB_API}/movie`, {
+      director,
+      duration,
+      name,
+      posterUrl,
+      premiereTime,
+      category,
+      trailerUrl,
+      description,
+      language,
+    });
+    const { movie, success } = response.data;
+    if (!success) {
+      antMessage.error('Thêm phim không thành công');
+    } else {
+      let modifyMovies = cloneDeep(movies);
+      modifyMovies.unshift({ ...movie, key: movie.id });
+      setMovies(modifyMovies);
+      setShowAddMovieModal(false);
+      antMessage.success('Thêm phim thành công');
+    }
+  };
+
+  const onFinishEditMovie = async values => {
+    const {
+      trailerUrl,
+      description,
+      language,
       director,
       duration,
       name,
@@ -178,19 +301,23 @@ export const ManageMovies = memo(() => {
       posterUrl,
       premiereTime,
       category,
+      trailerUrl,
+      description,
+      language,
     });
     const { movie, success } = response.data;
     if (!success) {
-      message.error('Chỉnh sửa phim không thành công');
+      antMessage.error('Chỉnh sửa phim không thành công');
     } else {
       const movieIndex = movies.findIndex(m => m.id === movie.id);
       let modifyMovie = cloneDeep(movies[movieIndex]);
-      modifyMovie = movie;
+      modifyMovie = { ...movie, key: movie.id };
       let modifyMovies = cloneDeep(movies);
       modifyMovies[movieIndex] = modifyMovie;
       setMovies(modifyMovies);
       setShowEditMovieModal(false);
-      message.success('Chỉnh sửa phim thành công');
+      setEditMovie('');
+      antMessage.success('Chỉnh sửa phim thành công');
     }
   };
 
@@ -221,126 +348,24 @@ export const ManageMovies = memo(() => {
           />
         </Card>
       </Layout>
-      <Modal
-        title="Thêm phim"
-        visible={showAddMovieModal}
-        onOk={handleOk}
-        confirmLoading={isLoading}
-        onCancel={handleCancel}
-        footer={[
-          <Button key="back" onClick={handleCancel}>
-            Hủy bỏ
-          </Button>,
-          <Button
-            key="submit"
-            type="primary"
-            loading={isLoading}
-            onClick={handleOk}
-          >
-            Xác nhận
-          </Button>,
-        ]}
-      ></Modal>
-      <Modal
-        title="Chỉnh sửa phim"
-        visible={showEditMovieModal}
-        onOk={handleEditOk}
-        confirmLoading={isLoading}
-        onCancel={handleEditCancel}
-        footer={[
-          <Button key="back" onClick={handleEditCancel}>
-            Hủy bỏ
-          </Button>,
-          <Button
-            key="submit"
-            type="primary"
-            loading={isLoading}
-            onClick={() => {
-              editFormEl.current.submit();
-            }}
-          >
-            Xác nhận
-          </Button>,
-        ]}
-      >
-        {editMovie ? (
-          <Form name="basic" onFinish={onFinish} ref={editFormEl}>
-            <Form.Item
-              label="Posterurl"
-              name="posterUrl"
-              initialValue={editMovie?.posterUrl}
-              rules={[
-                {
-                  required: true,
-                  message: 'Posterurl không được bỏ trống',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Tên phim"
-              name="name"
-              initialValue={editMovie?.name}
-              rules={[
-                {
-                  required: true,
-                  message: 'Tên phim không được bỏ trống',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="Đạo diễn"
-              name="director"
-              initialValue={editMovie?.director}
-              rules={[
-                {
-                  required: true,
-                  message: 'Đạo diễn không được bỏ trống',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name="category"
-              label="Thể loại"
-              initialValue={editMovie?.category}
-              rules={[
-                {
-                  required: true,
-                  message: 'Thể loại không được bỏ trống',
-                },
-              ]}
-            >
-              <Select>
-                <Option value={'Kinh dị'}>Kinh dị</Option>
-                <Option value={'Hành động'}>Hành động</Option>
-              </Select>
-            </Form.Item>
-            <Form.Item
-              label="Thời lượng (phút)"
-              name="duration"
-              initialValue={editMovie?.duration}
-              rules={[
-                {
-                  required: true,
-                  message: 'Thời lượng không được bỏ trống',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item label="Thời điểm ra mắt" name="premiereTime">
-              <DatePicker
-                value={moment(editMovie?.premiereTime).format('YYYY-MM-DD')}
-              />
-            </Form.Item>
-          </Form>
-        ) : null}
-      </Modal>
+
+      {/* AddMovie Modal */}
+      <AddEditMovieModal
+        modalTitle="Thêm phim"
+        showModal={showAddMovieModal}
+        handleCancel={handleAddCancel}
+        onFinish={onFinishAddMovie}
+      />
+      {/* EditMovie Modal */}
+      {editMovie ? (
+        <AddEditMovieModal
+          modalTitle="Chỉnh sửa phim"
+          inputMovie={editMovie}
+          showModal={showEditMovieModal}
+          handleCancel={handleEditCancel}
+          onFinish={onFinishEditMovie}
+        />
+      ) : null}
     </>
   );
 });

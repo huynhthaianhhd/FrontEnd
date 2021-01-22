@@ -1,6 +1,7 @@
 import { getAll } from 'fetchers/cinema/groupCinema.service';
 import { getAllMovie, getListMovieInDay } from 'fetchers/cinema/movie.service';
-import { getCinemaByMovie } from 'fetchers/cinema/cinema.service';
+// import { getCinemaByMovie } from 'fetchers/cinema/cinema.service';
+import { getManyNews } from 'fetchers/newsFetcher';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 
@@ -32,6 +33,24 @@ function* fetchMovieTask() {
     yield put(actions.fetchMovieFailed(error));
   }
 }
+
+function* getNewsSummaryWatcher() {
+  yield takeLatest(actions.fetchNewsSummary, getNewsSummaryTask);
+}
+
+function* getNewsSummaryTask(action) {
+  const { response, error } = yield call(getNewsSummaryAPI);
+  if (response) {
+    yield put(actions.fetchNewsSummarySuccess(response));
+  } else {
+    yield put(actions.fetchNewsSummaryFailed(error.data));
+  }
+}
+
+function getNewsSummaryAPI() {
+  return getManyNews();
+}
+
 function fetchMovie() {
   return getAllMovie();
 }
@@ -55,5 +74,6 @@ export default function* defaultSaga() {
     fork(fetchGroupListTask),
     fork(fetchMovieWatcher),
     fork(getListMovieInDayWatcher),
+    fork(getNewsSummaryWatcher),
   ]);
 }

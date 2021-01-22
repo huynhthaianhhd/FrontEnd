@@ -15,6 +15,7 @@ import get from 'lodash/fp/get';
 import moment from 'moment';
 import { actions as popupActions } from 'app/containers/Popup/slice';
 import { POPUP_TYPE } from 'app/containers/Popup/constants';
+import { nameOfSeats } from './helper';
 
 const useHooks = () => {
   const { showTimeId } = useParams();
@@ -53,8 +54,23 @@ const useHooks = () => {
 
   useEffect(() => {
     if (bookStatus === ACTION_STATUS.SUCCESS)
-      history.push(`/booking/${showTimeId}/result`);
-  }, [bookStatus, history, resetData, showTimeId]);
+      history.push({
+        pathname: `/booking/${showTimeId}/result`,
+        state: {
+          movie,
+          startTime,
+          pickedSeats: nameOfSeats(pickedSeats),
+        },
+      });
+  }, [
+    bookStatus,
+    history,
+    movie,
+    pickedSeats,
+    resetData,
+    showTimeId,
+    startTime,
+  ]);
 
   const handleClickSeat = ({ id, newStatus }) =>
     updateSeatStatus({ id, newStatus });

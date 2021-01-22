@@ -31,3 +31,8 @@ export const makeListMovieToday = createSelector(
   selectHomeState,
   listMovieToday => get('listMovieToday', listMovieToday),
 );
+
+export const selectNewsSummaryData = createSelector(
+  selectHomeState,
+  currentShowTime => get('newsSummary.data', currentShowTime),
+);

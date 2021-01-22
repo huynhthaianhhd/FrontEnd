@@ -67,8 +67,9 @@ export const MovieDetail = memo(() => {
               </div>
             </div>
             <div className="group-star">
-              {numStars.map(() => (
+              {numStars.map((_, i) => (
                 <img
+                  key={i}
                   className="smallStar"
                   src="https://tix.vn/app/assets/img/icons/star1.png"
                   alt="Rating"

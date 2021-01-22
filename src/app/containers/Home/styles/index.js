@@ -16,7 +16,7 @@ export const StyledSection = styled.div`
   &.first-section {
     padding-top: 0;
   }
-  padding-top: 75px;
+  padding-top: 65px;
   width: 100%;
   position: relative !important;
   img {
@@ -45,10 +45,6 @@ export const StyledSection = styled.div`
     clear: both;
     display: flex;
     flex-direction: column;
-    .main {
-      display: flex;
-      flex-wrap: wrap;
-    }
     .header {
       display: flex;
       width: 100%;
@@ -59,6 +55,10 @@ export const StyledSection = styled.div`
         color: #fa5238;
         margin-bottom: 0;
       }
+    }
+    .main {
+      display: flex;
+      flex-wrap: wrap;
     }
     .block {
       display: flex !important;

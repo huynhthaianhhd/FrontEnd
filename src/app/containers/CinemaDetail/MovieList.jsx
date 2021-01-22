@@ -12,11 +12,16 @@ import { memo } from 'react';
 const { Title } = Typography;
 export const MovieList = memo(({ movies }) => {
   return (
-    <StyledMovieList>
-      {movies.length > 0 &&
+    <StyledMovieList checkLength={movies.length}>
+      {movies.length > 0 ? (
         movies.map((movie, i) => (
           <OneMovieInList index={i} {...movie} key={i} />
-        ))}
+        ))
+      ) : (
+        <div style={{ textAlign: 'center' }}>
+          Không có suất chiếu trong ngày
+        </div>
+      )}
     </StyledMovieList>
   );
 });

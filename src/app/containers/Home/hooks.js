@@ -8,11 +8,11 @@ import {
   // makeListMovieHighLight,
   makeListMovie,
   makeListMovieToday,
-  makeCurrentShowTime,
   makeLoading,
   makeCurrentError,
+  selectNewsSummaryData,
 } from './selectors';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { actions as popupActions } from 'app/containers/Popup/slice';
 import { POPUP_TYPE } from 'app/containers/Popup/constants';
 
@@ -22,10 +22,12 @@ export const useHooks = () => {
     fetchListMovie,
     openPopup,
     getListMovieInDay,
+    fetchNewsSummary,
   } = useActions(
     {
       fetchGroup: actions.fetchGroup,
       fetchListMovie: actions.fetchListMovie,
+      fetchNewsSummary: actions.fetchNewsSummary,
       openPopup: popupActions.openPopup,
       getListMovieInDay: actions.getListMovieInDay,
     },
@@ -33,11 +35,12 @@ export const useHooks = () => {
   );
   const status = useSelector(makeStatus);
   const cinemaGroupList = useSelector(makeGroupList);
-  // const listMovieHighLight = useSelector(makeListMovieHighLight);
   const listMovie = useSelector(makeListMovie);
   const loading = useSelector(makeLoading);
   const currentError = useSelector(makeCurrentError);
   const listMovieToday = useSelector(makeListMovieToday);
+  const newsSummary = useSelector(selectNewsSummaryData);
+
   const history = useHistory();
 
   const handleClickMovie = useCallback(
@@ -54,6 +57,12 @@ export const useHooks = () => {
     },
     [history],
   );
+  const handleClickNews = useCallback(
+    id => {
+      history.push(`/news/${id}`);
+    },
+    [history],
+  );
 
   const handleShowTrailer = trailerUrl => {
     if (trailerUrl)
@@ -67,23 +76,25 @@ export const useHooks = () => {
     fetchGroup();
     fetchListMovie();
     getListMovieInDay();
-  }, [fetchGroup, fetchListMovie, getListMovieInDay]);
+    fetchNewsSummary();
+  }, [fetchGroup, fetchListMovie, getListMovieInDay, fetchNewsSummary]);
 
   return {
     selectors: {
       cinemaGroupList,
       status,
-      // listMovieHighLight,
       listMovie,
       listMovieToday,
       loading,
       currentError,
+      newsSummary,
     },
     handles: {
       // handleSelectMovie,
       confirmBooking,
       handleClickMovie,
       handleShowTrailer,
+      handleClickNews,
     },
   };
 };
