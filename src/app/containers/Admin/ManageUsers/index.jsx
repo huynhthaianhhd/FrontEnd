@@ -8,6 +8,7 @@ import {
   message,
   Layout,
   Menu,
+  Card,
 } from 'antd';
 import Avatar from 'antd/lib/avatar/avatar';
 import { UserOutlined } from '@ant-design/icons';
@@ -114,7 +115,18 @@ export const ManageUsers = memo(() => {
   return (
     <Layout style={{ height: '100%' }}>
       <AdminSider selectedKey={1} />
-      <div
+      <Card
+        title="Danh sách người dùng"
+        style={{ width: '80%', margin: '0 auto', marginTop: '16px' }}
+      >
+        <Table
+          style={{ width: '100%', margin: '0 auto', marginTop: '16px' }}
+          bordered
+          columns={columns}
+          dataSource={users}
+        />
+      </Card>
+      {/* <div
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -128,7 +140,7 @@ export const ManageUsers = memo(() => {
           columns={columns}
           dataSource={users}
         />
-      </div>
+      </div> */}
     </Layout>
   );
 });

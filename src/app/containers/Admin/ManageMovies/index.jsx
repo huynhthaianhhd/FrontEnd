@@ -318,6 +318,14 @@ export const ManageMovies = memo(() => {
               <Select>
                 <Option value={'Kinh dị'}>Kinh dị</Option>
                 <Option value={'Hành động'}>Hành động</Option>
+                <Option value={'Viễn tưởng'}>Viễn tưởng</Option>
+                <Option value={'Võ thuật'}>Võ thuật</Option>
+                <Option value={'Chiến tranh'}>Chiến tranh</Option>
+                <Option value={'Hài hước'}>Hài hước</Option>
+                <Option value={'Tâm lý'}>Tâm lý</Option>
+                <Option value={'Hình sự'}>Hình sự</Option>
+                <Option value={'Phiêu lưu'}>Phiêu lưu</Option>
+                <Option value={'Thần thoại'}>Thần thoại</Option>
               </Select>
             </Form.Item>
             <Form.Item
