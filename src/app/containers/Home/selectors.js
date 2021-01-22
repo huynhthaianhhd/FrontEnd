@@ -35,3 +35,8 @@ export const makeCurrentShowTime = createSelector(
   selectHomeState,
   currentShowTime => get('currentShowTime', currentShowTime),
 );
+
+export const selectNewsSummaryData = createSelector(
+  selectHomeState,
+  currentShowTime => get('newsSummary.data', currentShowTime),
+);

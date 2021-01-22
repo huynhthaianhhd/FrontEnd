@@ -25,6 +25,7 @@ const CouchList = ({ handleClickSeat, seats, seatPerRow = 10, ...rest }) => {
                     status={item.status}
                     row={item.row}
                     icon={faCouch}
+                    key={item.id}
                   />
                 );
               })}

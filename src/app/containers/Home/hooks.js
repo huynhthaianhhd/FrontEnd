@@ -10,16 +10,23 @@ import {
   makeCurrentCinemas,
   makeCurrentDate,
   makeCurrentShowTime,
+  selectNewsSummaryData,
 } from './selectors';
 import { useHistory, useLocation } from 'react-router-dom';
 import { actions as popupActions } from 'app/containers/Popup/slice';
 import { POPUP_TYPE } from 'app/containers/Popup/constants';
 
 export const useHooks = () => {
-  const { fetchGroup, fetchListMovie, openPopup } = useActions(
+  const {
+    fetchGroup,
+    fetchListMovie,
+    openPopup,
+    fetchNewsSummary,
+  } = useActions(
     {
       fetchGroup: actions.fetchGroup,
       fetchListMovie: actions.fetchListMovie,
+      fetchNewsSummary: actions.fetchNewsSummary,
       openPopup: popupActions.openPopup,
     },
     [actions],
@@ -28,6 +35,7 @@ export const useHooks = () => {
   const cinemaGroupList = useSelector(makeGroupList);
   const listMovieHighLight = useSelector(makeListMovieHighLight);
   const listMovie = useSelector(makeListMovie);
+  const newsSummary = useSelector(selectNewsSummaryData);
 
   const currentCinemas = useSelector(makeCurrentCinemas);
   const currentDate = useSelector(makeCurrentDate);
@@ -39,6 +47,13 @@ export const useHooks = () => {
   const handleClickMovie = useCallback(
     id => {
       history.push(`/movie/${id}`);
+    },
+    [history],
+  );
+
+  const handleClickNews = useCallback(
+    id => {
+      history.push(`/news/${id}`);
     },
     [history],
   );
@@ -58,7 +73,8 @@ export const useHooks = () => {
   useEffect(() => {
     fetchGroup();
     fetchListMovie();
-  }, [fetchGroup, fetchListMovie]);
+    fetchNewsSummary();
+  }, [fetchGroup, fetchListMovie, fetchNewsSummary]);
 
   return {
     selectors: {
@@ -69,6 +85,7 @@ export const useHooks = () => {
       currentCinemas,
       currentDate,
       currentShowTime,
+      newsSummary,
     },
     handles: {
       handleSelectMovie,
@@ -76,6 +93,7 @@ export const useHooks = () => {
       handleSelectCinema,
       handleClickMovie,
       handleShowTrailer,
+      handleClickNews,
     },
   };
 };

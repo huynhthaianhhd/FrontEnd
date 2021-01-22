@@ -24,7 +24,7 @@ export const PublicHeader = () => {
         <Link to="/">Trang chủ</Link>
         <a href="/#show-time">Lịch chiếu</a>
         <a href="/#group-cinema">Cụm rạp</a>
-        <Link to="/">Tin tức</Link>
+        <a href="/#news">Tin tức</a>
       </div>
 
       <div className="control">
