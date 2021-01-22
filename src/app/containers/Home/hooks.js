@@ -73,7 +73,7 @@ export const useHooks = () => {
   useEffect(() => {
     fetchGroup();
     fetchListMovie();
-    fetchNewsSummary();
+    fetchNewsSummary(2);
   }, [fetchGroup, fetchListMovie, fetchNewsSummary]);
 
   return {

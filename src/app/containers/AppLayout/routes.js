@@ -8,6 +8,7 @@ import { Booking } from 'app/containers/Booking/Loadable';
 import { ManageUsers } from 'app/containers/Admin/ManageUsers/Loadable';
 import { SearchMovie } from 'app/containers/SearchMovie/Loadable';
 import { News } from 'app/containers/News/Loadable';
+import { ManageNews } from 'app/containers/Admin/ManageNews/Loadable';
 import BookingResult from 'app/components/BookingResult';
 import ManageTheaters from '../Admin/ManageTheaters';
 import ManageMovies from '../Admin/ManageMovies';
@@ -83,5 +84,10 @@ export const adminRoutes = [
     path: '/admin/manage-theaters',
     component: ManageTheaters,
     key: 'ManageTheaters',
+  },
+  {
+    path: '/admin/manage-news',
+    component: ManageNews,
+    key: 'ManageNews',
   },
 ];
