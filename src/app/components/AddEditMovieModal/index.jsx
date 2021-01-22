@@ -11,7 +11,6 @@ const AddEditMovieModal = ({
   onFinish,
   modalTitle,
 }) => {
-  console.log('render');
   const formEl = useRef(null);
   return (
     <Modal

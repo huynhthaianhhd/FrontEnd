@@ -55,7 +55,6 @@ const useHooks = () => {
   }, [selectorMovieReviews]);
 
   useEffect(() => {
-    console.log('selectorGroupCinema', selectorGroupCinema);
     if (selectorGroupCinema && selectorGroupCinema.data) {
       if (selectorGroupCinema.status === ACTION_STATUS.SUCCESS) {
         setGroupCinema(selectorGroupCinema.data);

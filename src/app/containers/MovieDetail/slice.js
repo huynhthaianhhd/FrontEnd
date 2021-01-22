@@ -106,7 +106,6 @@ const detailMovieSlice = createSlice({
     },
 
     fetchGroupSuccess(state, action) {
-      console.log('action.payload', action.payload);
       return flow(
         set('groupCinema.data', action.payload),
         set('groupCinema.status', ACTION_STATUS.SUCCESS),
