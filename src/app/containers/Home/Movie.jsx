@@ -6,6 +6,7 @@ import {
   RightOutlined,
 } from '@ant-design/icons';
 import { Carousel } from 'antd';
+import { indexBy } from 'lodash/fp';
 const { Title } = Typography;
 
 function SamplePrevArrow(props) {
@@ -64,11 +65,11 @@ export const Movie = ({
     duration,
     trailerUrl,
   }) => {
-    const point = movieReviews.reduce(
+    const point = movieReviews?.reduce(
       (totalRate, item) => totalRate + item.rating,
       0,
     );
-    const numReviews = movieReviews.length > 0 ? movieReviews.length : 1;
+    const numReviews = movieReviews?.length > 0 ? movieReviews?.length : 1;
     const pointRating = ((point * 10) / (numReviews * 5.0)).toFixed(1);
     const stars = pointRating > 0 ? Math.ceil(pointRating / 2.0) : 5;
     return (
@@ -114,16 +115,23 @@ export const Movie = ({
     );
   };
 
-  const list = highLightMovie
-    .map((e, i) => <MoviePreview {...e} id={e.id} src={e.posterUrl} key={i} />)
-    .reduce((acc, curr, index, array) => {
-      if (index % 8 === 0) {
-        acc.push(<div className="block">{array.slice(index, index + 8)}</div>);
-      }
-      return acc;
-    }, []);
+  const list =
+    highLightMovie.length > 0 &&
+    highLightMovie
+      ?.map((e, i) => (
+        <MoviePreview key={e.id} {...e} id={e.id} src={e.posterUrl} />
+      ))
+      ?.reduce((acc, _, index, array) => {
+        if (index % 8 === 0) {
+          acc.push(
+            <div key={index} className="block">
+              {array.slice(index, index + 8)}
+            </div>,
+          );
+        }
+        return acc;
+      }, []);
 
-  console.log('list', list);
   return (
     <div className="container">
       <div className="header">

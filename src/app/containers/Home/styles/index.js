@@ -92,7 +92,6 @@ export const StyledMovie = styled.div`
     padding: 5px;
     display: flex;
     flex-direction: column;
-<<<<<<< HEAD
     .poster-group {
       position: relative;
       .poster {
@@ -157,10 +156,6 @@ export const StyledMovie = styled.div`
     }
     .tag {
       font-weight: bold;
-=======
-    img {
-      height: 330px;
->>>>>>> 5dddd6aea466a4ce8d693361641c643c54c7a127
     }
     .rate {
       position: absolute;
