@@ -7,7 +7,7 @@ export const initialState = {
   listCinema: [],
   error: null,
   status: '',
-  defaultCinema: 0,
+  defaultCinema: [],
 };
 const cinemaDetailSlice = createSlice({
   name: 'cinemaDetail',
@@ -35,6 +35,39 @@ const cinemaDetailSlice = createSlice({
       return flow(set('defaultCinema', state.listCinema[action.payload] || []))(
         state,
       );
+    },
+    fetchReviewOfCinema(state) {
+      return flow(
+        set('status', ACTION_STATUS.PENDING),
+        set('error', null),
+      )(state);
+    },
+    fetchReviewSuccess(state, action) {
+      return flow(
+        set('defaultCinema', action.payload),
+        set('status', ACTION_STATUS.SUCCESS),
+      )(state);
+    },
+    fetchReviewFailed(state, action) {
+      return flow(
+        set('error', action.payload),
+        set('status', ACTION_STATUS.FAILED),
+      )(state);
+    },
+    addReviewOfCinema(state) {
+      return flow(
+        set('error', null),
+        set('status', ACTION_STATUS.PENDING),
+      )(state);
+    },
+    addReviewOfCinemaSuccess(state) {
+      return flow(set('status', ACTION_STATUS.SUCCESS))(state);
+    },
+    addReviewOfCinemaFailed(state, action) {
+      return flow(
+        set('error', action.payload),
+        set('status', ACTION_STATUS.FAILED),
+      )(state);
     },
   },
 });

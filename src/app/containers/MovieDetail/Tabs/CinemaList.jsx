@@ -13,11 +13,12 @@ export const CinemaList = ({ cinemaList, handleBooking }) => {
   const movie = cinemaList[0];
   return (
     <StyledCinemaList>
-      {cinemas.map(cinema => (
+      {cinemas.map((cinema, i) => (
         <OneMovieInList
           movie={movie}
           handleBooking={handleBooking}
           {...cinema}
+          key={i}
         />
       ))}
     </StyledCinemaList>

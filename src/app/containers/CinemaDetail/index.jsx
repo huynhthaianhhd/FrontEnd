@@ -16,12 +16,12 @@ export const CinemaDetail = memo(() => {
   useInjectReducer({ key: sliceKey, reducer });
   const { selectors, handles } = useHooks();
   const { listCinema, defaultCinema } = selectors;
-  const { onClickTab, changeDefaultCinema } = handles;
+  const { onClickTab, changeDefaultCinema, onSubmitReview } = handles;
   return (
     <StyledSection>
       <Header {...defaultCinema} />
       <Tabs defaultActiveKey="1" centered>
-        <TabPane tab="Lịch Chiếu" key="1">
+        <TabPane tab="Lịch Chiếu" key="Lịch Chiếu">
           <Container>
             <ShowTime
               cinemas={listCinema}
@@ -30,14 +30,14 @@ export const CinemaDetail = memo(() => {
             />
           </Container>
         </TabPane>
-        <TabPane tab="Thông tin" key="2">
+        <TabPane tab="Thông tin" key="Thông tin">
           <Container>
             <Detail {...defaultCinema}></Detail>
           </Container>
         </TabPane>
-        <TabPane tab="Đánh giá" key="3">
+        <TabPane tab="Đánh giá" key="Đánh giá">
           <Container>
-            <Review></Review>
+            <Review {...defaultCinema} onSubmit={onSubmitReview}></Review>
           </Container>
         </TabPane>
       </Tabs>

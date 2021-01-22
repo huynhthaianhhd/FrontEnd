@@ -75,9 +75,18 @@ export const GetUrlMovie = i => {
   const length = Movie.length;
   if (i >= 0) {
     if (i >= length) {
-      return Movie[i - length];
+      return Movie[i - length * Math.floor(i / length)];
     } else {
       return Movie[i];
     }
   }
+};
+
+export const CalcReviewPoint = data => {
+  if (data) {
+    return data.reduce((pre, curr) => {
+      return pre + curr?.rating / data.length;
+    }, 0);
+  }
+  return 5;
 };

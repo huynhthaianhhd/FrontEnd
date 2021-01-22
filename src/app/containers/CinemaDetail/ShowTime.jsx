@@ -3,11 +3,12 @@ import { GetUrlCinema } from 'utils/common';
 import { StyledTab, StyleTimeTab } from './styles';
 import { DateTab } from './DateTab';
 import { MovieList } from './MovieList';
-import { useState } from 'react';
+import { useState, memo } from 'react';
+
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
-export const ShowTime = ({ cinemas, onClickTab, onChangeTabCinema }) => {
+export const ShowTime = memo(({ cinemas, onClickTab, onChangeTabCinema }) => {
   const [activeTab, setActiveTab] = useState(0);
   const onChangeTab = i => {
     setActiveTab(i);
@@ -18,7 +19,12 @@ export const ShowTime = ({ cinemas, onClickTab, onChangeTabCinema }) => {
         cinemas.map((e, i) => (
           <TabPane
             tab={
-              <OneTab {...e} index={i} onClick={() => onChangeTabCinema(i)} />
+              <OneTab
+                {...e}
+                index={i}
+                onClick={() => onChangeTabCinema(i)}
+                key={i}
+              />
             }
             key={i}
           >
@@ -34,7 +40,7 @@ export const ShowTime = ({ cinemas, onClickTab, onChangeTabCinema }) => {
         ))}
     </Tabs>
   );
-};
+});
 
 const OneTab = ({ name, location, index, onClick }) => {
   return (

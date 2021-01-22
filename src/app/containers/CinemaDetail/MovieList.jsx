@@ -8,9 +8,9 @@ import { Image, Typography } from 'antd';
 import { GetUrlMovie } from 'utils/common';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-
+import { memo } from 'react';
 const { Title } = Typography;
-export const MovieList = ({ movies }) => {
+export const MovieList = memo(({ movies }) => {
   return (
     <StyledMovieList>
       {movies.length > 0 &&
@@ -19,14 +19,13 @@ export const MovieList = ({ movies }) => {
         ))}
     </StyledMovieList>
   );
-};
+});
 
 const OneMovieInList = ({
   name,
   duration,
   language,
   category,
-  startTime,
   index,
   showTimes,
 }) => {
@@ -36,13 +35,13 @@ const OneMovieInList = ({
         <Image className="img-tiny" src={GetUrlMovie(index)} preview={false} />
         <div className="content">
           <Title level={5}>{name}</Title>
-          <div className="sub-title">{`${duration} phút - Thể Loại: ${category} - Ngôn ngữ:${language}`}</div>
+          <div className="sub-title">{`${duration} phút - Thể Loại: ${category} - Ngôn ngữ: ${language}`}</div>
         </div>
       </StyledMovieDetail>
       <StyledListTime>
         {showTimes &&
           showTimes.map((ee, i) => (
-            <StyledTime>
+            <StyledTime key={i}>
               <Link to={`/booking/${ee?.id}`}>
                 <div className="time">
                   {moment(ee?.startTime).format('HH:mm')}

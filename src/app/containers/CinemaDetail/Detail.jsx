@@ -1,6 +1,7 @@
 import { Row, Col, Typography } from 'antd';
+import { memo } from 'react';
 const { Title } = Typography;
-export const Detail = ({ location, phone, description }) => {
+export const Detail = memo(({ location, phone, description }) => {
   return (
     <Row>
       <Col span={12}>
@@ -37,4 +38,4 @@ export const Detail = ({ location, phone, description }) => {
       </Col>
     </Row>
   );
-};
+});

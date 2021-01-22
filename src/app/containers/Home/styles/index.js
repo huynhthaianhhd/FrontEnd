@@ -92,6 +92,7 @@ export const StyledMovie = styled.div`
     padding: 5px;
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
     .poster-group {
       position: relative;
       .poster {
@@ -156,6 +157,10 @@ export const StyledMovie = styled.div`
     }
     .tag {
       font-weight: bold;
+=======
+    img {
+      height: 330px;
+>>>>>>> 5dddd6aea466a4ce8d693361641c643c54c7a127
     }
     .rate {
       position: absolute;
@@ -213,10 +218,11 @@ export const StyledMovie = styled.div`
 export const StyledListMovie = styled.div`
   display: flex;
   width: 100%;
-  height: 80vh;
+  min-height: 85vh;
   position: relative;
   border: 1px solid #c2c2c2;
   .ant-tabs-nav {
+    padding: 10px;
     width: 15%;
   }
   .ant-tabs {
@@ -228,5 +234,10 @@ export const StyledListMovie = styled.div`
   }
   .ant-spin-nested-loading {
     width: 100%;
+  }
+  .ant-list-items {
+    & > * {
+      padding: 20px 20px 10px 0px;
+    }
   }
 `;
