@@ -31,5 +31,10 @@ export const StyledContent = styled(Content)`
     * div {
       overflow: auto;
     }
+    .ant-table-thead {
+      .ant-table-cell {
+        font-weight: 700;
+      }
+    }
   }
 `;

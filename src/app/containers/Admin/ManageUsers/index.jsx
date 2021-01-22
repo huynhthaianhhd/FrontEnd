@@ -56,7 +56,7 @@ export const ManageUsers = memo(() => {
                 style={{ marginRight: '8px' }}
                 src={record.avatar}
               />
-              <Text strong>{name}</Text>
+              <Text>{name}</Text>
             </div>
           </>
         );
@@ -66,7 +66,7 @@ export const ManageUsers = memo(() => {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      render: email => <Text strong>{email}</Text>,
+      render: email => <Text>{email}</Text>,
     },
     {
       title: 'Action',

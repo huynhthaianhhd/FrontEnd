@@ -28,6 +28,9 @@ const AdminSider = ({ selectedKey }) => {
           <Menu.Item key="8">Team 2</Menu.Item>
         </SubMenu>
         <Menu.Item key="9">Files</Menu.Item> */}
+        <Menu.Item key="6">
+          <Link to={'/admin/manage-transactions'}>Quản lý giao dịch</Link>
+        </Menu.Item>
         <Menu.Item key="manage-news">
           <Link to={'/admin/manage-news'}>Quản lý tin tức</Link>
         </Menu.Item>
