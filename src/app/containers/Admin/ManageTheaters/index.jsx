@@ -55,7 +55,7 @@ export const ManageTheaters = memo(() => {
                 icon={<UserOutlined />}
                 style={{ marginRight: '8px' }}
               />
-              <Text strong>{name}</Text>
+              <Text>{name}</Text>
             </div>
           </>
         );
@@ -65,7 +65,7 @@ export const ManageTheaters = memo(() => {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      render: email => <Text strong>{email}</Text>,
+      render: email => <Text>{email}</Text>,
     },
     {
       title: 'Action',
