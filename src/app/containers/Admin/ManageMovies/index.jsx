@@ -259,7 +259,7 @@ export const ManageMovies = memo(() => {
       premiereTime,
       category,
     } = values;
-    const response = await axios.post(`${WEB_API}/movie/${editMovie.id}`, {
+    const response = await axios.post(`${WEB_API}/movie`, {
       director,
       duration,
       name,
