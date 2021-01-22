@@ -11,6 +11,7 @@ import { News } from 'app/containers/News/Loadable';
 import BookingResult from 'app/components/BookingResult';
 import ManageTheaters from '../Admin/ManageTheaters';
 import ManageMovies from '../Admin/ManageMovies';
+import ManageTransactions from '../Admin/ManageTransactions';
 
 export const privateRoutes = [
   {
@@ -83,5 +84,10 @@ export const adminRoutes = [
     path: '/admin/manage-theaters',
     component: ManageTheaters,
     key: 'ManageTheaters',
+  },
+  {
+    path: '/admin/manage-transactions',
+    component: ManageTransactions,
+    key: 'ManageTransactions',
   },
 ];
