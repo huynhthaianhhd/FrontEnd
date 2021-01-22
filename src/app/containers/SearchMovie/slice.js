@@ -5,6 +5,7 @@ import { ACTION_STATUS } from 'utils/constants';
 
 export const initialState = {
   searchMovie: {
+    total: 0,
     data: null,
     status: '',
     error: null,
@@ -23,8 +24,10 @@ const searchMovieSlice = createSlice({
     },
 
     searchMovieSuccess(state, action) {
+      const { rows, count } = action.payload;
       return flow(
-        set('searchMovie.data', action.payload),
+        set('searchMovie.data', rows),
+        set('searchMovie.total', count),
         set('searchMovie.status', ACTION_STATUS.SUCCESS),
       )(state);
     },
@@ -34,6 +37,10 @@ const searchMovieSlice = createSlice({
         set('searchMovie.error', action.payload),
         set('searchMovie.status', ACTION_STATUS.FAILED),
       )(state);
+    },
+
+    resetState() {
+      return { ...initialState };
     },
   },
 });

@@ -11,11 +11,11 @@ export const SearchMovie = props => {
   useInjectSaga({ key: sliceKey, saga });
   useInjectReducer({ key: sliceKey, reducer });
   const { selectors, handles } = useHooks(props);
-  const { searchMovieList, myRef } = selectors;
-  const { handleClickMovie } = handles;
+  const { searchMovieList, myRef, currentPage, total } = selectors;
+  const { handleClickMovie, handleChangePage, handleShowTrailer } = handles;
   return (
     <StyledHome>
-      <StyledSection>
+      <StyledSection className="first-section">
         <Banner />
       </StyledSection>
       <StyledSection>
@@ -23,6 +23,10 @@ export const SearchMovie = props => {
           handleClickMovie={handleClickMovie}
           searchMovieList={searchMovieList}
           myRef={myRef}
+          handleShowTrailer={handleShowTrailer}
+          handleChangePage={handleChangePage}
+          currentPage={currentPage}
+          total={total}
         />
       </StyledSection>
     </StyledHome>

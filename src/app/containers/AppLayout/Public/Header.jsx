@@ -26,41 +26,43 @@ export const PublicHeader = () => {
         <a href="/#group-cinema">Cụm rạp</a>
         <Link to="/">Tin tức</Link>
       </div>
-      <div>
-        <Input
-          placeholder="Tìm kiếm ..."
-          suffix={<SearchOutlined />}
-          onPressEnter={event => {
-            const input = event.target.value;
-            history.push(`/search?q=${input}`);
-          }}
-          allowClear
-        />
-      </div>
+
       <div className="control">
-        {user ? (
-          <Dropdown
-            trigger={['click']}
-            overlay={
-              <Menu>
-                <Menu.Item>
-                  <Link to="/profile">Profile</Link>
-                </Menu.Item>
-                <Menu.Item onClick={onLogout}>Log out</Menu.Item>
-              </Menu>
-            }
-          >
-            <Avatar src={user?.avatar} />
-          </Dropdown>
-        ) : (
-          <Button
-            onClick={() => history.push('/login')}
-            icon={<UserOutlined />}
-            className="align-center button"
-          >
-            Đăng nhập
-          </Button>
-        )}
+        <div className="search">
+          <Input
+            placeholder="Tìm kiếm"
+            suffix={<SearchOutlined />}
+            onPressEnter={event => {
+              const input = event.target.value;
+              history.push(`/search?q=${input}`);
+            }}
+          />
+        </div>
+        <div>
+          {user ? (
+            <Dropdown
+              trigger={['click']}
+              overlay={
+                <Menu>
+                  <Menu.Item>
+                    <Link to="/profile">Profile</Link>
+                  </Menu.Item>
+                  <Menu.Item onClick={onLogout}>Log out</Menu.Item>
+                </Menu>
+              }
+            >
+              <Avatar src={user?.avatar} />
+            </Dropdown>
+          ) : (
+            <Button
+              onClick={() => history.push('/login')}
+              icon={<UserOutlined />}
+              className="align-center button"
+            >
+              Đăng nhập
+            </Button>
+          )}
+        </div>
       </div>
     </StyledHeader>
   );
