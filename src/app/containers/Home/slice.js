@@ -14,6 +14,11 @@ export const initialState = {
   currentShowTime: [],
   step: 0,
   loading: false,
+  newsSummary: {
+    data: [],
+    status: '',
+    error: null,
+  },
 };
 
 const homePageSlice = createSlice({
@@ -59,6 +64,26 @@ const homePageSlice = createSlice({
         set('status', ACTION_STATUS.SUCCESS),
       )(state);
     },
+
+    fetchNewsSummary(state) {
+      return flow(
+        set('newsSummary.error', null),
+        set('newsSummary.status', ACTION_STATUS.PENDING),
+      )(state);
+    },
+    fetchNewsSummarySuccess(state, action) {
+      return flow(
+        set('newsSummary.data', action.payload),
+        set('newsSummary.status', ACTION_STATUS.SUCCESS),
+      )(state);
+    },
+    fetchNewsSummaryFailed(state, action) {
+      return flow(
+        set('newsSummary.error', action.payload),
+        set('newsSummary.status', ACTION_STATUS.FAILED),
+      )(state);
+    },
+
     setHighLightMovie(state, action) {
       return flow(set('listMovieHighLight', action.payload))(state);
     },

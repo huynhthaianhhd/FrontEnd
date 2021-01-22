@@ -5,6 +5,7 @@ import {
   StyledHelper,
   StyledListMovie,
 } from './styles';
+import NewsSummary from './NewsSummary';
 import { Banner } from './Banner';
 import { BookTicketQick } from './BookTicketQick';
 import { Movie } from './Movie';
@@ -20,13 +21,18 @@ export const Home = memo(() => {
   const { selectors, handles } = useHooks();
   const {
     cinemaGroupList,
-    listMovieHighLight,
     listMovie,
     currentCinemas,
     currentDate,
     currentShowTime,
+    newsSummary,
   } = selectors;
-  const { handleSelectMovie, handleClickMovie, handleShowTrailer } = handles;
+  const {
+    handleSelectMovie,
+    handleClickMovie,
+    handleShowTrailer,
+    handleClickNews,
+  } = handles;
   return (
     <StyledHome>
       <StyledSection className="first-section">
@@ -50,9 +56,20 @@ export const Home = memo(() => {
       </StyledSection>
       <StyledSection id="group-cinema">
         <div className="container">
+          <div className="header">
+            <h3 className="title">Cụm rạp</h3>
+          </div>
           <StyledListMovie check={cinemaGroupList.length === 0}>
             <ListMovie dataSource={cinemaGroupList} />
           </StyledListMovie>
+        </div>
+      </StyledSection>
+      <StyledSection id="news">
+        <div className="container">
+          <div className="header">
+            <h3 className="title">Tin tức nổi bật</h3>
+          </div>
+          <NewsSummary handleClickNews={handleClickNews} data={newsSummary} />
         </div>
       </StyledSection>
     </StyledHome>
