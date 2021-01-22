@@ -49,6 +49,11 @@ export const StyledSection = styled.div`
       width: 100%;
       justify-content: center;
       margin: 20px;
+      .title {
+        font-size: 28px;
+        color: #fa5238;
+        margin-bottom: 0;
+      }
     }
     .block {
       display: flex !important;

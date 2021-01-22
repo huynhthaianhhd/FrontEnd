@@ -127,8 +127,7 @@ export const Movie = ({
   return (
     <div className="container">
       <div className="header">
-        <Button size="large">Đang chiếu</Button>
-        <Button size="large">Sắp chiếu</Button>
+        <h3 className="title">Phim mới công chiếu</h3>
       </div>
       <Carousel
         dots={false}
