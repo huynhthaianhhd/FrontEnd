@@ -13,7 +13,6 @@ export const StyledHeader = styled(Header)`
   width: 100%;
   z-index: 999;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background: #fff;
   color: black;
@@ -33,6 +32,10 @@ export const StyledHeader = styled(Header)`
     flex: 1;
   }
   .category {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     & > * {
       margin: 0px 10px;
       color: black;
@@ -41,6 +44,14 @@ export const StyledHeader = styled(Header)`
       &:hover {
         color: #fb4226;
       }
+    }
+  }
+  .control {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .search {
+      margin-right: 20px;
     }
   }
   .align-center {
