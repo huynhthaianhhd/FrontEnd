@@ -39,7 +39,7 @@ function* getNewsSummaryWatcher() {
 }
 
 function* getNewsSummaryTask(action) {
-  const { response, error } = yield call(getNewsSummaryAPI);
+  const { response, error } = yield call(getNewsSummaryAPI, action.payload);
   if (response) {
     yield put(actions.fetchNewsSummarySuccess(response));
   } else {
@@ -47,8 +47,8 @@ function* getNewsSummaryTask(action) {
   }
 }
 
-function getNewsSummaryAPI() {
-  return getManyNews();
+function getNewsSummaryAPI(payload) {
+  return getManyNews(payload);
 }
 
 function fetchMovie() {

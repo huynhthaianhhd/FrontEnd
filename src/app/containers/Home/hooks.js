@@ -76,7 +76,7 @@ export const useHooks = () => {
     fetchGroup();
     fetchListMovie();
     getListMovieInDay();
-    fetchNewsSummary();
+    fetchNewsSummary(2);
   }, [fetchGroup, fetchListMovie, getListMovieInDay, fetchNewsSummary]);
 
   return {

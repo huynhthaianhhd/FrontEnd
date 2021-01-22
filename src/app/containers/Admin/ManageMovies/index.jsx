@@ -156,21 +156,21 @@ export const ManageMovies = memo(() => {
       dataIndex: 'name',
       key: 'name',
       ...getColumnSearchProps('name'),
-      render: name => <Text strong>{name}</Text>,
+      render: name => <Text>{name}</Text>,
     },
     {
       title: 'Đạo diễn',
       dataIndex: 'director',
       key: 'director',
       ...getColumnSearchProps('director'),
-      render: director => <Text strong>{director}</Text>,
+      render: director => <Text>{director}</Text>,
     },
     {
       title: 'Thể loại',
       dataIndex: 'category',
       key: 'category',
       ...getColumnSearchProps('category'),
-      render: category => <Text strong>{category}</Text>,
+      render: category => <Text>{category}</Text>,
     },
     {
       title: 'Thời lượng',
@@ -180,7 +180,7 @@ export const ManageMovies = memo(() => {
         const hour = Math.floor(duration / 60);
         const minute = duration % 60;
         return (
-          <Text strong>
+          <Text>
             {hour} tiếng {minute} phút
           </Text>
         );
@@ -192,7 +192,7 @@ export const ManageMovies = memo(() => {
       key: 'premiereTime',
       render: premiereTime => {
         let date = moment(premiereTime).format('DD-MM-YYYY');
-        return <Text strong>{date}</Text>;
+        return <Text>{date}</Text>;
       },
     },
     {
